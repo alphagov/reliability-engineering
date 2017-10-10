@@ -1,16 +1,16 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: gds-way.cloudapps.digital
+host: reliability-engineering.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: false
-service_name: The GDS Way
-service_link: https://gds-way.cloudapps.digital
+service_name: Reliability Engineering
+service_link: https://reliability-engineering.cloudapps.digital
 phase: Alpha
 
 # Links to show on right-hand-side of header
 header_links:
   Documentation: /
-  GitHub: https://github.com/alphagov/gds-tech
+  GitHub: https://github.com/alphagov/reliability-engineering
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:
@@ -21,4 +21,4 @@ ga_tracking_id:
 max_toc_heading_level: 6
 
 # Prevent robots from indexing (e.g. whilst in development)
-prevent_indexing: false
+prevent_indexing: true

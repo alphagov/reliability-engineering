@@ -1,10 +1,6 @@
 ---
 applications:
-- name: gds-way
+- name: reliability-engineering
   memory: 64M
   path: ./build
-  buildpack: staticfile_buildpack
-- name: gds-tech-docs
-  memory: 64M
-  path: ./redirect
   buildpack: staticfile_buildpack

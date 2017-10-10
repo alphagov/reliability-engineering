@@ -1,108 +1,30 @@
 ---
-title: The GDS Way
+title: Reliability Engineering
 ---
 
 # <%= current_page.data.title %>
 
-The GDS Way is guidance for how GDS teams should build their digital services. If you do not work for GDS and are looking for help creating and running digital services, please refer to the [Service Manual](https://www.gov.uk/service-manual).
+<intro to reliability engineering>
 
-## About The GDS Way
+## Services we provide
 
-Since the [Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service) was formed a few years ago, we've grown to an organisation of several hundred people with well established teams which are meeting user needs by creating software.
+### Logging
 
-As we've grown GDS teams have had to choose how they want to build their services. In some ways this has been good - every team has picked the most suitable tools for their project - but now we suspect that we're at the point where having some easy-to-use defaults for new teams will be helpful. Some of the things we're hoping to achieve are:
+We provide ELK (elasticsearch/logstash/kibana) stacks via
+[logit](https://logit.io).  We have guides to help you:
 
-* using similar tools across GDS
-* doing procurement once centrally for GDS
-* new teams will be cheaper to spin up
+- Get a logit account (TODO)
+- Ship logs from S3 to logit (TODO)
+- [Send logs securely to Logit.io](manuals/logit-io.html)
 
-The phrase we are using to explain this to other people in GDS is The GDS Way. We are trying to get across the idea that this guidance will make it easier for projects to get started while still giving teams the flexibility to do something different if their project needs it.
+The PaaS docs document
+[how to send logs from PaaS to logit](https://docs.cloud.service.gov.uk/#set-up-the-logit-io-log-management-service).
 
-Essentially The GDS Way includes:
+### Tech docs tool
 
-* consistent terminology
-* consistent ways of working
-* consistent technology and tools
-* consistent measures
+We own the
+[tech docs template](https://github.com/alphagov/tech-docs-template).
 
-This site documents some of the technical decisions we have made for the products we operate and that have been agreed at the Tech Ops Forum. It also complements the [Service Manual](https://www.gov.uk/service-manual) which
-covers service design more broadly.
+### Metrics
 
-Products at GDS must follow the
-[discovery, alpha, beta and live phases set out in the Service Manual](https://www.gov.uk/service-manual/agile-delivery).
-Products at discovery and alpha can optionally follow the standards
-in this repository. Projects at beta and live should follow these standards.
-
-## Standards
-
-Standards are based on formal decisions made by the tech forum.
-They have an expiry date to ensure we review decisions and see if they
-are still working for GDS as an organization.
-
-### Building software
-
-- [naming things](standards/naming-things.html)
-- [choosing programming languages](standards/programming-languages.html)
-- [storing source code](standards/source-code.html)
-
-### Operating services
-
-- [managing DNS](standards/dns-hosting.html)
-- [monitoring your service](standards/monitoring.html)
-- [operating systems](standards/operating-systems.html)
-- [responding to problems](standards/alerting.html)
-- [sending emails](standards/sending-email.html)
-- [storing and querying logs](standards/logging.html)
-- [supporting a service](standards/supporting-services.html)
-
-## Manuals
-
-Manuals are informative guides, not necessarily based on any formal
-decision or standard.
-
-- [Programming language style guides](manuals/programming-languages.html)
-- [Setting up logging](manuals/logging.html)
-- [Sending logs securely to Logit.io](manuals/logit-io.html)
-
-## Adding new guidance
-
-We’d like to thank all contributors for their suggestions and challenges as we continue to build and develop this repository, and seek the best way to build and operate our services so we can deliver at scale.
-
-If you think you can contribute a change to this repository which reflects
-current practice at GDS, make a pull request in [GitHub](https://github.com/alphagov/gds-tech)
-and we'll discuss it at the Tech Ops Forum meeting and in the
-[#tech-ops-forum Slack channel](https://govuk.slack.com/messages/tech-ops-forum/).
-
-Alternatively contact us at <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">The GDS Way</a>.
-
-When you create a new Markdown file please ensure it follows this pattern and make a pull request:
-
-```markdown
----
-title: Thing you're writing a standard about
-expires: yyyy-mm-dd (6 months from now)
----
-
-# <%%= current_page.data.title %>
-
-<%%= partial :expires %>
-
-Introduction of a couple of paragraphs to explain why the thing you're
-writing a standard about is important.
-
-## User needs
-
-Why do we do this thing? Who is it helping?
-
-## Principles
-
-What broad approaches do we follow when we do this thing?
-
-## Tools
-
-What specific bits of software (commercial or open source) do
-we use to help us do this thing?
-```
-
-The service manual has some useful information on
-[learning about and writing user needs](https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs).
+This is work in progress.
