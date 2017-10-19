@@ -49,6 +49,25 @@ Logstash speaks many different protocols and these are all assigned to sequentia
 
 TCP ports are assigned on a per-stack basis at stack creation time and will be different per stack.
 
+## Shipping logs via Amazon S3
+
+In some cases such as logging for Amazon services (CloudTrail, VPC FlowLogs etc) it can make sense to use an S3 bucket as a log "source" for your Logit stack. This differs from other ways of using Logit as logs are "pulled" into your stack by a process in Logit infrastructure.
+
+### Sharing access to resources in your Amazon account ###
+
+Amazon [recommend using IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) to share access to resources in your account. This method doesn't require the creation of shared secrets.
+
+Currently Logit don't support this, however they do plan to support it in the future. Right now the only way to grant them access is by issuing them access keys which can access the S3 bucket in question.
+
+When setting this up you make sure that
+
+  * The access key is only able to ListObjects and GetObject from the S3 bucket containing the logs
+  * You are able to migrate to Role based access in the future when it is supported by Logit
+
+### Configuring Logit ###
+
+Currently pulling logs from an S3 bucket requires a Logit support engineer to configure it for your stack. To start this process, add a "Source" to your Logit stack and select "S3". Complete the form and a Logit support engineer will contact you once it has been configured.
+
 ## Shut down unsecure inputs
 
 Logit stacks have a non-restrictive security configuration by default. Each of the inputs listed will be behind a TCP port that is open to the internet at large, and will not authenticate connecting clients.
