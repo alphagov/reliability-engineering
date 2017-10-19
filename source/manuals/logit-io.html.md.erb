@@ -68,6 +68,8 @@ When setting this up you make sure that
 
 Currently pulling logs from an S3 bucket requires a Logit support engineer to configure it for your stack. To start this process, add a "Source" to your Logit stack and select "S3". Complete the form and a Logit support engineer will contact you once it has been configured.
 
+Logs pulled from S3 will be processed as usual by Logstash.
+
 ## Shut down unsecure inputs
 
 Logit stacks have a non-restrictive security configuration by default. Each of the inputs listed will be behind a TCP port that is open to the internet at large, and will not authenticate connecting clients.
