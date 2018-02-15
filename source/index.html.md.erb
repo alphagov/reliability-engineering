@@ -6,72 +6,44 @@ title: Reliability Engineering
 
 <intro to reliability engineering>
 
+Reliabilty Engineering provide a shared platform to GDS teams with the tools needed to set up and maintain a service, we do this by:
+
+* acquiring tools and where appropriate administer them for GDS, for example [Logit](https://logit.io/)
+* running off-the-shelf services for GDS as internal SaaS, for example [Prometheus](https://prometheus.io/)
+* providing patterns and guidance, for example [PaaS incident templates](https://government-paas-team-manual.readthedocs.io/en/latest/support/incident_process/)
+
+To understand the context for our decisions and guidance you'll need to refer to the [Service Manual](https://www.gov.uk/service-manual) and the [GDS Way](https://gds-way.cloudapps.digital/#gds-technical-guidance).
+
 ## Services we provide
 
-Reliabilty Engineering provide a shared platform to GDS teams with the tools you need to set up and maintain a service, we do this by:
+These tools have been procured for use by GDS teams, we are updating our recommendations on how we use them:
 
-* acquiring tools and where appropriate administer them for GDS, for example Logit
-* running off-the-shelf services for GDS as internal SaaS, for example Prometheus
-* providing patterns and guidance, for example PaaS incident templates
+- [Confluence](https://www.atlassian.com/software/confluence)
+- [Jira](https://www.atlassian.com/software/jira)
+- [Sentry](https://sentry.io/welcome/)
+- [PagerDuty](https://www.pagerduty.com/)
+- [Statuspage](https://www.statuspage.io/)
+- [Pingdom](https://www.pingdom.com/)
+- [Zendesk](https://www.zendesk.co.uk/)
+- [Amazon EC2 Reserved Instances](https://aws.amazon.com/ec2/pricing/reserved-instances/)
+- [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
 
-To understand the context for our decisions and guidance you'll need to refer to the [Service Manual](https://www.gov.uk/service-manual) and [GDS Way](https://gds-way.cloudapps.digital/#gds-technical-guidance).
+### Logging
 
-### Logit
+You should use Logit for your logging solution, it's been approved for use at GDS.
 
-You can use Logit as your logging solution, it's been approved for use at GDS.
+We provide [ELK (Elasticsearch, Logstash, and Kibana)](https://www.elastic.co/elk-stack) stacks using
+[Logit](https://logit.io), these guides will help you:
 
-We provide ELK (elasticsearch/logstash/kibana) stacks using
-[logit](https://logit.io).  We have guides to help you:
-
-- [Get a logit account](manuals/logit-io-joiners-and-leavers.html)
-- Ship logs from S3 to logit (guidance in progress)
-- [Send logs securely to Logit.io](manuals/logit-io.html)
-
-The PaaS docs document
-[how to send logs from PaaS to logit](https://docs.cloud.service.gov.uk/#set-up-the-logit-io-log-management-service).
-
-### Confluence
-
-[Confluence](https://www.atlassian.com/software/confluence) is an approved tool for GDS service teams to use.
-
-### Jira
-
-[Jira](https://www.atlassian.com/software/jira) is an approved tool for GDS service teams to use.
-
-### Hosted Graphite
-
-[Hosted Graphite](https://www.hostedgraphite.com/) is an approved tool for GDS service teams to use.
-
-### Sentry
-
-[Sentry](https://sentry.io/welcome/) is an approved tool for GDS service teams to use.
-
-### PagerDuty
-
-[PagerDuty](https://www.pagerduty.com/) is an approved tool for GDS service teams to use.
-
-### Zendesk - Verify
-
-[Zendesk](https://www.zendesk.co.uk/) is an approved tool for GDS service teams to use.
-
-### AWS EC2 Reserved Instances
-
-This is work in progress.
-
-### Status Page
-
-This is work in progress.
-
-### Pingdom
-
-This is work in progress.
-
-
-### Tech docs tool
-
-We own the
-[tech docs template](https://github.com/alphagov/tech-docs-template).
+- [get a logit account](manuals/logit-io-joiners-and-leavers.html)
+- ship logs from S3 to logit (guidance in development)
+- [send logs securely to Logit.io](manuals/logit-io.html)
+- [send logs from PaaS to logit](https://docs.cloud.service.gov.uk/#set-up-the-logit-io-log-management-service)
 
 ### Metrics
+
+This is work in progress.
+
+### Alerting
 
 This is work in progress.
