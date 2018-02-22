@@ -40,7 +40,51 @@ We provide [ELK (Elasticsearch, Logstash, and Kibana)](https://www.elastic.co/el
 
 ### Metrics
 
-This is work in progress.
+GDS Metrics is in alpha. These instructions are subject to change.
+
+
+
+#### Setting up metrics
+
+If you're using Ruby, follow the instructions [here](https://github.com/alphagov/gds_metrics_ruby).
+
+If you're using Java with Dropwizard, follow the instructions [here](https://github.com/alphagov/gds_metrics_dropwizard).
+
+
+
+#### Logging into Grafana
+
+Visit [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) and sign in with Google:
+
+![google-auth](images/google-auth.png)
+
+Log in with your digital.cabinet-office.gov.uk email address.
+
+
+
+#### Viewing metrics for your app
+
+Click on the dashboard dropdown in the top-left of the screen:
+
+![dropdown](images/home.png)
+
+Select 'Common Template Dashboard' from the list:
+
+![Dashboard List](images/dashboard-list.png)
+
+You should be presented with a dashboard.
+
+Choose your application in the 'Available Apps' dropdown:
+
+![Available Apps](images/available-apps.png)
+
+If you can't see your application in the list, make sure you've followed the instructions in [Setting up metrics](#setting-up-metrics) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/#technical-documentation-for-gov-uk-paas).
+
+
+
+You should now see a dashboard for your app. This is explained in the next section.
+
+
 
 ### Alerting
 
