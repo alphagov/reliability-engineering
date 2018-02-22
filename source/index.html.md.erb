@@ -85,6 +85,127 @@ If you can't see your application in the list, make sure you've followed the ins
 You should now see a dashboard for your app. This is explained in the next section.
 
 
+#### Undestanding our dashboards
+
+The application sets by default an example dashboard for every application using the Reliability Enginering team metrics solution.
+
+The example dashboard looks like that:
+
+![Dashboard](./images/grafana_dashboard/dashboard.png)
+
+There are different areas in the dashboard that are going to allow us to interact with the dashboard or give us relevant information about the elected application.
+
+##### Dashboard selected
+
+1. Options to manage Grafana items. Profile updates, alerts, permissions, dashboard and folder creations. The available options depend on the level of permissions assigned to the user.
+2. A dropdown where the different dashboards available to the user can be selected. In this case, we are going to select the _Common Template Dashboard_.
+3. A dropdown where the we can select the applications availables to check their metrics. In this case, we have selected _registers.cloudapps.digital:80_.
+4. An area to interact with the dashboard.
+5. The information the dashboard is offering to the users.
+
+![Dashboard](./images/grafana_dashboard/dashboard_annotated.png)
+
+##### Number 2: Dashboard selector
+
+This element allow us to select the desired dashboard we want to see. We should just open the list and select the one we want to see. The application offers a filter to make easier to find the appropriate dashboard.
+
+In addition, there is the option of filtering by tags, and depending on users permission we will be able to create new dashboards.
+
+![Dashboard selector](./images/grafana_dashboard/dashboard_selector.png)
+
+##### Number 3: Application selector
+
+This element allow us to select the desired application to be used with the dashboard.
+
+![Application selector](./images/grafana_dashboard/application_selector.png)
+
+##### Number 4: Interacting with the Dashboard
+
+Under construction
+
+##### Number 5: The dashboard
+
+We are going to use as a reference the _Common Template Dashboard_ that is going to work as default with every application using metrics.
+
+The dashboard is a group of different widgets showing as some interesting metrics about the monitored application.
+
+In our _Common Template Dashboard_ we can see eleven different widgets showing us different information:
+
+![Template dashboard widgets](./images/grafana_dashboard/template_dashboard.png)
+
+1. It is just a brief description of the dashboard.
+2. It is a single stat showing the number of healthy instances our applications has running right now. The range of colors is: Green (more than 1 isntance available), Orange (1 instance available), Red (no instances available)
+3. It is a single stat showing the number of total instances the application has.
+4. It is a single stat showing the percentage of HTTP Status code 2xx responses.
+5. It is a single stat showing the percentage of HTTP Status code 3xx responses.
+6. It is a single stat showing the percentage of HTTP Status code 4xx responses.
+7. It is a single stat showing the percentage of HTTP Status code 5xx responses.
+8. It is a graph showing the number of request per minute our applciation is serving.
+9. It is a graph showing the number of HTTP errors (4xx, 5xx) per minutes our application is throwing.
+10. It is a graph showing the average response time in our application.
+11. It is a table with the list of the seven slowest endpoint in the application.
+
+#### Widgets
+
+Widget are components taht allow us to show inforamtion in the dashboards. They are hightly configurable and it should be possible to adapt them to our needs. Types available are:
+
+_TODO_: Add description of the types.
+
+* Graph: 
+* Singlestat: 
+* Table: 
+* Text:
+* Heatmap:
+* Alert List:
+* Dashboard list:
+* Row:
+* Plugin list:
+
+##### Number 1: Text widget
+
+This is a _Text_ widget. This widget allows us to add some text (markdown supported) to document or explain our dashboards.
+
+##### Number 2: Healthy instances
+
+This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the number of healthy instances the application has running in this moment.
+
+In addition, we can configure the background color. The example has configure, as mentioned before, Green when there are more than one healthy intances, Orange when there is just one healthe instance and Red when there are no healthy instances available.
+
+##### Number 3: Total instances
+
+This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the number of taotal instances the application has running in this moment.
+
+##### Number 4: 2xx Status codes
+
+This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 2xx HTTP status code.
+
+##### Number 5: 3xx Status codes
+
+This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 3xx HTTP status code.
+
+##### Number 6: 4xx Status codes
+
+This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 4xx HTTP status code.
+
+##### Number 7: 5xx Status codes
+
+This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 5xx HTTP status code.
+
+##### Number 8: Number of requests per 5 minutes
+
+This is a _Graph_ widget. This widget allows us to draw a two dimension representation of our data. The example case is a representation of the requests received by the application every 5 minutes, where the axis X is the time and the axis Y is the number of request received.
+
+##### Number 9: Number of HTTP Error per minute
+
+This is a _Graph_ widget. This widget allows us to draw a two dimension representation of our data. The example case is a representation of the errors thrown by the application every minute, where the axis X is the time and the axis Y is the number of HTTP errors thrown.
+
+##### Number 10: Average response time
+
+This is a _Graph_ widget. This widget allows us to draw a two dimension representation of our data. The example case is a representation of how long it takes to the application on average to responde to the requests, where the axis X is the time and the axis Y is the time in ms.
+
+##### Number 11: Slowest requests
+
+This is a _Table_ widget. This widget allows us to represent our information in a table format. The example case is showing a list of the last seven slowest (response time) endpoints in our application.
 
 ### Alerting
 
