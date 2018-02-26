@@ -124,13 +124,9 @@ There are eleven widgets showing information about your application:
 10. A graph showing the average response times for your application.
 11. A table of the list of the seven slowest endpoints in the application.
 
+##### Requesting Grafana edit permissions from Reliability Engineering
 
-
-##### How do I customise the dashboard?
-
-TODO - write about PromQL
-
-
+Contact us on Slack in the #reliabiltiy-eng channel to be granted edit permissions.
 
 Refer to the instructions below to help you orientate the Grafana interface:
 
@@ -202,8 +198,8 @@ A summary with a base metric name of `<basename>` exposes multiple time series d
 * the total sum of all observed values, exposed as `<basename>_sum`
 * the count of events that have been observed, exposed as `<basename>_count`
 
-More detailed explanations can be found in the [Prometheus documentation](https://prometheus.io/docs/concepts/metric_types/).
+##### How to add custom metrics
 
-More detailed explanations about the Java implementation can be found [here](https://github.com/prometheus/client_java#instrumenting).
+More detailed explanations on the different types of metrics can be found in the [Prometheus documentation](https://prometheus.io/docs/concepts/metric_types/).
 
-More detailed explanatios about the Ruby implementation can be found [here](https://github.com/prometheus/client_ruby#metrics).
+Instructions on how to add new metrics using the Java implementation can be found [in the library documentation](https://github.com/prometheus/client_java#instrumenting). Ruby users can find similar documentation in the [client_ruby documentation](https://github.com/prometheus/client_ruby#metrics).
