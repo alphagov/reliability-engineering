@@ -105,7 +105,6 @@ http_server_requests_total
 The widgets on the dashboard are the result of queries over these metrics. For example, the 'Number of requests per minute' widget is built from `http_server_requests_total` using Prometheus' [`sum`](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators) aggregator and [`rate`](https://prometheus.io/docs/prometheus/latest/querying/functions/#rate()) function. [TODO - link to PromQL section](#)
 
 
-
 ##### What does the dashboard tell me?
 
 There are eleven widgets showing information about your application:
@@ -145,24 +144,6 @@ Refer to the instructions below to help you orientate the Grafana interface:
 The dashboard dropdown contains all dashboards currently in use. Use the filters to find dashboards by name or by tag. If you have edit permissions, you can also create new dashboards.
 
 ![Dashboard selector](./images/grafana_dashboard/dashboard_selector.png)
-
-##### Understanding the different widgets in this dashboard
-
-In this _Common Template Dashboard_, there are eleven different widgets showing different information about your application:
-
-![Template dashboard widgets](./images/grafana_dashboard/template_dashboard.png)
-
-1. A brief description of the dashboard.
-2. The number of healthy instances the application has running right now. The range of colors is: Green (more than 1 instance available), Orange (1 instance available), Red (no instances available)
-3. The number of total instances for your application.
-4. The percentage of HTTP Status code 2xx responses.
-5. The percentage of HTTP Status code 3xx responses.
-6. The percentage of HTTP Status code 4xx responses.
-7. The percentage of HTTP Status code 5xx responses.
-8. The number of request per minute your application is serving.
-9. The number of HTTP errors (4xx, 5xx) per minutes your application is throwing.
-10. A graph showing the average response times for your application.
-11. A table of the list of the seven slowest endpoints in the application.
 
 #### Custom metrics
 
