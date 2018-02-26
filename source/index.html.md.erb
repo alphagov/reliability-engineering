@@ -6,7 +6,7 @@ title: Reliability Engineering
 
 <intro to reliability engineering>
 
-Reliabilty Engineering provide a shared platform to GDS teams with the tools needed to set up and maintain a service, we do this by:
+Reliability Engineering provide a shared platform to GDS teams with the tools needed to set up and maintain a service, we do this by:
 
 * acquiring tools and where appropriate administer them for GDS, for example [Logit](https://logit.io/)
 * running off-the-shelf services for GDS as internal SaaS, for example [Prometheus](https://prometheus.io/)
@@ -64,17 +64,15 @@ Log in with your digital.cabinet-office.gov.uk email address.
 
 #### Viewing metrics for your app
 
-Click on the dashboard dropdown in the top-left of the screen:
+Click 'Home' in the top left of the screen:
 
 ![dropdown](images/home.png)
 
-Select 'Common Template Dashboard' from the list:
+Select 'GDS Default Dashboard' from the dropdown:
 
 ![Dashboard List](images/dashboard-list.png)
 
-You should be presented with a dashboard.
-
-Choose your application in the 'Available Apps' dropdown:
+Select your application from the 'Available Apps' dropdown:
 
 ![Available Apps](images/available-apps.png)
 
@@ -82,131 +80,130 @@ If you can't see your application in the list, make sure you've followed the ins
 
 
 
-You should now see a dashboard for your app. This is explained in the next section.
+You should now see the GDS Default Dashboard applied to your application.
 
+#### Understanding the dashboard
 
-#### Undestanding our dashboards
-
-The application sets by default an example dashboard for every application using the Reliability Enginering team metrics solution.
-
-The example dashboard looks like that:
+This is the default dashboard for every application using the Reliability Enginering team metrics solution:
 
 ![Dashboard](./images/grafana_dashboard/dashboard.png)
 
-There are different areas in the dashboard that are going to allow us to interact with the dashboard or give us relevant information about the elected application.
 
-##### Dashboard selected
 
-1. Options to manage Grafana items. Profile updates, alerts, permissions, dashboard and folder creations. The available options depend on the level of permissions assigned to the user.
-2. A dropdown where the different dashboards available to the user can be selected. In this case, we are going to select the _Common Template Dashboard_.
-3. A dropdown where the we can select the applications availables to check their metrics. In this case, we have selected _registers.cloudapps.digital:80_.
-4. An area to interact with the dashboard.
-5. The information the dashboard is offering to the users.
+##### What's powering this dashboard?
 
-![Dashboard](./images/grafana_dashboard/dashboard_annotated.png)
+This dashboard has been built using the following metrics provided by Prometheus:
 
-##### Number 2: Dashboard selector
+```
+http_server_exceptions_total
+http_server_request_duration_seconds_bucket
+http_server_request_duration_seconds_count
+http_server_request_duration_seconds_sum
+http_server_requests_total
+```
 
-This element allow us to select the desired dashboard we want to see. We should just open the list and select the one we want to see. The application offers a filter to make easier to find the appropriate dashboard.
+The widgets on the dashboard are the result of queries over these metrics. For example, the 'Number of requests per minute' widget is built from `http_server_requests_total` using Prometheus' [`sum`](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators) aggregator and [`rate`](https://prometheus.io/docs/prometheus/latest/querying/functions/#rate()) function. [TODO - link to PromQL section](#)
 
-In addition, there is the option of filtering by tags, and depending on users permission we will be able to create new dashboards.
 
-![Dashboard selector](./images/grafana_dashboard/dashboard_selector.png)
 
-##### Number 3: Application selector
+##### What does the dashboard tell me?
 
-This element allow us to select the desired application to be used with the dashboard.
-
-![Application selector](./images/grafana_dashboard/application_selector.png)
-
-##### Number 4: Interacting with the Dashboard
-
-Under construction
-
-##### Number 5: The dashboard
-
-We are going to use as a reference the _Common Template Dashboard_ that is going to work as default with every application using metrics.
-
-The dashboard is a group of different widgets showing as some interesting metrics about the monitored application.
-
-In our _Common Template Dashboard_ we can see eleven different widgets showing us different information:
+There are eleven widgets showing information about your application:
 
 ![Template dashboard widgets](./images/grafana_dashboard/template_dashboard.png)
 
-1. It is just a brief description of the dashboard.
-2. It is a single stat showing the number of healthy instances our applications has running right now. The range of colors is: Green (more than 1 isntance available), Orange (1 instance available), Red (no instances available)
-3. It is a single stat showing the number of total instances the application has.
-4. It is a single stat showing the percentage of HTTP Status code 2xx responses.
-5. It is a single stat showing the percentage of HTTP Status code 3xx responses.
-6. It is a single stat showing the percentage of HTTP Status code 4xx responses.
-7. It is a single stat showing the percentage of HTTP Status code 5xx responses.
-8. It is a graph showing the number of request per minute our applciation is serving.
-9. It is a graph showing the number of HTTP errors (4xx, 5xx) per minutes our application is throwing.
-10. It is a graph showing the average response time in our application.
-11. It is a table with the list of the seven slowest endpoint in the application.
+1. A brief description of the dashboard.
+2. The number of healthy instances the application has running right now. The range of colors is: Green (more than 1 instance available), Orange (1 instance available), Red (no instances available)
+3. The number of total instances for your application.
+4. The percentage of HTTP Status code 2xx responses.
+5. The percentage of HTTP Status code 3xx responses.
+6. The percentage of HTTP Status code 4xx responses.
+7. The percentage of HTTP Status code 5xx responses.
+8. The number of request per minute your application is serving.
+9. The number of HTTP errors (4xx, 5xx) per minutes your application is throwing.
+10. A graph showing the average response times for your application.
+11. A table of the list of the seven slowest endpoints in the application.
 
-#### Widgets
 
-Widget are components that allow us to show inforamtion in the dashboards. They are highly configurable and it should be possible to adapt them to our needs. Types available are:
 
-_TODO_: Add description of the types.
+##### How do I customise the dashboard?
 
-* Graph: 
-* Singlestat: 
-* Table: 
-* Text:
-* Heatmap:
-* Alert List:
-* Dashboard list:
-* Row:
-* Plugin list:
+TODO - write about PromQL
 
-##### Number 1: Text widget
 
-This is a _Text_ widget. This widget allows us to add some text (markdown supported) to document or explain our dashboards.
 
-##### Number 2: Healthy instances
+Refer to the instructions below to help you orientate the Grafana interface:
 
-This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the number of healthy instances the application has running in this moment.
+![Dashboard](./images/grafana_dashboard/dashboard_annotated.png)
 
-In addition, we can configure the background color. The example has configure, as mentioned before, Green when there are more than one healthy intances, Orange when there is just one healthe instance and Red when there are no healthy instances available.
+1. Click these icons to configure Grafana, e.g. manage profile updates, alerts, permissions, dashboard and folders. You'll see different options depending on your level of permissions.
+2. Click this dropdown to see the list of available dashboards, some of which you can apply to change the view of your application. 
+3. Click this dropdown to see the list of applications currently instrumented with GDS metrics. In the screenshot, we have selected _registers.cloudapps.digital:80_.
+4. Click these icons to interact with the dashboard. You can create a copy of the dashboard or share it, as well as changing the time period displayed.
+5. View the widgets and graphs currently measuring the performance of your application. Click and drag on any of the graphs to zoom in on a particular time period. If you have editing permissions, you can click on any widget to configure or remove these.
 
-##### Number 3: Total instances
+#### More instructions for navigating Grafana
 
-This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the number of taotal instances the application has running in this moment.
+##### Selecting different dashboards, and creating new dashboards
 
-##### Number 4: 2xx Status codes
+The dashboard dropdown contains all dashboards currently in use. Use the filters to find dashboards by name or by tag. If you have edit permissions, you can also create new dashboards.
 
-This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 2xx HTTP status code.
+![Dashboard selector](./images/grafana_dashboard/dashboard_selector.png)
 
-##### Number 5: 3xx Status codes
+##### Understanding the different widgets in this dashboard
 
-This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 3xx HTTP status code.
+In this _Common Template Dashboard_, there are eleven different widgets showing different information about your application:
 
-##### Number 6: 4xx Status codes
+![Template dashboard widgets](./images/grafana_dashboard/template_dashboard.png)
 
-This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 4xx HTTP status code.
+1. A brief description of the dashboard.
+2. The number of healthy instances the application has running right now. The range of colors is: Green (more than 1 instance available), Orange (1 instance available), Red (no instances available)
+3. The number of total instances for your application.
+4. The percentage of HTTP Status code 2xx responses.
+5. The percentage of HTTP Status code 3xx responses.
+6. The percentage of HTTP Status code 4xx responses.
+7. The percentage of HTTP Status code 5xx responses.
+8. The number of request per minute your application is serving.
+9. The number of HTTP errors (4xx, 5xx) per minutes your application is throwing.
+10. A graph showing the average response times for your application.
+11. A table of the list of the seven slowest endpoints in the application.
 
-##### Number 7: 5xx Status codes
+#### Custom metrics
 
-This is a _Singlestat_ widget. This widget allows us to show a unique number or string with the desired information. The example case is showing the pecentage of responses in our application that return a 5xx HTTP status code.
+Using the Prometheus client libraries, both [Java](https://github.com/alphagov/gds_metrics_dropwizard) and [Ruby](https://github.com/alphagov/gds_metrics_ruby) vesions, we are allowed to create our own custom metrics to measure things specific to our applications in addtion to the generic metrics offered by the libraries. The libraries include the Prometheus `simpleclient` offering four metric types.
 
-##### Number 8: Number of requests per 5 minutes
+##### Counter
 
-This is a _Graph_ widget. This widget allows us to draw a two dimension representation of our data. The example case is a representation of the requests received by the application every 5 minutes, where the axis X is the time and the axis Y is the number of request received.
+A counter is a cumulative metric that represents a single numerical value that only ever goes up. A counter is typically used to count requests served, tasks completed, errors occurred, etc. Counters should not be used to expose current counts of items whose number can also go down, e.g. the number of currently running threads. Use gauges for this use case.
 
-##### Number 9: Number of HTTP Error per minute
+##### Gauge
 
-This is a _Graph_ widget. This widget allows us to draw a two dimension representation of our data. The example case is a representation of the errors thrown by the application every minute, where the axis X is the time and the axis Y is the number of HTTP errors thrown.
+A gauge is a metric that represents a single numerical value that can arbitrarily go up and down.
 
-##### Number 10: Average response time
+Gauges are typically used for measured values like temperatures or current memory usage, but also "counts" that can go up and down, like the number of running threads.
 
-This is a _Graph_ widget. This widget allows us to draw a two dimension representation of our data. The example case is a representation of how long it takes to the application on average to responde to the requests, where the axis X is the time and the axis Y is the time in ms.
+##### Histogram
 
-##### Number 11: Slowest requests
+A histogram samples observations (usually things like request durations or response sizes) and counts them in configurable buckets. It also provides a sum of all observed values.
 
-This is a _Table_ widget. This widget allows us to represent our information in a table format. The example case is showing a list of the last seven slowest (response time) endpoints in our application.
+A histogram with a base metric name of `<basename>` exposes multiple time series during a scrape:
 
-### Alerting
+* cumulative counters for the observation buckets, exposed as `<basename>_bucket{le="<upper inclusive bound>"}`
+* the total sum of all observed values, exposed as `<basename>_sum`
+* the count of events that have been observed, exposed as `<basename>_count (identical to <basename>_bucket{le="+Inf"} above)`
 
-This is work in progress.
+##### Summary
+
+Similar to a histogram, a summary samples observations (usually things like request durations and response sizes). While it also provides a total count of observations and a sum of all observed values, it calculates configurable quantiles over a sliding time window.
+
+A summary with a base metric name of `<basename>` exposes multiple time series during a scrape:
+
+* streaming **φ-quantiles** (0 ≤ φ ≤ 1) of observed events, exposed as `<basename>{quantile="<φ>"}`
+* the total sum of all observed values, exposed as `<basename>_sum`
+* the count of events that have been observed, exposed as `<basename>_count`
+
+More detailed explanations can be found in the [Prometheus documentation](https://prometheus.io/docs/concepts/metric_types/).
+
+More detailed explanations about the Java implementation can be found [here](https://github.com/prometheus/client_java#instrumenting).
+
+More detailed explanatios about the Ruby implementation can be found [here](https://github.com/prometheus/client_ruby#metrics).
