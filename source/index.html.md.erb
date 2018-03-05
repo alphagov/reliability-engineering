@@ -26,7 +26,7 @@ These tools have been procured for use by GDS teams, we are updating our recomme
 - [Amazon EC2 Reserved Instances](https://aws.amazon.com/ec2/pricing/reserved-instances/)
 - [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
 
-### Logging
+## Logging
 
 You should use Logit for your logging solution, it's been approved for use at GDS.
 
@@ -38,149 +38,20 @@ We provide [ELK (Elasticsearch, Logstash, and Kibana)](https://www.elastic.co/el
 - [send logs securely to Logit.io](manuals/logit-io.html)
 - [send logs from PaaS to logit](https://docs.cloud.service.gov.uk/#set-up-the-logit-io-log-management-service)
 
-### Metrics
+## Metrics
+
+Reliability Engineering is running an Alpha on using [Prometheus](https://prometheus.io/) as the operational metrics service for GDS.
+
+You can setup GDS metrics with:
+
+- [Ruby Rails](https://github.com/alphagov/gds_metrics_ruby)
+- [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard)
+
+When you use GDS metrics you can create:
+
+- [Grafana dashboards](manuals/grafana-dashboards.html)
+- [custom metrics](manuals/add-custom-metrics.html)
+
+Please <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">contact us</a> to find out more.
 
 GDS Metrics is in alpha. These instructions are subject to change.
-
-
-
-#### Setting up metrics
-
-If you're using Ruby, follow the instructions [here](https://github.com/alphagov/gds_metrics_ruby).
-
-If you're using Java with Dropwizard, follow the instructions [here](https://github.com/alphagov/gds_metrics_dropwizard).
-
-
-
-#### Logging into Grafana
-
-Visit [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) and sign in with Google:
-
-![google-auth](images/google-auth.png)
-
-Log in with your digital.cabinet-office.gov.uk email address.
-
-
-
-#### Viewing metrics for your app
-
-Click 'Home' in the top left of the screen:
-
-![dropdown](images/home.png)
-
-Select 'GDS Default Dashboard' from the dropdown:
-
-![Dashboard List](images/dashboard-list.png)
-
-Select your application from the 'Available Apps' dropdown:
-
-![Available Apps](images/available-apps.png)
-
-If you can't see your application in the list, make sure you've followed the instructions in [Setting up metrics](#setting-up-metrics) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/#technical-documentation-for-gov-uk-paas).
-
-
-
-You should now see the GDS Default Dashboard applied to your application.
-
-#### Understanding the dashboard
-
-This is the default dashboard for every application using the Reliability Enginering team metrics solution:
-
-![Dashboard](./images/grafana_dashboard/dashboard.png)
-
-
-
-##### What's powering this dashboard?
-
-This dashboard has been built using the following metrics provided by Prometheus:
-
-```
-http_server_exceptions_total
-http_server_request_duration_seconds_bucket
-http_server_request_duration_seconds_count
-http_server_request_duration_seconds_sum
-http_server_requests_total
-```
-
-The widgets on the dashboard are the result of queries over these metrics. For example, the 'Number of requests per minute' widget is built from `http_server_requests_total` using Prometheus' [`sum`](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators) aggregator and [`rate`](https://prometheus.io/docs/prometheus/latest/querying/functions/#rate()) function. [TODO - link to PromQL section](#)
-
-
-##### What does the dashboard tell me?
-
-There are eleven widgets showing information about your application:
-
-![Template dashboard widgets](./images/grafana_dashboard/template_dashboard.png)
-
-1. A brief description of the dashboard.
-2. The number of healthy instances the application has running right now. The range of colors is: Green (more than 1 instance available), Orange (1 instance available), Red (no instances available)
-3. The number of total instances for your application.
-4. The percentage of HTTP Status code 2xx responses.
-5. The percentage of HTTP Status code 3xx responses.
-6. The percentage of HTTP Status code 4xx responses.
-7. The percentage of HTTP Status code 5xx responses.
-8. The number of request per minute your application is serving.
-9. The number of HTTP errors (4xx, 5xx) per minutes your application is throwing.
-10. A graph showing the average response times for your application.
-11. A table of the list of the seven slowest endpoints in the application.
-
-##### Requesting Grafana edit permissions from Reliability Engineering
-
-Contact us on Slack in the #reliabiltiy-eng channel to be granted edit permissions.
-
-Refer to the instructions below to help you orientate the Grafana interface:
-
-![Dashboard](./images/grafana_dashboard/dashboard_annotated.png)
-
-1. Click these icons to configure Grafana, e.g. manage profile updates, alerts, permissions, dashboard and folders. You'll see different options depending on your level of permissions.
-2. Click this dropdown to see the list of available dashboards, some of which you can apply to change the view of your application. 
-3. Click this dropdown to see the list of applications currently instrumented with GDS metrics. In the screenshot, we have selected _registers.cloudapps.digital:80_.
-4. Click these icons to interact with the dashboard. You can create a copy of the dashboard or share it, as well as changing the time period displayed.
-5. View the widgets and graphs currently measuring the performance of your application. Click and drag on any of the graphs to zoom in on a particular time period. If you have editing permissions, you can click on any widget to configure or remove these.
-
-#### More instructions for navigating Grafana
-
-##### Selecting different dashboards, and creating new dashboards
-
-The dashboard dropdown contains all dashboards currently in use. Use the filters to find dashboards by name or by tag. If you have edit permissions, you can also create new dashboards.
-
-![Dashboard selector](./images/grafana_dashboard/dashboard_selector.png)
-
-#### Custom metrics
-
-Using the Prometheus client libraries, both [Java](https://github.com/alphagov/gds_metrics_dropwizard) and [Ruby](https://github.com/alphagov/gds_metrics_ruby) vesions, we are allowed to create our own custom metrics to measure things specific to our applications in addtion to the generic metrics offered by the libraries. The libraries include the Prometheus `simpleclient` offering four metric types.
-
-##### Counter
-
-A counter is a cumulative metric that represents a single numerical value that only ever goes up. A counter is typically used to count requests served, tasks completed, errors occurred, etc. Counters should not be used to expose current counts of items whose number can also go down, e.g. the number of currently running threads. Use gauges for this use case.
-
-##### Gauge
-
-A gauge is a metric that represents a single numerical value that can arbitrarily go up and down.
-
-Gauges are typically used for measured values like temperatures or current memory usage, but also "counts" that can go up and down, like the number of running threads.
-
-##### Histogram
-
-A histogram samples observations (usually things like request durations or response sizes) and counts them in configurable buckets. It also provides a sum of all observed values.
-
-A histogram with a base metric name of `<basename>` exposes multiple time series during a scrape:
-
-* cumulative counters for the observation buckets, exposed as `<basename>_bucket{le="<upper inclusive bound>"}`
-* the total sum of all observed values, exposed as `<basename>_sum`
-* the count of events that have been observed, exposed as `<basename>_count (identical to <basename>_bucket{le="+Inf"} above)`
-
-##### Summary
-
-Similar to a histogram, a summary samples observations (usually things like request durations and response sizes). While it also provides a total count of observations and a sum of all observed values, it calculates configurable quantiles over a sliding time window.
-
-A summary with a base metric name of `<basename>` exposes multiple time series during a scrape:
-
-* streaming **φ-quantiles** (0 ≤ φ ≤ 1) of observed events, exposed as `<basename>{quantile="<φ>"}`
-* the total sum of all observed values, exposed as `<basename>_sum`
-* the count of events that have been observed, exposed as `<basename>_count`
-
-##### How to add custom metrics
-
-More detailed explanations on the different types of metrics can be found in the [Prometheus documentation](https://prometheus.io/docs/concepts/metric_types/).
-
-Instructions on how to add new metrics using the Java implementation can be found [in the library documentation](https://github.com/prometheus/client_java#instrumenting). Ruby users can find similar documentation in the [client_ruby documentation](https://github.com/prometheus/client_ruby#metrics).
