@@ -30,9 +30,9 @@ If you are unable to see `gds-prometheus` in the output of `cf marketplace` plea
 These steps will create a Prometheus service within your space and allow you to bind it to running apps in your space.
 
 1. Create a Prometheus service instance within each space you have Prometheus instrumented apps deployed
-  - `❯ cf create-service gds-prometheus prometheus <sandbox-prom>`
+  - `❯ cf create-service gds-prometheus prometheus <service-instance-name>`
 2. Either [update your app's manifest.yml] to bind your new service or bind it using the CLI
-  - `❯ cf bind-service <app-name> <sandbox-prom>`
+  - `❯ cf bind-service <app-name> <service-instance-name>`
 3. Within 5 minutes Prometheus will begin scraping your application for metrics
 
 Validate metrics are arriving by checking the [default dashboard](https://grafana-paas.cloudapps.digital).
