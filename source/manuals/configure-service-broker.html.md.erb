@@ -1,0 +1,41 @@
+---
+title: Monitoring your apps with Prometheus
+---
+
+# <%= current_page.data.title %>
+
+Prometheus uses service discovery to determine which apps to monitor, for PaaS apps this requires users to follow these steps:
+
+1. Granting Prometheus read-only access to your space
+2. Indicating which apps Prometheus should monitor by binding apps with the service broker
+
+### Granting Prometheus read-only access to your PaaS spaces
+
+Giving prometheus-for-paas the SpaceAuditor role allows it to monitor each instance of your app and respond to events (start/stop/scaling).
+
+`cf set-space-role prometheus-for-paas@digital.cabinet-office.gov.uk <org-name> <space-name> SpaceAuditor`
+
+### Using the Service Broker to bind Prometheus
+
+Our Prometheus service broker can be found in the PaaS marketplace.
+
+```
+❯ cf marketplace
+service          plans        description
+gds-prometheus   prometheus   GDS internal Prometheus monitoring alpha https://reliability-engineering.cloudapps.digital/#metrics
+```
+
+If you are unable to see `gds-prometheus` in the output of `cf marketplace` please get in touch in the [#reliability-eng Slack channel].
+
+These steps will create a Prometheus service within your space and allow you to bind it to running apps in your space.
+
+1. Create a Prometheus service instance within each space you have Prometheus instrumented apps deployed
+  - `❯ cf create-service gds-prometheus prometheus <sandbox-prom>`
+2. Either [update your app's manifest.yml] to bind your new service or bind it using the CLI
+  - `❯ cf bind-service <app-name> <sandbox-prom>`
+3. Within 5 minutes Prometheus will begin scraping your application for metrics
+
+Validate metrics are arriving by checking the [default dashboard](https://grafana-paas.cloudapps.digital).
+
+[#reliability-eng Slack channel]: https://govuk.slack.com/messages/C6TH7R5MM
+[update your app's manifest.yml]: https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block
