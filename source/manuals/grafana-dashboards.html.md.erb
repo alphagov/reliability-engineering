@@ -13,7 +13,7 @@ Visit [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) a
 
 Log in with your digital.cabinet-office.gov.uk email address.
 
-### Viewing metrics for your app
+## Viewing metrics for your app
 
 Click 'Home' in the top left of the screen:
 
@@ -33,7 +33,7 @@ If you can't see your application in the list, make sure you've followed the ins
 
 You should now see the GDS Default Dashboard applied to your application.
 
-### Understanding the dashboard
+## Understanding the dashboard
 
 This is the default dashboard for every application using the Reliability Enginering team metrics solution:
 
@@ -41,7 +41,7 @@ This is the default dashboard for every application using the Reliability Engine
 
 
 
-#### What's powering this dashboard?
+### What's powering this dashboard?
 
 This dashboard has been built using the following metrics provided by Prometheus:
 
@@ -56,7 +56,7 @@ http_server_requests_total
 The widgets on the dashboard are the result of queries over these metrics. For example, the 'Number of requests per minute' widget is built from `http_server_requests_total` using Prometheus' [`sum`](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators) aggregator and [`rate`](https://prometheus.io/docs/prometheus/latest/querying/functions/#rate()) function. [TODO - link to PromQL section](#)
 
 
-#### What does the dashboard tell me?
+### What does the dashboard tell me?
 
 There are eleven widgets showing information about your application:
 
@@ -74,7 +74,7 @@ There are eleven widgets showing information about your application:
 10. A graph showing the average response times for your application.
 11. A table of the list of the seven slowest endpoints in the application.
 
-#### Requesting Grafana edit permissions from Reliability Engineering
+### Requesting Grafana edit permissions from Reliability Engineering
 
 Contact us on Slack in the #reliabiltiy-eng channel to be granted edit permissions.
 
@@ -88,9 +88,9 @@ Refer to the instructions below to help you orientate the Grafana interface:
 4. Click these icons to interact with the dashboard. You can create a copy of the dashboard or share it, as well as changing the time period displayed.
 5. View the widgets and graphs currently measuring the performance of your application. Click and drag on any of the graphs to zoom in on a particular time period. If you have editing permissions, you can click on any widget to configure or remove these.
 
-### More instructions for navigating Grafana
+## More instructions for navigating Grafana
 
-#### Selecting different dashboards, and creating new dashboards
+### Selecting different dashboards, and creating new dashboards
 
 The dashboard dropdown contains all dashboards currently in use. Use the filters to find dashboards by name or by tag. If you have edit permissions, you can also create new dashboards.
 
