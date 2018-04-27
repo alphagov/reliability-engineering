@@ -15,6 +15,15 @@ GDS manage a number of Amazon Web Services (AWS) accounts.
 User accounts are managed centrally in a "base account" from which users
 can access the target accounts through a process called "assuming roles".
 
+## Adding new users to GDS' AWS accounts
+
+Currently new joiners have no access to AWS by default. To grant a user access
+to AWS they need to be added to the `gds-users` base account. Once a user is in
+the base account it is up to the owners of the target accounts to grant the
+user access to roles within the account.
+
+To add a user to the `gds-users` base account fill in [this form](https://gds-request-an-aws-account.cloudapps.digital/).
+
 ## Accessing the AWS Console
 
 <ul>
