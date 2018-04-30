@@ -1,5 +1,7 @@
 # Technical Documentation
 
+[![Build Status](https://travis-ci.org/alphagov/reliability-engineering.svg?branch=master)](https://travis-ci.org/alphagov/reliability-engineering)
+
 ## Getting started
 
 To preview or build the website, we need to use the terminal.
@@ -72,6 +74,10 @@ bundle exec middleman build
 
 This will create a `build` subfolder in the application folder which contains
 the HTML and asset files ready to be published.
+
+## Deploy
+
+Continuously deployed from master by Travis.
 
 ## Licence
 
