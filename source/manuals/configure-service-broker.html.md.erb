@@ -6,8 +6,8 @@ title: How to monitor your apps with Prometheus
 
 [Prometheus][] uses service discovery to decide what it monitors, so for apps running on [GOV.UK PaaS][] you'll need to:
 
-* grant Prometheus read-only access to your PaaS spaces
-* bind your apps with the Prometheus service broker
+1. Grant Prometheus read-only access to your PaaS spaces.
+2. Bind your apps with the Prometheus service broker.
 
 ### Grant Prometheus read-only access to your PaaS spaces
 
@@ -17,7 +17,7 @@ By giving prometheus-for-paas the [SpaceAuditor][] role you allow it to monitor 
 
 ### Use the service broker to bind Prometheus
 
-The Prometheus service broker can be found in the PaaS marketplace.
+You can find the Prometheus service broker in the PaaS marketplace.
 
 ```
 ❯ cf marketplace
@@ -27,15 +27,14 @@ gds-prometheus   prometheus   GDS internal Prometheus monitoring alpha https://r
 
 If you're unable to see `gds-prometheus` in the output of `cf marketplace` please contact us through the [#reliability-eng Slack channel].
 
-Once you have the service broker you can create a Prometheus service within your PaaS space and allow it to bind to apps running there. Do this by following these steps:
+With the service broker you can create a Prometheus service within your PaaS space and allow it to bind to apps running there, you can do this by following these steps:
 
 1. Create a Prometheus service instance in each space you have Prometheus instrumented apps deployed
   - `❯ cf create-service gds-prometheus prometheus <service-instance-name>`
 2. Either [update your app's manifest.yml] to bind your new service or bind it using the CLI
   - `❯ cf bind-service <app-name> <service-instance-name>`
-3. Within 5 minutes Prometheus will start scraping your application for metrics
 
-You can validate if your metrics are arriving by checking the [default Grafana dashboard](https://grafana-paas.cloudapps.digital).
+Within 5 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana](https://grafana-paas.cloudapps.digital).
 
 
 [#reliability-eng Slack channel]: https://govuk.slack.com/messages/C6TH7R5MM
