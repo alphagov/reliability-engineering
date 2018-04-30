@@ -18,7 +18,7 @@ If one team uses up the organisation quota, it stops other teams from being able
 
 To create a space with a name of `log-pipeline` memory quota of 1 Gb, an OrgManager can run the following commands:
 
-- `cf create-space-quota log-pipeline -m 1g`
+- `cf create-space-quota log-pipeline -m 1g -r 5`
 - `cf create-space log-pipeline -o gds-tech-ops -q log-pipeline`
 
 To update the quota later, an OrgManager can run:
