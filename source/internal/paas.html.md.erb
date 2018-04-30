@@ -16,9 +16,9 @@ We have an overall quota for the organisation.  You can see the name of the quot
 
 If one team uses up the organisation quota, it stops other teams from being able to create apps.  Therefore, teams should ensure they work in spaces, and that each space has a space quota.  If a team hits the quota for their space, it won't block other teams.  This is particularly problematic with memory usage.
 
-To create a space with a name of `log-pipeline` memory quota of 1 Gb, an OrgManager can run the following commands:
+To create a space with a name of `log-pipeline`, a memory quota of 1 Gb and a routes quota of 5, an OrgManager can run the following commands:
 
-- `cf create-space-quota log-pipeline -m 1g`
+- `cf create-space-quota log-pipeline -m 1g -r 5`
 - `cf create-space log-pipeline -o gds-tech-ops -q log-pipeline`
 
 To update the quota later, an OrgManager can run:
