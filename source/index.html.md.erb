@@ -49,10 +49,14 @@ We provide client libraries which wrap Prometheus's own libraries.  We do this f
 - for GOV.UK PaaS apps, to guard the `/metrics` API behind http basic auth
 - to ease configuration through the use of framework-specific things like railties or dropwizard bundles.
 
-You can setup GDS metrics with:
+You can setup GDS metrics for your GOV.UK PaaS app with:
 
 - [Ruby](https://github.com/alphagov/gds_metrics_ruby)
 - [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard)
+
+Once you've setup your GOV.UK PaaS app with GDS metrics you can:
+
+* [monitor your PaaS app with Prometheus](manuals/monitor-paas-app-with-prometheus.html)
 
 When you use GDS metrics you can create:
 
