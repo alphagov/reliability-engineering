@@ -11,20 +11,17 @@ account_list:
 
 # <%= current_page.data.title %>
 
-GDS manage a number of Amazon Web Services (AWS) accounts.
-User accounts are managed centrally in a "base account" from which users
-can access the target accounts through a process called "assuming roles".
+GDS manages a number of [Amazon Web Services (AWS)][] accounts. User accounts are managed centrally by Reliability Engineering with a base GDS  account. Users must sign into the base account through which they can access their own AWS accounts through a [process called assuming roles][].
 
-## Adding new users to GDS' AWS accounts
+## Add new users to GDS AWS accounts
 
-Currently new joiners have no access to AWS by default. To grant a user access
-to AWS they need to be added to the `gds-users` base account. Once a user is in
-the base account it is up to the owners of the target accounts to grant the
-user access to roles within the account.
+People joining GDS do not automatically have access to AWS.
 
-To add a user to the `gds-users` base account fill in [this form](https://gds-request-an-aws-account.cloudapps.digital/).
+To grant a user access to AWS you'll need to add them to the `gds-users` base account. Once a user is added to the GDS base account it's up to individual teams to grant the user access to any roles they need.
 
-## Accessing the AWS Console
+Fill in the [Request an AWS account form][] to add a user to the `gds-users` base account.
+
+## Access the AWS Console
 
 <ul>
   <li>
@@ -59,20 +56,19 @@ To add a user to the `gds-users` base account fill in [this form](https://gds-re
   </li>
 </ul>
 
-## Accessing AWS from the command line
+## Access AWS from the command line
 
-There are several command line tools which interact with AWS, including:
+There are several command line tools you can use to work with AWS, such as:
 
-* [AWS Command Line Interface](https://aws.amazon.com/cli/)
-* [AWS Shell](https://github.com/awslabs/aws-shell)
-* [Terraform](https://www.terraform.io/)
+* [AWS Command Line Interface (AWS CLI)][]
+* [AWS Shell][]
+* [Terraform][]
 
-These need credentials for accessing AWS. The simplest way of managing these credentials
-is with an AWS credentials file.
+These tools need credentials to access AWS. The simplest way of managing these credentials is to use an AWS credentials file.
 
-### Creating an AWS credentials file
+### Create an AWS credentials file
 
-Create a file at `~/.aws/credentials` and add the following text:
+Create a local on your computer file at `~/.aws/credentials` and add:
 
 ```
 [gds-users]
@@ -80,10 +76,9 @@ aws_access_key_id = MYACCESSKEYID
 aws_secret_access_key = MYSECRETACCESSKEY
 ```
 
-You can find your access key id and secret access key by logging into the AWS console
-to the base account and following [the AWS instructions here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the the GDS base account using the [AWS console][]. You'll need to use the AWS instructions about [creating, modifying, and viewing Access Keys (Console)][] to do this.
 
-For each role you need to assume, add a section like the following:
+For each role you need to assume, add a section like:
 
 ```
 [your-account-name]
@@ -93,7 +88,7 @@ role_arn = <role arn>
 mfa_serial = <mfa device arn>
 ```
 
-Where `<role arn>` is taken from your Team's list of accounts and roles...
+Where `<role arn>` is taken from your team's list of accounts and roles.
 
 <details>
   <summary><small>Teams' lists of accounts and roles</small></summary>
@@ -104,24 +99,22 @@ Where `<role arn>` is taken from your Team's list of accounts and roles...
   </ul>
 </details>
 
-... and `<mfa device arn>` is your user's assigned MFA device.
+And `<mfa device arn>` is your user's assigned [Multi-Factor Authentication (MFA)][] device.
 
 <details>
   <summary><small>How to find your MFA device ARN</small></summary>
-  <li>Sign in to the base account in the console</li>
-  <li>Navigate to `IAM` > `Users` > `$your-user`</li>
-  <li>Select the `Security credentials` tab</li>
-  <li>Look for the `Assigned MFA device`</li>
+  <li>sign in to the base account using the AWS console</li>
+  <li>navigate to `IAM` > `Users` > `$your-user`</li>
+  <li>select the `Security credentials` tab</li>
+  <li>look for the `Assigned MFA device`</li>
   </ul>
 </details>
 
-### Creating tokens for command line use
+### Create tokens for command line use
 
-Some tools (e.g. [Terraform](https://www.terraform.io/)) aren't able to interactively
-ask the user for an MFA token. To work with these tools you can create a token using
-[STS](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html).
+Some tools, such as [Terraform][] can't ask the user for an MFA token. To use these tools you'll need to create a token using the [AWS Security Token Service (STS)][].
 
-Using [`awscli`](https://aws.amazon.com/cli/), run:
+Using [AWS CLI][], run:
 
 ```
 aws sts assume-role \
@@ -132,14 +125,12 @@ aws sts assume-role \
   --token-code <mfa token>
 ```
 
-See [the AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html) on assume-role for details.
+(Read [the AWS CLI documentation][] to learn about `assume-role` in AWS).
 
-Where `<role arn>` and `<mfa device arn>` are the values you set in `~/.aws/credentials`
-(see [Creating an AWS credentials file](#creating-an-aws-credentials-file))
-and `<mfa token>` is the current token being shown by your MFA device.
+Use the values set in `~/.aws/credentials` (see [Creating an AWS credentials file][]) for `<role arn>` and `<mfa device arn>`. Use the current token shown by your MFA device for `<mfa token>`.
 
-This will return some JSON which includes some keys and tokens. Use the output
-to set the following environment variables:
+This returns some JSON which contains keys and tokens, use it
+to set these environment variables:
 
 ```
 export AWS_ACCESS_KEY_ID=... # Credentials.AccessKeyId
@@ -150,5 +141,21 @@ export AWS_SESSION_TOKEN=... # Credentials.SessionToken
 Tools like Terraform will use these environment variables instead of the
 credentials file.
 
-Note that the SessionToken will expire after 8 hours (or whatever time you
-supply in <nobr>`--duration-seconds`</nobr>).
+Be aware the SessionToken will expire after eight hours, or whatever time you
+supply in <nobr>`--duration-seconds`</nobr>.
+
+
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
+[the request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
+[AWS Command Line Interface (AWS CLI)]: https://aws.amazon.com/cli/
+[AWS Shell]: https://github.com/awslabs/aws-shell
+[Terraform]: https://www.terraform.io/
+[AWS console]: https://gds-users.signin.aws.amazon.com/console
+[creating, modifying, and viewing Access Keys (Console)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey
+[Multi-Factor Authentication (MFA)]: https://aws.amazon.com/iam/details/mfa/
+[Terraform]: https://www.terraform.io/
+[AWS Security Token Service (STS)]: https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html
+[AWS CLI]: https://aws.amazon.com/cli/
+[the AWS CLI documentation]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
+[Creating an AWS credentials file]: #creating-an-aws-credentials-file
