@@ -4,13 +4,38 @@ title: Reliability Engineering
 
 # <%= current_page.data.title %>
 
-Reliability Engineering provide a shared platform to GDS teams with the tools needed to set up and maintain a service, we do this by:
+Reliability Engineering provide a shared platform to GDS teams comprising of tools to set up and maintain a service by:
 
-* acquiring tools and where appropriate administer them for GDS, for example [Logit](https://logit.io/)
-* running off-the-shelf services for GDS as internal SaaS, for example [Prometheus](https://prometheus.io/)
-* providing patterns and guidance, for example [PaaS incident templates](https://government-paas-team-manual.readthedocs.io/en/latest/support/incident_process/)
+* acquiring tools and where appropriate administer them for GDS like [Logit][]
+* running off-the-shelf services for GDS as internal SaaS such as [Prometheus][]
+* providing patterns and guidance like the [PaaS incident templates][]
 
-To understand the context for our decisions and guidance you'll need to refer to the [Service Manual](https://www.gov.uk/service-manual) and the [GDS Way](https://gds-way.cloudapps.digital/#gds-technical-guidance).
+To understand the context for our decisions and guidance you'll need to refer to the [Service Manual][] and the [GDS Way][].
+
+## Platforms
+
+Reliability Engineering develops, maintains and supports the [Amazon Web Services (AWS)][] and the [GOV.UK PaaS][] infrastructure GDS uses. GDS teams are responsible for the applications and components running on these platforms.
+
+For example, Reliability Engineering is responsible for rotating the SSL certificates that manage communications between AWS environments and [OpenVMS][]. GDS teams are responsible for rotating certificates that encrypt messages used by their service.
+
+### Monitoring
+
+Reliability Engineering monitors [Amazon Web Services (AWS)][] and the [GOV.UK PaaS][] ensuring their availability. GDS teams must monitor their own applications and respond to alerts.
+
+### Capacity
+
+Reliability Engineering helps GDS teams manage their capacity until they have the capability to manage their own resources. GDS teams are responsible for performance testing their applications and fixing related problems at code level.
+
+Reliability Engineering holds quarterly meetings, where GDS teams can:
+
+* discuss scaling their environment
+* address issues in service performance
+
+For example, if there's an incident that could cause a performance spike, GDS teams should notify Reliability Engineering as soon as possible. This allows Reliability Engineering to make any related changes to a team's environment.
+
+## Tools
+
+Reliability Engineering provides tools to help GDS teams manage their environment. GDS teams can choose other tools if they develop, maintain and support them.
 
 These tools have been procured for use by GDS teams, we are updating our recommendations on how we use them.
 
@@ -24,12 +49,12 @@ These tools have been procured for use by GDS teams, we are updating our recomme
 - [Amazon EC2 Reserved Instances](https://aws.amazon.com/ec2/pricing/reserved-instances/)
 - [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
 
-## Logging
+### Logging
 
-You should use Logit for your logging solution, it's been approved for use at GDS.
+Reliability Engineering uses [Logit](https://logit.io) to provision, manage and ensure availability of our logging infrastructure. Reliability Engineering helps GDS teams integrate Logit into their environments and create their logging and usage policies.
 
-We provide [ELK (Elasticsearch, Logstash, and Kibana)](https://www.elastic.co/elk-stack) stacks using
-[Logit](https://logit.io), these guides will help you:
+Reliability Engineering provide [ELK (Elasticsearch, Logstash, and Kibana)](https://www.elastic.co/elk-stack) stacks using
+Logit. You can:
 
 - [get a logit account](manuals/logit-io-joiners-and-leavers.html)
 - ship logs from S3 to logit (guidance in development)
@@ -37,19 +62,19 @@ We provide [ELK (Elasticsearch, Logstash, and Kibana)](https://www.elastic.co/el
 - [send logs from PaaS to logit](https://docs.cloud.service.gov.uk/#set-up-the-logit-io-log-management-service)
 - [respond to an incident with Logit](manuals/logit-incident-management.html)
 
-## Metrics
+### Metrics
 
 Reliability Engineering is running an Alpha on using [Prometheus](https://prometheus.io/) as the operational metrics service for GDS.
 
-We provide client libraries which wrap Prometheus's own libraries.  We do this for several reasons:
+Reliability Engineering provides client libraries which wrap Prometheus's own libraries so we can:
 
-- to provide a sensible default choice
-- to provide a consistent set of metrics across with consistent naming across different runtimes
-- to solve problems like "how do you get metrics from all worker processes rather than just one?"
-- for GOV.UK PaaS apps, to guard the `/metrics` API behind http basic auth
-- to ease configuration through the use of framework-specific things like railties or dropwizard bundles.
+- provide an easy metrics choice for GDS teams
+- supply consistent metrics and naming across different runtimes
+- solve problems like, how to get metrics from all worker processes not just one
+- guard the `/metrics` API behind HTTP basic auth for GOV.UK PaaS apps
+- ease configuration by using framework-specific things such as [Railties][] or [Dropwizard][] bundles
 
-You can setup GDS metrics for your GOV.UK PaaS app with:
+You can setup GDS metrics for your GOV.UK PaaS app using the Ruby and Java Dropwizard guides on GitHub:
 
 - [Ruby](https://github.com/alphagov/gds_metrics_ruby)
 - [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard)
@@ -58,27 +83,45 @@ Once you've setup your GOV.UK PaaS app with GDS metrics you can:
 
 * [monitor your PaaS app with Prometheus](manuals/monitor-paas-app-with-prometheus.html)
 
-When you use GDS metrics you can create:
+When using GDS metrics you can create:
 
 - [Grafana dashboards](manuals/grafana-dashboards.html)
 - [custom metrics](manuals/add-custom-metrics.html)
 
-Please <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">contact us</a> to find out more.
+Please email us at <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">the-gds-way@digital.cabinet-office.gov.uk</a> to find out more.
 
 GDS Metrics is in alpha. These instructions are subject to change.
 
 ## Infrastructure as a Service
 
-Several teams across GDS use Amazon Web Services as their infrastructure provider.
-Teams manage their own accounts, but users log in to a shared base account which is managed by Reliability Engineering.
+Several teams in GDS use [Amazon Web Services (AWS)][] as their infrastructure provider. 
 
-There is guidance on:
+GDS teams manage their own AWS accounts, but users sign must into a shared base AWS account managed by Reliability Engineering. You can find out:
 
-- [How to access AWS accounts](manuals/access-aws-accounts.html)
-- [How to create new AWS accounts](manuals/create-aws-accounts.html)
+- [how to access AWS accounts][]
+- [how to create new AWS accounts][]
 
-## Internal docs
+## Service Levels
 
-This section is for members of the Reliability Engineering team.  We have internal guides on:
+Reliability Engineering supports each GDS team's existing service levels until standardised support is agreed across GDS.
+
+## Reliability Engineering team guides
+
+This section is for members of the Reliability Engineering team. We are updating our guidance and currently have internal guides on:
 
 - [how to manage our shared PaaS organisation](internal/paas.html)
+
+
+[Logit]: https://logit.io/
+[Prometheus]: https://prometheus.io/
+[PaaS incident templates]: https://team-manual.cloud.service.gov.uk/support/incident_process/
+[Service Manual]: https://www.gov.uk/service-manual
+[GDS Way]: https://gds-way.cloudapps.digital/#gds-technical-guidance
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[GOV.UK PaaS]: https://www.cloud.service.gov.uk/
+[OpenVMS]: http://www.openvms.org/
+[Railties]: https://github.com/rails/rails/tree/master/railties
+[Dropwizard]: https://www.dropwizard.io/1.3.2/docs/
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[how to access AWS accounts]: manuals/access-aws-accounts.html
+[how to create new AWS accounts]: manuals/create-aws-accounts.html
