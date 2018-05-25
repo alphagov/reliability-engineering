@@ -1,34 +1,34 @@
 ---
-title: Creating AWS Accounts
+title: How to create AWS Accounts
 ---
 
 # <%= current_page.data.title %>
 
-Using multiple AWS accounts allows GDS to:
+Using multiple [Amazon Web Services (AWS)][] accounts allows GDS to:
 
-* Enforce administrative isolation between workloads
-* Minimize the impact of security breaches
-* Isolate audit data in separate accounts
+* enforce administrative isolation between workloads
+* minimize the impact of security breaches
+* isolate audit data in separate accounts
 
-See [the AWS multi-account guidance](https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/).
+GDS teams can create as many AWS accounts as they need, this means usually at least one production and one non-production account.
 
-Programmes can create as many AWS accounts as they need (usually at least one
-production and non-production).
+You can read more about [AWS Multiple Account Security Strategy][] in AWS Answers.
 
 Requesting an account
 ---------------------
 
-To request an account simply fill in and submit [this form](https://gds-request-an-aws-account.cloudapps.digital/).
+To request an AWS account complete and submit the [Request an AWS account form][].
 
-The reliability engineering team will confirm that your account is eligible to
-be included in GDS' AWS bill and perform the initial setup.
+Reliability Engineering will confirm if your account is eligible for inclusion in the GDS AWS bill and also perform the initial account setup.
 
-Once the account is created you will recieve an email with the account ID and
-will be able to assume an administrative role from [the GDS users base account](https://gds-users.signin.aws.amazon.com/console).
-You should use this role to set your new account up. We recommend that you
-follow the [advice on managing cross account access](https://gds-way-aws-preview.cloudapps.digital/standards/aws-account-management.html)
-in the GDS Way.
+Once your account is created you'll recieve an email with the account ID and will be able to assume an administrative role from [the GDS users base account][].
+
+You should use the administrative role to set up your new account and you should refer to the [guidance on managing cross account access][] in the GDS Way.
 
 <!-- TODO: replace the link above with a non-preview link -->
 
-
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[AWS Multiple Account Security Strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
+[Request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
+[the GDS users base account]: https://gds-users.signin.aws.amazon.com/console
+[guidance on managing cross account access]: https://gds-way-aws-preview.cloudapps.digital/standards/aws-account-management.html
