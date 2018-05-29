@@ -17,18 +17,34 @@ You can read more about [AWS Multiple Account Security Strategy][] in AWS Answer
 Requesting an account
 ---------------------
 
-To request an AWS account complete and submit the [Request an AWS account form][].
+To request an AWS account complete and submit the [request an AWS account form][].
 
 Reliability Engineering will confirm if your account is eligible for inclusion in the GDS AWS bill and also perform the initial account setup.
 
 Once your account is created you'll recieve an email with the account ID and will be able to assume an administrative role from [the GDS users base account][].
 
-You should use the administrative role to set up your new account and you should refer to the [guidance on managing cross account access][] in the GDS Way.
+Setting up an account
+---------------------
 
-<!-- TODO: replace the link above with a non-preview link -->
+Your account will be created with a `bootstrap` role which has full admin
+rights. The users you specified in the request an AWS account form should be able to assume this role
+from [the GDS users base account][] (see [accessing aws accounts][]).
+
+You should use the `bootstrap` role to set up your new account following your
+team's best practices (for example using [Terraform][]).
+
+As part of your account set up you should ensure that your users can assume
+roles that give them appropriate permissions.
+
+You should remove the `bootstrap` role once you've added a properly configured admin role.
+
+<!-- TODO: replace the gds-way link with a non-preview link -->
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [AWS Multiple Account Security Strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
-[Request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
+[request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
 [the GDS users base account]: https://gds-users.signin.aws.amazon.com/console
 [guidance on managing cross account access]: https://gds-way-aws-preview.cloudapps.digital/standards/aws-account-management.html
+[Terraform]: https://www.terraform.io/
+[accessing aws accounts]: access-aws-accounts.html
+
