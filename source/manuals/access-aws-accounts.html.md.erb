@@ -1,17 +1,14 @@
 ---
 title: Accessing AWS Accounts
-account_list:
-  - team: 'GOV.UK'
-    url: 'https://github.com/alphagov/govuk-aws-data/blob/master/docs/govuk-aws-accounts.md'
-  - team: 'Verify'
-    url: 'https://github.com/alphagov/verify-blackbox-passwords/blob/master/aws-accounts.info'
-  - team: 'Digital Marketplace'
-    url: 'https://alphagov.github.io/digitalmarketplace-manual/aws-accounts.html#available-roles'
+account_list: >
+  [GOV.UK](https://github.com/alphagov/govuk-aws-data/blob/master/docs/govuk-aws-accounts.md),
+  [Verify](https://github.com/alphagov/verify-blackbox-passwords/blob/master/aws-accounts.info),
+  and [Digital Marketplace](https://alphagov.github.io/digitalmarketplace-manual/aws-accounts.html#available-roles)'s lists of accounts
 ---
 
 # <%= current_page.data.title %>
 
-GDS manages a number of [Amazon Web Services (AWS)][] accounts. User accounts are managed centrally by Reliability Engineering with a base GDS  account. Users must sign into the base account through which they can access their own AWS accounts through a [process called assuming roles][].
+GDS manages a number of [Amazon Web Services (AWS)][] accounts. User accounts are managed centrally by Reliability Engineering with a base GDS account. Users must sign into the base account through which they can access their own AWS accounts through a [process called assuming roles][].
 
 ## Add new users to GDS AWS accounts
 
@@ -19,7 +16,7 @@ People joining GDS do not automatically have access to AWS.
 
 To grant a user access to AWS you'll need to add them to the `gds-users` base account. Once a user is added to the GDS base account it's up to individual teams to grant the user access to any roles they need.
 
-Fill in the [Request an AWS account form][] to add a user to the `gds-users` base account.
+Fill in the [request an AWS account form][] to add a user to the `gds-users` base account.
 
 ## Access the AWS Console
 
@@ -40,21 +37,15 @@ Fill in the [Request an AWS account form][] to add a user to the `gds-users` bas
     </details>
   </li>
   <li>
-    Fill in the account number and role you're switching to
+    Fill in the account number or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#AboutAccountAlias">account alias</a> and role you're switching to
     <details>
       <summary><small>Screenshot of the switch role page</small></summary>
       <img src="/images/aws-switch-role-form.png" alt="Screenshot of the sign in page">
     </details>
-    <details>
-      <summary><small>Teams' lists of accounts and roles</small></summary>
-      <ul>
-        <% for link in current_page.data.account_list %>
-          <li><a href="<%= link['url'] %>"><%= link['team'] %></a></li>
-        <% end %>
-      </ul>
-    </details>
   </li>
 </ul>
+
+Teams manage their own lists of accounts and roles (see <%= current_page.data.account_list %>).
 
 ## Access AWS from the command line
 
@@ -88,18 +79,7 @@ role_arn = <role arn>
 mfa_serial = <mfa device arn>
 ```
 
-Where `<role arn>` is taken from your team's list of accounts and roles.
-
-<details>
-  <summary><small>Teams' lists of accounts and roles</small></summary>
-  <ul>
-    <% for link in current_page.data.account_list %>
-      <li><a href="<%= link['url'] %>"><%= link['team'] %></a></li>
-    <% end %>
-  </ul>
-</details>
-
-And `<mfa device arn>` is your user's assigned [Multi-Factor Authentication (MFA)][] device.
+Where `<role arn>` is taken from your team's list of accounts and roles (see <%= current_page.data.account_list %>) and `<mfa device arn>` is your user's assigned [Multi-Factor Authentication (MFA)][] device.
 
 <details>
   <summary><small>How to find your MFA device ARN</small></summary>
@@ -144,10 +124,9 @@ credentials file.
 Be aware the SessionToken will expire after eight hours, or whatever time you
 supply in <nobr>`--duration-seconds`</nobr>.
 
-
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
-[the request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
+[request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
 [AWS Command Line Interface (AWS CLI)]: https://aws.amazon.com/cli/
 [AWS Shell]: https://github.com/awslabs/aws-shell
 [Terraform]: https://www.terraform.io/
@@ -159,3 +138,4 @@ supply in <nobr>`--duration-seconds`</nobr>.
 [AWS CLI]: https://aws.amazon.com/cli/
 [the AWS CLI documentation]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
 [Creating an AWS credentials file]: #creating-an-aws-credentials-file
+
