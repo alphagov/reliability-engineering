@@ -102,7 +102,7 @@ aws sts assume-role \
   --role-session-name "$(whoami)-$(date +%d-%m-%y_%H-%M)" \
   --role-arn <role arn> \
   --serial-number <mfa device arn> \
-  --duration-seconds "$((8*60*60))" \
+  --duration-seconds "$((1*60*60))" \
   --token-code <mfa token>
 ```
 
@@ -122,8 +122,8 @@ export AWS_SESSION_TOKEN=... # Credentials.SessionToken
 Tools like Terraform will use these environment variables instead of the
 credentials file.
 
-Be aware the SessionToken will expire after eight hours, or whatever time you
-supply in <nobr>`--duration-seconds`</nobr>.
+Be aware the SessionToken will expire after one hour, or whatever time you
+supply in <nobr>`--duration-seconds`</nobr> (up to the [maximum session duration][] for the role).
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
@@ -140,3 +140,4 @@ supply in <nobr>`--duration-seconds`</nobr>.
 [the AWS CLI documentation]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
 [Creating an AWS credentials file]: #creating-an-aws-credentials-file
 [aws-vault]: https://github.com/99designs/aws-vault
+[maximum session duration]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
