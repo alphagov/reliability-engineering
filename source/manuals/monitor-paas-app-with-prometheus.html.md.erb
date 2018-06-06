@@ -27,24 +27,29 @@ gds-prometheus   prometheus   GDS internal Prometheus monitoring alpha https://r
 
 If you're unable to see `gds-prometheus` in the output of `cf marketplace` please contact us through the [#re-prometheus-support Slack channel].
 
-You can create a Prometheus service within your PaaS space and allow it to bind to apps running there.  You can do this by following these steps:
+You can create a Prometheus service within your PaaS space and allow it to bind to apps running there. You can do this by following these steps:
 
 1. Create a Prometheus service instance in each space you have Prometheus instrumented apps deployed
   - `cf create-service gds-prometheus prometheus <service-instance-name>`
 2. Either [update your app's manifest.yml] to bind your new service or bind it using the CLI
   - `cf bind-service <app-name> <service-instance-name>`
-3. If your app uses a custom domain, you need to make sure that the [authorization header and other app headers][] are being forwarded otherwise the basic auth to the metrics endpoint will fail and your app won't have access to your other headers.
+3. If your app uses a custom domain, make sure the [authorization header and other app headers][] are being forwarded to the app, or the basic auth to the metrics endpoint will fail and your app won't have access to your other headers.
   - `cf update-service <cdn-route-service> \
     -c '{"domain": "<custom-domain>", "headers": ["Accept", "Authorization", "<other app header values>"]}'`
 
 Within 5 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana][].
 
-### Notes about the app route
+### App route
 
-* Only the first route of the app will be scraped.
-* Any changes to the first route will be picked up within 5 minutes
-  * This may mean there will be gaps to metrics during changes to routes when using a zero downtime plugin such as [autopilot][]
-* If there are no routes to your app the Prometheus service will default the route to `<app-name>.cloudapps.digital`
+Whether or not you're using a custom domain the Prometheus service broker will only scrape your app's first route.
+
+For example, some apps may have multiple routes especially if they use custom domains such as `custom.domain.gov.uk, an-interesting-app.cloudapps.digital`. Only the first route will be picked up.
+
+If there are no routes to your app the Prometheus service will default the route to `<app-name>.cloudapps.digital`.
+
+Because changes to the first route will only be picked up within 5 minutes it could create gaps to metrics during route changes if you're using a zero downtime plugin such as [autopilot][].
+
+
 
 [#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
 [authorization header and other app headers]: https://docs.cloud.service.gov.uk/#forwarding-headers
