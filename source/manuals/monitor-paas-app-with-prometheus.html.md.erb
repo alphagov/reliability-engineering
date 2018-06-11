@@ -9,13 +9,13 @@ title: How to monitor your PaaS app with Prometheus
 1. Grant Prometheus read-only access to your PaaS spaces.
 2. Bind your apps to the Prometheus service.
 
-### Grant Prometheus read-only access to your PaaS spaces
+## Grant Prometheus read-only access to your PaaS spaces
 
-By giving the `prometheus-for-paas` user the [SpaceAuditor][] role you allow it to monitor each instance of your app and respond to events (for example: start, stop, scaling).
+By giving the `prometheus-for-paas` user the [`SpaceAuditor`][] role you allow it to monitor each instance of your app and respond to events, for example start, stop, scaling.
 
 `cf set-space-role prometheus-for-paas@digital.cabinet-office.gov.uk <org-name> <space-name> SpaceAuditor`
 
-### Bind your apps to the Prometheus service
+## Bind your apps to the Prometheus service
 
 You can find Prometheus in the PaaS marketplace.
 
@@ -27,7 +27,7 @@ gds-prometheus   prometheus   GDS internal Prometheus monitoring alpha https://r
 
 If you're unable to see `gds-prometheus` in the output of `cf marketplace` please contact us through the [#re-prometheus-support Slack channel].
 
-You can create a Prometheus service within your PaaS space and allow it to bind to apps running there. You can do this by following these steps:
+Create a Prometheus service within your PaaS space and allow it to bind to apps running there. Do this by following these steps:
 
 1. Create a Prometheus service instance in each space you have Prometheus instrumented apps deployed
   - `cf create-service gds-prometheus prometheus <service-instance-name>`
@@ -39,74 +39,87 @@ You can create a Prometheus service within your PaaS space and allow it to bind 
 
 Within 5 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana][].
 
-### App route
+### App route configuration
 
 Whether or not you're using a custom domain the Prometheus service broker will only scrape your app's first route.
 
 For example, some apps may have multiple routes especially if they use custom domains such as `custom.domain.gov.uk, an-interesting-app.cloudapps.digital`. Only the first route will be picked up.
 
-If there are no routes to your app the Prometheus service will default the route to `<app-name>.cloudapps.digital`.
+If there are no routes to your app the Prometheus service will default the route to:
+
+`<app-name>.cloudapps.digital`.
 
 Because changes to the first route will only be picked up within 5 minutes it could create gaps to metrics during route changes if you're using a zero downtime plugin such as [autopilot][].
 
-## Container metrics
+## Configure container metrics
 
-Cloud Foundry provides time-series data, or metrics, for each instance of your PaaS app. You should use the metrics exporter app to send this data to a monitoring system of your choice. Your monitoring system can then store this data over time and let you view it.
+[Cloud Foundry][] provides time-series data (metrics), for your PaaS apps.
 
-To use the metrics exporter, you deploy it as an app on PaaS. The current metrics supported by the metrics exporter app are CPU, RAM, disk usage data, app crashes, app requests and app response times.
+Use the metrics exporter app to send Cloud Foundry metrics data to a monitoring system of your choice to store and view it. You'll need to deploy the metrics exporter as an app on PaaS before you can use it.
 
-### Setting up the metrics exporter app
+Currently suppprted metrics are:
 
-Before you set up the metrics exporter app, you will need a live Cloud Foundry account assigned to the spaces you want to receive metrics on; this account should be separate to your primary Cloud Foundry account.
+* CPU
+* RAM
+* disk usage data
+* app crashes
+* app requests
+* app response times
 
-We recommend that the separate Cloud Foundry account uses the [`SpaceAuditor` role](https://docs.cloud.service.gov.uk/#user-roles-space-auditor), as this role has the minimum permissions needed to meet the requirements of the metrics exporter app.
+### Set up the metrics exporter app
 
-To set up the metrics app:
+Before you setting up the metrics exporter app, you'll need a live Cloud Foundry account assigned to the spaces you want to receive metrics on.
 
-1. Clone the [https://github.com/alphagov/paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter) repository.
-2. [Push the metrics exporter app](https://docs.cloud.service.gov.uk/#deployment-overview) to Cloud Foundry without starting the app by running `cf push --no-start metric-exporter`.
-3. Set the following mandatory environment variables in the metrics exporter app using `cf set-env metric-exporter NAME VALUE`:
+Your new account should be separate to your primary Cloud Foundry account and use the [`SpaceAuditor`][] role beause it can view app data without modifying it.
+
+To set up the metrics exporter app:
+
+1. Clone the [paas-metric-exporter][] GitHub repository.
+2. [Push the metrics exporter app](https://docs.cloud.service.gov.uk/#deployment-overview) to Cloud Foundry (without starting the app) by running
+ * `cf push --no-start metric-exporter`
+3. Set the following mandatory environment variables in the metrics exporter app using
+  * `cf set-env metric-exporter NAME VALUE`
+
+	Use the `cf set-env` command for these mandatory variables, this will keep secure the secret information contained in them.
 
 	|Name|Value|
 	|:---|:---|
 	|`API_ENDPOINT`|Use `https://api.cloud.service.gov.uk`|
-	|`USERNAME`|Cloud Foundry User|
-	|`PASSWORD`|Cloud Foundry Password|
+	|`USERNAME`|Cloud Foundry user|
+	|`PASSWORD`|Cloud Foundry password|
 	|`ENABLE_STATSD`|false|
 	|`ENABLE_PROMETHEUS`|true|
 
-	You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure.
+	You could also set environment variables by amending the manifest file for optional environment variables that do not contain secret information. Read [paas-metric-exporter][] GitHub repository for more information.
 
-	You can also set environment variables by amending the manifest file. We recommend that you use this method for optional environment variables that do not contain secret information. Refer to the [https://github.com/alphagov/paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter) repository for more information.
-
-4. Start your app by running `cf start metric-exporter`.
-  - Check that you are generating Prometheus metrics by going to the metrics endpoint
+4. Run `cf start metric-exporter` to start your app
+1. Check you're generating Prometheus metrics at the metrics endpoint
     - `https://<your-app-url>/metrics`
 5. Bind your app to the Prometheus service
   - `cf bind-service <app-name> <service-instance-name>`
 
-### IP whitelist your application
+### IP whitelist your app
 
 1. Register the IP whitelist route service as a user-provided service in your PaaS space.
 
     `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
 
 
-2. Register the route service for routes that you want to protect.
+2. Register the route service for routes you want to protect.
 
     `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname <your paas app route>`
 
-    For example for `app-to-protect.cloudapps.digital` - 
+    For example, `app-to-protect.cloudapps.digital` would be:
 
     `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect`
 
 ### Troubleshooting
 
-If you are not receiving the metrics, check the [logs](/#logs) for the metrics exporter app. If you still need help, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If you're not receiving metrics, check the [logs][] for the metrics exporter app or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk][].
 
-### More about monitoring
+### Further reading
 
-For more information about monitoring apps, see [Monitoring the status of your service](https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service) on the Service Manual.
+The Service Manual as more information about [monitoring the status of your service][].
 
 [#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
 [authorization header and other app headers]: https://docs.cloud.service.gov.uk/#forwarding-headers
@@ -114,5 +127,10 @@ For more information about monitoring apps, see [Monitoring the status of your s
 [GOV.UK PaaS]: https://www.cloud.service.gov.uk/
 [Grafana]: https://grafana-paas.cloudapps.digital
 [Prometheus]: https://prometheus.io/
-[SpaceAuditor]: https://docs.cloud.service.gov.uk/#metrics
+[`SpaceAuditor`]: https://docs.cloud.service.gov.uk/#user-roles-space-auditor
 [update your app's manifest.yml]: https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block
+[Cloud Foundry]: https://docs.cloudfoundry.org/concepts/overview.html
+[paas-metric-exporter]: https://github.com/alphagov/paas-metric-exporter
+[gov-uk-paas-support@digital.cabinet-office.gov.uk]: mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk
+[monitoring the status of your service]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
+[logs]: https://reliability-engineering.cloudapps.digital/#logging
