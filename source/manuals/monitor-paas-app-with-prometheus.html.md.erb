@@ -49,7 +49,7 @@ If there are no routes to your app the Prometheus service will default the route
 
 Because changes to the first route will only be picked up within 5 minutes it could create gaps to metrics during route changes if you're using a zero downtime plugin such as [autopilot][].
 
-### Container metrics
+## Container metrics
 
 Cloud Foundry provides time-series data, or metrics, for each instance of your PaaS app. You should use the metrics exporter app to send this data to a monitoring system of your choice. Your monitoring system can then store this data over time and let you view it.
 
@@ -80,8 +80,25 @@ To set up the metrics app:
 	You can also set environment variables by amending the manifest file. We recommend that you use this method for optional environment variables that do not contain secret information. Refer to the [https://github.com/alphagov/paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter) repository for more information.
 
 4. Start your app by running `cf start metric-exporter`.
+  - Check that you are generating Prometheus metrics by going to the metrics endpoint
+    - `https://<your-app-url>/metrics`
+5. Bind your app to the Prometheus service
+  - `cf bind-service <app-name> <service-instance-name>`
 
-You can now check your monitoring system to see if you are receiving metrics.
+### IP whitelist your application
+
+1. Register the IP whitelist route service as a user-provided service in your PaaS space.
+
+    `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
+
+
+2. Register the route service for routes that you want to protect.
+
+    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname <your paas app route>`
+
+    For example for `app-to-protect.cloudapps.digital` - 
+
+    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect`
 
 ### Troubleshooting
 
