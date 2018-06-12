@@ -55,8 +55,6 @@ Because changes to the first route will only be picked up within 5 minutes it co
 
 [Cloud Foundry][] provides time-series data (metrics), for your PaaS apps.
 
-Use the metrics exporter app to send Cloud Foundry metrics data to a monitoring system of your choice to store and view it. You'll need to deploy the metrics exporter as an app on PaaS before you can use it.
-
 Currently suppprted metrics are:
 
 * CPU
@@ -68,7 +66,7 @@ Currently suppprted metrics are:
 
 ### Set up the metrics exporter app
 
-Before you setting up the metrics exporter app, you'll need a live Cloud Foundry account assigned to the spaces you want to receive metrics on.
+Before you setting up the metrics exporter app, you'll need a live [Cloud Foundry account][] assigned to the spaces you want to receive metrics on.
 
 Your new account should be separate to your primary Cloud Foundry account and use the [`SpaceAuditor`][] role beause it can view app data without modifying it.
 
@@ -94,11 +92,17 @@ To set up the metrics exporter app:
 
 4. Run `cf start metric-exporter` to start your app
 1. Check you're generating Prometheus metrics at the metrics endpoint
-    - `https://<your-app-url>/metrics`
+    - `https://<app-name>.cloudapps.digital/metrics`
 5. Bind your app to the Prometheus service
-  - `cf bind-service <app-name> <service-instance-name>`
+  - `cf bind-service metric-exporter <service-instance-name>`
+6. Map a route to your app so Prometheus can scrape it
+  - `cf map-route metric-exporter cloudapps.digital --hostname <app-name>`
 
 ### IP whitelist your app
+
+IP whitelisting allows you to create lists of trusted IP addresses or IP ranges from which your users can 
+access your domains. IP whitelist is a security feature often used for limiting and controlling access only 
+to trusted users.
 
 1. Register the IP whitelist route service as a user-provided service in your PaaS space.
 
@@ -134,3 +138,4 @@ The Service Manual as more information about [monitoring the status of your serv
 [gov-uk-paas-support@digital.cabinet-office.gov.uk]: mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk
 [monitoring the status of your service]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [logs]: https://reliability-engineering.cloudapps.digital/#logging
+[Cloud Foundry account]: https://docs.cloud.service.gov.uk/#get-started
