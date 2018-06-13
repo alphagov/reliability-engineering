@@ -51,91 +51,12 @@ If there are no routes to your app the Prometheus service will default the route
 
 Because changes to the first route will only be picked up within 5 minutes it could create gaps to metrics during route changes if you're using a zero downtime plugin such as [autopilot][].
 
-## Configure container metrics
-
-[Cloud Foundry][] provides time-series data (metrics), for your PaaS apps.
-
-Currently suppprted metrics are:
-
-* CPU
-* RAM
-* disk usage data
-* app crashes
-* app requests
-* app response times
-
-### Set up the metrics exporter app
-
-Before you setting up the metrics exporter app, you'll need a live [Cloud Foundry account][] assigned to the spaces you want to receive metrics on.
-
-Your new account should be separate to your primary Cloud Foundry account and use the [`SpaceAuditor`][] role beause it can view app data without modifying it.
-
-To set up the metrics exporter app:
-
-1. Clone the [paas-metric-exporter][] GitHub repository.
-2. [Push the metrics exporter app](https://docs.cloud.service.gov.uk/#deployment-overview) to Cloud Foundry (without starting the app) by running
- * `cf push --no-start metric-exporter`
-3. Set the following mandatory environment variables in the metrics exporter app using
-  * `cf set-env metric-exporter NAME VALUE`
-
-	Use the `cf set-env` command for these mandatory variables, this will keep secure the secret information contained in them.
-
-	|Name|Value|
-	|:---|:---|
-	|`API_ENDPOINT`|Use `https://api.cloud.service.gov.uk`|
-	|`USERNAME`|Cloud Foundry user|
-	|`PASSWORD`|Cloud Foundry password|
-	|`ENABLE_STATSD`|false|
-	|`ENABLE_PROMETHEUS`|true|
-
-	You could also set environment variables by amending the manifest file for optional environment variables that do not contain secret information. Read [paas-metric-exporter][] GitHub repository for more information.
-
-4. Run `cf start metric-exporter` to start your app
-1. Check you're generating Prometheus metrics at the metrics endpoint
-    - `https://<app-name>.cloudapps.digital/metrics`
-5. Bind your app to the Prometheus service
-  - `cf bind-service metric-exporter <service-instance-name>`
-6. Map a route to your app so Prometheus can scrape it
-  - `cf map-route metric-exporter cloudapps.digital --hostname <app-name>`
-
-### IP whitelist your app
-
-IP whitelisting allows you to create lists of trusted IP addresses or IP ranges from which your users can 
-access your domains. IP whitelist is a security feature often used for limiting and controlling access only 
-to trusted users.
-
-1. Register the IP whitelist route service as a user-provided service in your PaaS space.
-
-    `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
-
-
-2. Register the route service for routes you want to protect.
-
-    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname <your paas app route>`
-
-    For example, `app-to-protect.cloudapps.digital` would be:
-
-    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect`
-
-### Troubleshooting
-
-If you're not receiving metrics, check the [logs][] for the metrics exporter app or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk][].
-
-### Further reading
-
-The Service Manual as more information about [monitoring the status of your service][].
-
-[#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
-[authorization header and other app headers]: https://docs.cloud.service.gov.uk/#forwarding-headers
+[`SpaceAuditor`]: https://docs.cloud.service.gov.uk/#user-roles-space-auditor
 [autopilot]: https://github.com/contraband/autopilot
 [GOV.UK PaaS]: https://www.cloud.service.gov.uk/
 [Grafana]: https://grafana-paas.cloudapps.digital
 [Prometheus]: https://prometheus.io/
-[`SpaceAuditor`]: https://docs.cloud.service.gov.uk/#user-roles-space-auditor
 [update your app's manifest.yml]: https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block
 [Cloud Foundry]: https://docs.cloudfoundry.org/concepts/overview.html
 [paas-metric-exporter]: https://github.com/alphagov/paas-metric-exporter
-[gov-uk-paas-support@digital.cabinet-office.gov.uk]: mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk
 [monitoring the status of your service]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
-[logs]: https://reliability-engineering.cloudapps.digital/#logging
-[Cloud Foundry account]: https://docs.cloud.service.gov.uk/#get-started
