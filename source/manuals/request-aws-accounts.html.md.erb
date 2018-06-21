@@ -1,42 +1,41 @@
 ---
-title: How to create AWS Accounts
+title: How to request AWS Accounts
 ---
 
 # <%= current_page.data.title %>
 
-Using multiple [Amazon Web Services (AWS)][] accounts allows GDS to:
+GDS teams can request as many AWS accounts as required, for example at one production and one non-production account.
+
+Using multiple [Amazon Web Services (AWS)][] accounts allows GDS teams to:
 
 * enforce administrative isolation between workloads
 * minimize the impact of security breaches
 * isolate audit data in separate accounts
 
-GDS teams can create as many AWS accounts as they need, this means usually at least one production and one non-production account.
+AWS Answers has more information about [AWS Multiple Account Security Strategy][].
 
-You can read more about [AWS Multiple Account Security Strategy][] in AWS Answers.
-
-Requesting an account
----------------------
+## Request an account
 
 To request an AWS account complete and submit the [request an AWS account form][].
 
-Reliability Engineering will confirm if your account is eligible for inclusion in the GDS AWS bill and also perform the initial account setup.
+Reliability Engineering will confirm if your account is eligible for inclusion in GDS AWS billing and perform the initial account setup.
 
 Once your account is created you'll recieve an email with the account ID and will be able to assume an administrative role from [the GDS users base account][].
 
-Setting up an account
----------------------
+## Setup an account
 
 Your account will be created with a `bootstrap` role which has full admin
-rights. The users you specified in the request an AWS account form should be able to assume this role
-from [the GDS users base account][] (see [accessing aws accounts][]).
+rights.
+
+All users in the [Request an AWS account form][] will be able to assume the `bootstrap` role from [the GDS users base account][]. For more information read [accessing AWS accounts][].
 
 You should use the `bootstrap` role to set up your new account following your
-team's best practices (for example using [Terraform][]).
+team's best practices, for example using [Terraform][].
 
-As part of your account set up you should ensure that your users can assume
-roles that give them appropriate permissions.
+As part of your account setup, ensure your users can assume
+roles with the appropriate permissions.
 
-You should remove the `bootstrap` role once you've added a properly configured admin role.
+Remove the `bootstrap` role once you've added a properly configured admin role.
 
 <!-- TODO: replace the gds-way link with a non-preview link -->
 
@@ -47,4 +46,3 @@ You should remove the `bootstrap` role once you've added a properly configured a
 [guidance on managing cross account access]: https://gds-way-aws-preview.cloudapps.digital/standards/aws-account-management.html
 [Terraform]: https://www.terraform.io/
 [accessing aws accounts]: access-aws-accounts.html
-
