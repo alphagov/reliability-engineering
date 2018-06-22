@@ -1,5 +1,5 @@
 ---
-title: AWS Account Management
+title: How to manage AWS cross account access
 ---
 
 # <%= current_page.data.title %>
@@ -10,51 +10,45 @@ Teams in GDS use multiple Amazon Web Services (AWS) accounts to:
 * minimize the impact of security breaches
 * isolate audit data in separate accounts
 
-For example, by having separate AWS accounts for production and test workloads
-a team can restrict the security impact of a compromised credential.
+For example, by having separate AWS accounts for production and test workloads a team can restrict the security impact of a compromised AWS credential.
 
-To avoid users having to manage several sets of AWS credentials teams should
-use roles and cross-account access.
+To avoid users having to manage several sets of AWS credentials for multiple accounts teams should use roles and cross-account access. AWS describe this approach as the [multiple account security strategy][].
 
-AWS describe this approach as the [multiple account security strategy][].
+If you're setting up a new AWS account and your team want to use cross-account access follow this guidance using the `gds-users` account as your base account.
 
-If you're setting up a new AWS account for GDS and your team want to use
-cross-account access you should follow the guidance in this document using the
-`gds-users` account as your base account. See [accessing aws accounts][].
+Reliability Engineering has more information about how to [access AWS][].
 
-## Advice on managing cross account access
+## AWS cross account access
 
-Cross account access allows user accounts in one AWS account (the *base* account) to access resources in another AWS account (the *target* account).
+AWS cross account access allows user accounts held in the `gds-users` base account to access resources in any new target AWS account's created by your team.
 
-Access to the resources within the target AWS account is controlled through IAM roles which are managed within that target AWS account.
+Access to resources within a target AWS account is controlled using [AWS Identity and Access Management (IAM)][] roles managed within that AWS account.
 
-The IAM roles are used to establish trust relationships between the target (*trusting*) AWS account and the base (*trusted*) AWS account.
+IAM roles establish trust relationships between the target's (*trusting*) AWS account and the GDS base (*trusted*) AWS account.
 
-It is the target AWS accounts responsibility to manage access to it's resources. Although user accounts are managed within the base AWS account access to resources is managed by the target AWS account in which those resources reside.
+## How to manage access to resources
 
-### Manage Access to Resources
+The users exist in the GDS base account have permission to assume a role in a target account.
 
-![Assume Role Diagram](../images/assume-role.svg)
+The target account defines the roles users in the base account can assume, for example a Data Analyst:
 
-The users exist in the base account and have permission to assume role into the target account.
+![Assume Role Diagram](../images/aws/assume-role.svg)
 
-The target account defines the roles (Data Analyst in this example) which the users in the base account can assume. 
+### Trust Relationship (Assume Role Policy)
 
-#### The Trust Relationship (Assume Role Policy)
+The trust relationship describes what entities can assume the role (*principles*) and imposes *conditions* on how and when those entities can assume the role.
 
-The trust relationship describes which entities can assume the role (*principles*) and imposes *conditions* on how and when those entities can assume the role.
+**Principles**
 
-##### Principles
+An [AWS principle][] can be a user account, an AWS account or a role, principle entities are expressed as an AWS ARN.
 
-A principle can be a user account, an AWS account or a role. The principle entities are expressed as an AWS ARN.
+It's **strongly** recommended not to trust an AWS account. Trusting an AWS account base account allows all of the entities within that base account to assume that particular role.
 
-It is **strongly** recommended not to trust an AWS account. Trusting an AWS account base account allows all of the entities within the base account to assume the role. 
+**Conditions**
 
-##### Conditions
+Use conditions to enforce the presence of Multifactor authentication (MFA), for example restricting access to particular IP addresses or particular times of the day.
 
-Conditionals can be used to enforce the presence of MFA, restrict access to particular source IP addresses or restrict access to particular times of the day.
-
-##### An example Trust Relationship policy
+**Example Trust Relationship policy**
     {
       "Version": "2012-10-17",
       "Statement": {
@@ -65,9 +59,15 @@ Conditionals can be used to enforce the presence of MFA, restrict access to part
       }
     }
 
-#### Resource Permissions (Policies)
+### Resource Permissions (Policies)
 
-Access to resources are managed through IAM Policies, these can be custom or defined by Amazon. Roles should be designed around the permissions required to complete a task. 
+Access to resources are managed through [IAM Policies][] which can be custom built or defined by Amazon. Design your roles around the permissions people need to complete a task.
+
+Amazon provides some [examples of AWS policies][] related to IAM permissions.
 
 [multiple account security strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
-[accessing aws accounts]: access-aws-accounts.html
+[access AWS]: access-aws.html
+[AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+[AWS principle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+[IAM Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+[examples of AWS policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
