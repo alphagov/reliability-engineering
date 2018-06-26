@@ -88,7 +88,7 @@ The only inputs we are interested in are **Beats-SSL** and **Syslog-SSL**, you w
 
 If you know in advance which IP addresses or address ranges you will be sourcing logging traffic from, include these in your request so that the **Beats-SSL** and **Syslog-SSL** ports can be whitelisted.
 
-## Configuring Filebeat
+## Configure Filebeat
 
 Filebeat is a Logstash client that reads log files from the filesystem and ships them to Logstash as they are being written to. Please refer to [Filebeat documentation](https://www.elastic.co/products/beats/filebeat)for details on installation, general configuration and operation.
 
@@ -145,7 +145,7 @@ class { '::filebeat':
 }
 ```
 
-## Configuring Rsyslog
+## Configure Rsyslog
 
 Rsyslog version 8.x is known to work, we have not tried earlier versions. Although Ubuntu Trusty ships with 7.x, packages of 8.x for Trusty are available on the Rsyslog vendor's [PPA](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). You must also install the optional `rsyslog-gnutls` package.
 
