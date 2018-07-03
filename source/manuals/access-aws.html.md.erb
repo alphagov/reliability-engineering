@@ -1,5 +1,5 @@
 ---
-title: How to access AWS
+title: How to access Amazon Web Services (AWS)
 account_list: >
   [GOV.UK](https://github.com/alphagov/govuk-aws-data/blob/master/docs/govuk-aws-accounts.md),
   [Verify](https://github.com/alphagov/verify-blackbox-passwords/blob/master/aws-accounts.info),
@@ -14,9 +14,9 @@ AWS users must sign into the GDS base account before they can access their own A
 
 People joining GDS do not automatically have access to AWS. To grant a user access to AWS you'll need to add them to the `gds-users` base account.
 
-To add a user to the `gds-users` base account, complete the 'Request user access' section of the [Request an AWS account][] form.
+To add a user to the `gds-users` base account, complete the **Request user access** section of the [Request an AWS account][] form.
 
-After a user's added to the GDS base account it's the individual teams' responsibility to grant that user access to any team specific roles.
+After a user is added to the GDS base account it's the individual teams' responsibility to grant that user access to any team specific roles.
 
 Once setup is complete users can access AWS using the AWS Console or the command line.
 
@@ -32,12 +32,15 @@ It's your team's responsibility to manage your leavers process.
 
 To access the AWS Console:
 
-1. Sign in to the [GDS base account][].
-src="/images/aws/aws-base-account-signin-form.png" alt="Screenshot of the sign in page"
-2. From the top right dropdown menu, select **Switch Role**.
-src="/images/aws/aws-base-account-signin-form.png" alt="Screenshot of the sign in page"
+![Screenshot of the sign in page](../images/aws/aws-base-account-signin-form.png)
+
+2. From the top right dropdown menu, where your ID is shown, select **Switch Role**.
+
+![Screenshot of the sign in page](../images/aws/aws-switch-role-menu.png)
+
 3. Click **Switch Role** and complete the **Account** or [account alias][] and **Role** you're switching to.
-src="/images/aws/aws-switch-role-form.png" alt="Screenshot of the sign in page"
+
+![Screenshot of the sign in page](../images/aws/aws-switch-role-form.png)
 
 Teams manage their own lists of accounts and roles (see <%= current_page.data.account_list %>).
 
@@ -61,9 +64,7 @@ aws_access_key_id = MYACCESSKEYID
 aws_secret_access_key = MYSECRETACCESSKEY
 ```
 
-You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the the GDS base account using the [AWS console][].
-
-Use the AWS instructions for [creating, modifying, and viewing Access Keys (Console)][] to do this.
+You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the the GDS base account using the [AWS console][]. Use the AWS instructions for [creating, modifying, and viewing Access Keys (Console)][] to do this.
 
 For each role you need to assume, add a section like:
 
@@ -103,7 +104,7 @@ aws sts assume-role \
 
 [AWS CLI documentation][] has more information about `assume-role`.
 
-Use the values set in `~/.aws/credentials` (see [Creating an AWS credentials file][]) for `<role arn>` and `<mfa device arn>`. Use the current token shown by your MFA device for `<mfa token>`.
+Use the values set in `~/.aws/credentials` (see Create an AWS credentials file) for `<role arn>` and `<mfa device arn>`. Use the current token shown by your MFA device for `<mfa token>`.
 
 This command returns JSON containing keys and tokens, use it
 to set the following environment variables:
