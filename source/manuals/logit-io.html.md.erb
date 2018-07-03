@@ -4,9 +4,9 @@ title: How to send logs securely to Logit
 
 # <%= current_page.data.title %>
 
-**Introduction here**
+*more introduction here*
 
-You need to add a new stack and configure it, you'll then need to add setup how you'll send your logs to Logit.
+You need to add a new stack and configure it, you'll then need to setup how you'll send your logs to Logit.
 
 ## Add a new stack
 
@@ -16,7 +16,7 @@ After signing into Logit create a new stack by selecting **Add stack** from the 
 
 When choosing a stack name, consider that other teams will need to use this name to differentiate your stack from one of their own.
 
-Your own team will need to differentiate between stacks they own, so your stack name should be specific, concise, and convey information about who owns it and which environment it serves.
+Your own team will also need to differentiate between stacks they own, so your stack name should be specific, concise, and convey information about who owns it and which environment it serves.
 
 For example:
 
@@ -29,7 +29,7 @@ In the **Stack version** field select the latest Elasticsearch, Logstash and Kib
 
 Complete the **Daily logs** and **Retention fields** as appropriate then choose **continue**, confirm your stack details are correct and then **Create Stack**.
 
-Once created, return to the Logit.io Dashboard.
+Once created, return to the Logit Dashboard.
 
 ## Configure a new stack
 
@@ -51,11 +51,11 @@ TCP ports are assigned on a per-stack basis at stack creation time and will be d
 
 ## Send logs from virtual machines
 
-**what do we need here**
+*what do we need here*
 
 ## Send logs from PaaS apps
 
-Send logs from [GOV.UK Platform as a Service (PaaS)][] to Logit after you:
+You can send logs from [GOV.UK Platform as a Service (PaaS)][] apps to Logit after you:
 
 - [set up the Logit log management service][]
 
@@ -63,7 +63,7 @@ Send logs from [GOV.UK Platform as a Service (PaaS)][] to Logit after you:
 
 In some cases such as logging for Amazon services (CloudTrail, VPC FlowLogs etc) it can make sense to use an S3 bucket as a log "source" for your Logit stack. This differs from other ways of using Logit as logs are "pulled" into your stack by a process in Logit infrastructure.
 
-### Sharing access to resources in your Amazon account
+### Share access to resources in your Amazon account
 
 Amazon [recommend using IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) to share access to resources in your account. This method doesn't require the creation of shared secrets.
 
@@ -74,7 +74,7 @@ When setting this up you make sure that
   * The access key is only able to ListObjects and GetObject from the S3 bucket containing the logs
   * You are able to migrate to Role based access in the future when it is supported by Logit
 
-### Configuring Logit
+### Configure Logit
 
 Currently pulling logs from an S3 bucket requires a Logit support engineer to configure it for your stack. To start this process, add a "Source" to your Logit stack and select "S3". Complete the form and a Logit support engineer will contact you once it has been configured.
 
@@ -253,6 +253,8 @@ $UDPServerRun 514
 ```
 
 ## TLS authentication
+
+*say here when it may be appropriate to use mutual TLS.*
 
 Logit offers logstash endpoints, which by default have no authentication. This means anyone who has the logstash address can inject fake logs into your stash.
 
