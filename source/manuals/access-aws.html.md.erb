@@ -32,12 +32,30 @@ It's your team's responsibility to manage your leavers process.
 
 To access the AWS Console:
 
-1. Sign in to the [GDS base account][].
-src="/images/aws/aws-base-account-signin-form.png" alt="Screenshot of the sign in page"
-2. From the top right dropdown menu, select **Switch Role**.
-src="/images/aws/aws-base-account-signin-form.png" alt="Screenshot of the sign in page"
-3. Click **Switch Role** and complete the **Account** or [account alias][] and **Role** you're switching to.
-src="/images/aws/aws-switch-role-form.png" alt="Screenshot of the sign in page"
+<ul>
+  <li>
+   1. Sign in to the GDS base account at:
+    <a href="https://gds-users.signin.aws.amazon.com/console">https://gds-users.signin.aws.amazon.com/console</a>
+    <details>
+      <summary><small>Screenshot of the sign in page</small></summary>
+      <img src="/images/aws/aws-base-account-signin-form.png" alt="Screenshot of the sign in page">
+    </details>
+  </li>
+  <li>
+    2. From the top right dropdown menu, select **Switch Role**.
+    <details>
+      <summary><small>Screenshot of the switch role menu item</small></summary>
+      <img src="/images/aws/aws-switch-role-menu.png" alt="Screenshot of the sign in page">
+    </details>
+  </li>
+  <li>
+    3. Click **Switch Role** and complete the **Account** or [account alias][] and **Role** you're switching to.
+    <details>
+      <summary><small>Screenshot of the switch role page</small></summary>
+      <img src="/images/aws/aws-switch-role-form.png" alt="Screenshot of the sign in page">
+    </details>
+  </li>
+</ul>
 
 Teams manage their own lists of accounts and roles (see <%= current_page.data.account_list %>).
 
@@ -79,12 +97,14 @@ mfa_serial = <mfa device arn>
 
 `<mfa device arn>` is your user's assigned [Multi-Factor Authentication (MFA)][] device
 
-How to find your MFA device ARN:
-
-1. Sign into the GDS base account using the AWS console.
-1. Navigate to `IAM` > `Users` > `$your-user`.
-1. Select the `Security credentials` tab.
-1. Look for the `Assigned MFA device`.
+<details>
+  <summary><small>How to find your MFA device ARN</small></summary>
+  <li>sign into the GDS base account using the AWS console.</li>
+  <li>navigate to `IAM` > `Users` > `$your-user`</li>
+  <li>select the `Security credentials` tab</li>
+  <li>look for the `Assigned MFA device`</li>
+  </ul>
+</details>
 
 **Create tokens for command line use**
 
