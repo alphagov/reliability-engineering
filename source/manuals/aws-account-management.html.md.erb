@@ -1,10 +1,10 @@
 ---
-title: How to manage AWS cross account access
+title: How to manage Amazon Web Services (AWS) cross account access
 ---
 
 # <%= current_page.data.title %>
 
-Teams in GDS use multiple Amazon Web Services (AWS) accounts to:
+Teams in GDS use multiple AWS accounts to:
 
 * enforce administrative isolation between workloads
 * minimize the impact of security breaches
@@ -28,9 +28,9 @@ IAM roles establish trust relationships between the target's (*trusting*) AWS ac
 
 ## How to manage access to resources
 
-The users exist in the GDS base account have permission to assume a role in a target account.
+Users exist in the GDS base account and have permission to assume a role into a target account.
 
-The target account defines the roles users in the base account can assume, for example a Data Analyst:
+The target account defines the roles users in the base account can assume, such as a Data Analyst:
 
 ![Assume Role Diagram](../images/aws/assume-role.svg)
 
@@ -49,6 +49,7 @@ It's **strongly** recommended not to trust an AWS account. Trusting an AWS accou
 Use conditions to enforce the presence of Multifactor authentication (MFA), for example restricting access to particular IP addresses or particular times of the day.
 
 **Example Trust Relationship policy**
+
     {
       "Version": "2012-10-17",
       "Statement": {
