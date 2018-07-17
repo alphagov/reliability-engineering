@@ -8,25 +8,13 @@ account_list: >
 
 # <%= current_page.data.title %>
 
-AWS users must sign into the GDS base account before they can access their own AWS accounts by [switching to a role][].
-
-## Add users to the GDS base account
-
 People joining GDS do not automatically have access to AWS. To grant a user access to AWS you'll need to add them to the `gds-users` base account.
 
 To add a user to the `gds-users` base account, complete the **Request user access** section of the [Request an AWS account][] form.
 
-After a user is added to the GDS base account it's the individual teams' responsibility to grant that user access to any team specific roles.
+After a user is added to the GDS base account it's the individual teams' responsibility to grant that user access to any [team specific roles][].
 
 Once setup is complete users can access AWS using the AWS Console or the command line.
-
-## Remove users from AWS accounts
-
-If you need to remove someone's AWS access because they've either left GDS or no longer need access to AWS resources, complete the **Request user removal** section of the [Request an AWS account][] form.
-
-This will ensure leavers are removed from the `gds-users` base account.
-
-It's your team's responsibility to manage your leavers process.
 
 ### Use the AWS Console
 
@@ -34,7 +22,7 @@ To access the AWS Console:
 
 <ol class="list list-number">
   <li>
-   Sign in to the GDS base account at:
+   Sign into the GDS base account at:
     <a href="https://gds-users.signin.aws.amazon.com/console">https://gds-users.signin.aws.amazon.com/console</a>
     <details>
       <summary><small>Screenshot of the sign in page</small></summary>
@@ -49,7 +37,7 @@ To access the AWS Console:
     </details>
   </li>
   <li>
-    Click **Switch Role** and complete the **Account** or [account alias][] and **Role** you're switching to.
+    Click **Switch Role** and complete the **Account** or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#AboutAccountAlias">account alias<a> and **Role** you're switching to.
     <details>
       <summary><small>Screenshot of the switch role page</small></summary>
       <img src="/images/aws/aws-switch-role-form.png" alt="Screenshot of the sign in page">
@@ -57,7 +45,7 @@ To access the AWS Console:
   </li>
 </ol>
 
-Teams manage their own lists of accounts and roles (see <%= current_page.data.account_list %>).
+Teams manage their own lists of accounts and roles, for example <%= current_page.data.account_list %>.
 
 ### Use the command line
 
@@ -67,7 +55,7 @@ There are several command line tools you can use with AWS, such as:
 * [AWS Shell][]
 * [Terraform][]
 
-These tools need credentials to access AWS. The simplest way to manage credentials is with an AWS credentials file, you could also use a tool like [aws-vault][] to manage your credentials for you.
+These tools need credentials to access AWS. The simplest way to manage credentials is with an AWS credentials file. You could also use a tool like [aws-vault][] to manage your credentials for you.
 
 **Create an AWS credentials file**
 
@@ -79,7 +67,9 @@ aws_access_key_id = MYACCESSKEYID
 aws_secret_access_key = MYSECRETACCESSKEY
 ```
 
-You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the the GDS base account using the [AWS console][]. Use the AWS instructions for [creating, modifying, and viewing Access Keys (Console)][] to do this.
+You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the GDS base account using the [AWS console][].
+
+AWS has more instructions for [creating, modifying, and viewing Access Keys (Console)][].
 
 For each role you need to assume, add a section like:
 
@@ -106,9 +96,9 @@ mfa_serial = <mfa device arn>
 
 **Create tokens for command line use**
 
-Some tools, such as [Terraform][] can't ask the user for an MFA token. To use these tools you'll need to create a token using the [AWS Security Token Service (STS)][].
+If you use tools like [Terraform][] you will not be prompted for an MFA token.
 
-Using [AWS CLI][], run:
+To use these tools you'll need to create a token using the [AWS Security Token Service (STS)][]. Use [AWS CLI][] to run:
 
 ```
 aws sts assume-role \
@@ -121,7 +111,9 @@ aws sts assume-role \
 
 [AWS CLI documentation][] has more information about `assume-role`.
 
-Use the values set in `~/.aws/credentials` (see Create an AWS credentials file) for `<role arn>` and `<mfa device arn>`. Use the current token shown by your MFA device for `<mfa token>`.
+Use the values set in the AWS credentials file `~/.aws/credentials` for `<role arn>` and `<mfa device arn>`.
+
+Use the current token shown by your MFA device for `<mfa token>`.
 
 This command returns JSON containing keys and tokens, use it
 to set the following environment variables:
@@ -135,11 +127,10 @@ export AWS_SESSION_TOKEN=... # Credentials.SessionToken
 Tools like Terraform will use these environment variables instead of the
 credentials file.
 
-The SessionToken will expire after one hour, or the time you
+The `SessionToken` will expire after one hour, or the time you
 supply in <nobr>`--duration-seconds`</nobr> up to the [maximum session duration][] for the role.
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
-[switching to a role]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
 [Request an AWS account]: https://gds-request-an-aws-account.cloudapps.digital/
 [AWS Command Line Interface (AWS CLI)]: https://aws.amazon.com/cli/
 [AWS Shell]: https://github.com/awslabs/aws-shell
@@ -155,4 +146,4 @@ supply in <nobr>`--duration-seconds`</nobr> up to the [maximum session duration]
 [aws-vault]: https://github.com/99designs/aws-vault
 [maximum session duration]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
 [GDS base account]: https://gds-users.signin.aws.amazon.com/console
-[account alias]: https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#AboutAccountAlias
+[team specific roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html

@@ -4,23 +4,23 @@ title: How to manage Amazon Web Services (AWS) cross account access
 
 # <%= current_page.data.title %>
 
-Teams in GDS use multiple AWS accounts to:
+If you're setting up a new AWS account and your team want to use cross-account access use the `gds-users` account as your base account.
+
+Use multiple AWS accounts to:
 
 * enforce administrative isolation between workloads
 * minimize the impact of security breaches
 * isolate audit data in separate accounts
 
-For example, by having separate AWS accounts for production and test workloads a team can restrict the security impact of a compromised AWS credential.
+By having separate AWS accounts for production and test workloads teams can restrict the security impact of a compromised AWS credential.
 
-To avoid users having to manage several sets of AWS credentials for multiple accounts teams should use roles and cross-account access. AWS describe this approach as the [multiple account security strategy][].
-
-If you're setting up a new AWS account and your team want to use cross-account access follow this guidance using the `gds-users` account as your base account.
+To avoid managing several sets of AWS credentials for multiple accounts teams should use roles and cross-account access. AWS describe this approach as [multiple account security strategy][].
 
 Reliability Engineering has more information about how to [access AWS][].
 
 ## AWS cross account access
 
-AWS cross account access allows user accounts held in the `gds-users` base account to access resources in any new target AWS account's created by your team.
+AWS cross account access allows user accounts held in the `gds-users` base account to access resources in target AWS account's created by your team.
 
 Access to resources within a target AWS account is controlled using [AWS Identity and Access Management (IAM)][] roles managed within that AWS account.
 
@@ -28,27 +28,19 @@ IAM roles establish trust relationships between the target's (*trusting*) AWS ac
 
 ## How to manage access to resources
 
-Users exist in the GDS base account and have permission to assume a role into a target account.
-
-The target account defines the roles users in the base account can assume, such as a Data Analyst:
+Users exist in the GDS base account and have permission to assume a role into a target account. The target account defines the roles users in the base account can assume, such as a Data Analyst:
 
 ![Assume Role Diagram](../images/aws/assume-role.svg)
 
 ### Trust Relationship (Assume Role Policy)
 
-The trust relationship describes what entities can assume the role (*principles*) and imposes *conditions* on how and when those entities can assume the role.
-
-**Principles**
-
-An [AWS principle][] can be a user account, an AWS account or a role, principle entities are expressed as an AWS ARN.
-
-It's **strongly** recommended not to trust an AWS account. Trusting an AWS account base account allows all of the entities within that base account to assume that particular role.
-
-**Conditions**
+The trust relationship describes what entities can assume the role (*principles*) and imposes *conditions* on how and when those entities can assume the role. An [AWS principle][] can be a user account, an AWS account or a role, principle entities are expressed as an [Amazon Resource Name (ARN)][].
 
 Use conditions to enforce the presence of Multifactor authentication (MFA), for example restricting access to particular IP addresses or particular times of the day.
 
-**Example Trust Relationship policy**
+It's **strongly** recommended not to trust an AWS base account. Trusting an AWS base account allows all of the entities within that base account to assume that particular role.
+
+Example Trust Relationship policy:
 
     {
       "Version": "2012-10-17",
@@ -72,3 +64,4 @@ Amazon provides some [examples of AWS policies][] related to IAM permissions.
 [AWS principle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
 [IAM Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
 [examples of AWS policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
+[Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
