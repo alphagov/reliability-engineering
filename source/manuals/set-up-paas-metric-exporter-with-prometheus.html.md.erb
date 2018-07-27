@@ -26,7 +26,7 @@ Your new account should be separate to your primary Cloud Foundry account and us
 To set up the metrics exporter app:
 
 1. Clone the [paas-metric-exporter][] GitHub repository.
-2. [Push the metrics exporter app](https://docs.cloud.service.gov.uk/#deployment-overview) to Cloud Foundry (without starting the app) by running
+2. [Push the metrics exporter app](https://docs.cloud.service.gov.uk/deploying_apps.html) to Cloud Foundry (without starting the app) by running
  * `cf push -f manifest-prometheus.yml --no-start <app-name>`
 3. Set the following mandatory environment variables in the metrics exporter app using
   * `cf set-env <app-name> NAME VALUE`
@@ -74,10 +74,10 @@ If you're not receiving metrics, check the [logs][] for the metrics exporter app
 
 The Service Manual as more information about [monitoring the status of your service][].
 
-[Cloud Foundry account]: https://docs.cloud.service.gov.uk/#get-started
+[Cloud Foundry account]: https://docs.cloud.service.gov.uk/get_started.html
 [Cloud Foundry]: https://docs.cloudfoundry.org/concepts/overview.html
 [logs]: https://reliability-engineering.cloudapps.digital/#logging
 [monitoring the status of your service]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [paas-metric-exporter]: https://github.com/alphagov/paas-metric-exporter
 [#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
-[`SpaceAuditor`]: https://docs.cloud.service.gov.uk/#user-roles-space-auditor
+[`SpaceAuditor`]: https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-auditor
