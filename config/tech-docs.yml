@@ -12,6 +12,8 @@ header_links:
   Documentation: /
   GitHub: https://github.com/alphagov/reliability-engineering
 
+enable_search: true
+
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:
 
