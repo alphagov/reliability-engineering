@@ -1,0 +1,85 @@
+---
+title: How to create or edit alerts with Prometheus
+---
+
+# <%= current_page.data.title %>
+
+## What you should be alerting on
+
+When deciding on what your service should be alerting on, you could use the following:
+
+- [Alerting principles][6] in the GDS Way
+- Look at [existing alerting rules][2] used by other GDS teams
+- Talk to us for advice using the [#re-prometheus-support][7] Slack channel
+
+## How to create or update alerting rules
+
+You should first read the [Prometheus alerting rules documentation][4] to understand the alerting concepts.
+
+You will also need to understand how to write an expression in [PromQL][5] for your alerting rule.
+
+### Writing your alerting rule PromQL expression
+
+Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL][5] expression.
+
+The expression should generate some metrics which could be used in the alert, so no metrics will mean that the alert will not fire.
+
+Your expression must contain a `job` label that points at your team's metrics so that you don't accidently include metrics from other teams.
+
+Make sure to only include timeseries for the PaaS space you wish to alert on (e.g. production). For timeseries produced by application client libraries, this can be done by including `space="production"`. For timeseries produced by the [paas-metric-exporter][8] this can be done by including `exported_space="production"`.
+
+### Create the alerting rule
+
+Alerting rules are defined in YAML format in a config file in the [prometheus-aws-configuration-beta][2] repository. Each product team should use their own file for their alerting rules.
+
+Alerting rules should be prefixed with your team name, e.g. `registers_RequestsExcess5xx`, `DGU_HighDiskUsage`, to make your alert easier to identify.
+
+Make sure that you add a `product` label to your alerting rule under `labels` so if it triggers the correct team is alerted.
+
+An alerting rule file will look something like this:
+
+```
+  groups:
+- name: Your team name
+  rules:
+  - alert: RequestsExcess5xx
+    expr: rate(requests{job="yourteam-metric-exporter", exported_space="prod", status_range="5xx"}[5m]) > 1
+    for: 120s
+    labels:
+        product: "yourteam"
+    annotations:
+        summary: "App {{ $labels.app }} has too many 5xx errors"
+        description: "Further context to help your fix this alert"
+
+```
+
+Your alerting rule may not be perfect first time, for example you may get alerts that did not require any action to resolve them as the threshold was too low. We suggest iterating on your alerting rule to improve your expression or threshold.
+
+### Create a PR with your alerting rule
+
+Create a pull request with your changes to your alerting rules file. Your commit should explain what the alert is and why the threshold value was picked. This is important so future team members have the context they need to confidently change the alerting rule and other teams can learn from your alerting rules.
+
+Slack the [#re-prometheus-support][7] channel with the PR so that it can be reviewed. We will try and merge and deploy your pull request as quickly as possible. We will let you know when your alerting rule is live.
+
+## How to receive alerts
+
+Once Prometheus triggers an alert, it sends this to [Alertmanager][10]. Alertmanager is then responsible for forwarding alerts to receivers such as [Pagerduty][11] or [Zendesk][12].
+
+Alerts are forwarded to the appropriate team and receiver using the [Alertmanager config file][9] which matches the labels on alerts to decide which team and receiver should be sent the alert.
+
+If you have not yet set up a receiver or would like to set up additional receivers then please contact us in [Slack][7] for help doing so.
+
+
+[0]: https://prometheus.io/
+[1]: https://prom-2.monitoring.gds-reliability.engineering
+[2]: https://github.com/alphagov/prometheus-aws-configuration-beta/tree/master/terraform/projects/app-ecs-services/config/alerts
+[3]: https://github.com/alphagov/prometheus-aws-configuration-beta/
+[4]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+[5]: https://prometheus.io/docs/prometheus/latest/querying/basics/
+[6]: https://gds-way.cloudapps.digital/standards/alerting.html#alerting
+[7]: https://gds.slack.com/messages/CAF5H4N4Q
+[8]: https://github.com/alphagov/paas-metric-exporter
+[9]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/projects/app-ecs-services/templates/alertmanager.tpl
+[10]: https://prometheus.io/docs/alerting/alertmanager/
+[11]: https://www.pagerduty.com/
+[12]: https://www.zendesk.com/
