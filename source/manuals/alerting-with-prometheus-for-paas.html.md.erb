@@ -34,7 +34,7 @@ Alerting rules are defined in YAML format in a config file in the [prometheus-aw
 
 Alerting rules should be prefixed with your team name, e.g. `registers_RequestsExcess5xx`, `DGU_HighDiskUsage`, to make your alert easier to identify.
 
-Make sure that you add a `product` label to your alerting rule under `labels` so if it triggers the correct team is alerted.
+You must add a `product` label to your alerting rule under `labels` so if it triggers the correct team is alerted.
 
 An alerting rule file will look something like this:
 
