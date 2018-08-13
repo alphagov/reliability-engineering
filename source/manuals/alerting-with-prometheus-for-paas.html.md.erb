@@ -40,7 +40,7 @@ An alerting rule file will look something like this:
   groups:
 - name: Your team name
   rules:
-  - alert: RequestsExcess5xx
+  - alert: TeamName_RequestsExcess5xx
     expr: rate(requests{org="your-paas-org" job="yourteam-metric-exporter", exported_space="prod", status_range="5xx"}[5m]) > 1
     for: 120s
     labels:
