@@ -22,8 +22,6 @@ You will also need to understand how to write an expression in [PromQL][5] for y
 
 Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL][5] expression.
 
-The expression should generate some metrics which could be used in the alert, so no metrics will mean that the alert will not fire.
-
 Your expression must contain an `org` label, which refers to your PaaS organisation, to ensure you don't accidently include metrics from other teams. Whilst the `job` label, which defines the source of the metrics, may be sufficient for this it should not be used without `org` as it is not guaranteed to always be unique to your team.
 
 Make sure to only include timeseries for the PaaS space you wish to alert on (e.g. production). For timeseries produced by application client libraries, this can be done by including `space="production"`. For timeseries produced by the [paas-metric-exporter][8] this can be done by including `exported_space="production"`.
