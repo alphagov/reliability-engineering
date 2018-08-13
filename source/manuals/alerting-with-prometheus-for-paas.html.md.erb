@@ -24,7 +24,7 @@ Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL]
 
 The expression should generate some metrics which could be used in the alert, so no metrics will mean that the alert will not fire.
 
-Your expression must contain a `job` label that points at your team's metrics so that you don't accidently include metrics from other teams.
+Your expression must contain an `org` label, which refers to your PaaS organisation, to ensure you don't accidently include metrics from other teams. Whilst the `job` label, which defines the source of the metrics, may be sufficient for this it should not be used without `org` as it is not guaranteed to always be unique to your team.
 
 Make sure to only include timeseries for the PaaS space you wish to alert on (e.g. production). For timeseries produced by application client libraries, this can be done by including `space="production"`. For timeseries produced by the [paas-metric-exporter][8] this can be done by including `exported_space="production"`.
 
@@ -43,7 +43,7 @@ An alerting rule file will look something like this:
 - name: Your team name
   rules:
   - alert: RequestsExcess5xx
-    expr: rate(requests{job="yourteam-metric-exporter", exported_space="prod", status_range="5xx"}[5m]) > 1
+    expr: rate(requests{org="your-paas-org" job="yourteam-metric-exporter", exported_space="prod", status_range="5xx"}[5m]) > 1
     for: 120s
     labels:
         product: "yourteam"
