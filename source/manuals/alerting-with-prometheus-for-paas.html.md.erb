@@ -4,37 +4,37 @@ title: How to create or edit alerts with Prometheus
 
 # <%= current_page.data.title %>
 
-## What you should be alerting on
+## Choosing alerts
 
-When deciding on what your service should be alerting on, you could use the following:
+When deciding what alerts you want to receive, consider: 
 
-- [Alerting principles][6] in the GDS Way
-- Look at [existing alerting rules][2] used by other GDS teams
-- Talk to us for advice using the [#re-prometheus-support][7] Slack channel
+- reading the[Alerting principles][6] in the GDS Way
+- looking at [existing alerting rules][2] used by other GDS teams
+- talking to us for advice using the [#re-prometheus-support][7] Slack channel
 
 ## How to create or update alerting rules
 
-You should first read the [Prometheus alerting rules documentation][4] to understand the alerting concepts.
+You should first read [Prometheus' alerting rules documentation][4] to understand how the alerts work. 
 
-You will also need to understand how to write an expression in [PromQL][5] for your alerting rule.
+You will also need to understand how to write an expression in [PromQL][5] for your alerting rules.
 
 ### Writing your alerting rule PromQL expression
 
 Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL][5] expression.
 
-Your expression must contain an `org` label, which refers to your PaaS organisation, to ensure you don't accidently include metrics from other teams. Whilst the `job` label, which defines the source of the metrics, may be sufficient for this it should not be used without `org` as it is not guaranteed to always be unique to your team.
+Your expression must contain an `org` label, which refers to your PaaS organisation. This makes you sure it only uses metrics from your job. Although you can use the `job` label for this, it is not guaranteed to be unique to your team.
 
-Make sure to only include timeseries for the PaaS space you wish to alert on (e.g. production). For timeseries produced by application client libraries, this can be done by including `space="production"`. For timeseries produced by the [paas-metric-exporter][8] this can be done by including `exported_space="production"`.
+You should only include timeseries for the PaaS space you wish to alert on, for example production. For timeseries produced by application client libraries, include `space="production"`. For timeseries produced by the [paas-metric-exporter][8] include `exported_space="production"`.
 
 ### Create the alerting rule
 
 Alerting rules are defined in YAML format in a config file in the [prometheus-aws-configuration-beta][2] repository. Each product team should use their own file for their alerting rules.
 
-Alerting rules should be prefixed with your team name, e.g. `registers_RequestsExcess5xx`, `DGU_HighDiskUsage`, to make your alert easier to identify.
+Alerting rules should be prefixed with your team name, for example `registers_RequestsExcess5xx` or `DGU_HighDiskUsage`. This makes your alert easier to identify.
 
-You must add a `product` label to your alerting rule under `labels` so if it triggers the correct team is alerted.
+You must add a `product` label to your alerting rule under `labels` so if the alert is triggered, Prometheus will alert the correct team. 
 
-An alerting rule file will look something like this:
+The alerting rule file should look something like this:
 
 ```
   groups:
@@ -51,21 +51,21 @@ An alerting rule file will look something like this:
 
 ```
 
-Your alerting rule may not be perfect first time, for example you may get alerts that did not require any action to resolve them as the threshold was too low. We suggest iterating on your alerting rule to improve your expression or threshold.
+You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that did not require any action as the threshold was too low.
 
 ### Create a PR with your alerting rule
 
-Create a pull request with your changes to your alerting rules file. Your commit should explain what the alert is and why the threshold value was picked. This is important so future team members have the context they need to confidently change the alerting rule and other teams can learn from your alerting rules.
+Create a pull request for changes to your alerting rules file. Your commit should explain what the alert is and why you picked the threshold value. This is so future team members have the context they need to confidently change the alerting rule and other teams can learn from your alerting rules.
 
-Slack the [#re-prometheus-support][7] channel with the PR so that it can be reviewed. We will try and merge and deploy your pull request as quickly as possible. We will let you know when your alerting rule is live.
+Share your pull request in the [#re-prometheus-support][7] channel so we can review it. We will try to merge and deploy your pull request as quickly as possible and will let you know when your alerting rule is live.
 
 ## How to receive alerts
 
-Once Prometheus triggers an alert, it sends this to [Alertmanager][10]. Alertmanager is then responsible for forwarding alerts to receivers such as [Pagerduty][11] or [Zendesk][12].
+Once Prometheus triggers an alert, it sends the alert to [Alertmanager][10]. Alertmanager is then responsible for forwarding alerts to receivers such as [Pagerduty][11] or [Zendesk][12].
 
-Alerts are forwarded to the appropriate team and receiver using the [Alertmanager config file][9] which matches the labels on alerts to decide which team and receiver should be sent the alert.
+Alerts are forwarded to the appropriate team and receiver using the [Alertmanager config file][9] which uses the alert labels to direct the alert to the right team and receiver.
 
-If you have not yet set up a receiver or would like to set up additional receivers then please contact us in [Slack][7] for help doing so.
+If you have not yet set up a receiver or would like to set up additional receivers please contact us on [Slack][7].
 
 
 [0]: https://prometheus.io/
