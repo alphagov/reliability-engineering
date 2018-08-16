@@ -49,9 +49,9 @@ To set up the metrics exporter app:
 
 ### IP whitelist your app
 
-IP whitelisting allows you to create lists of trusted IP addresses or IP ranges from which your users can 
-access your domains. IP whitelist is a security feature often used for limiting and controlling access only 
-to trusted users.
+IP whitelist is a security feature often used for limiting and controlling access only to trusted users. It works by only allowing traffic through from lists of trusted IP addresses or IP ranges.
+
+By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
 
 1. Register the IP whitelist route service as a user-provided service in your PaaS space.
 
@@ -81,3 +81,4 @@ The Service Manual as more information about [monitoring the status of your serv
 [paas-metric-exporter]: https://github.com/alphagov/paas-metric-exporter
 [#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
 [`SpaceAuditor`]: https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-auditor
+[GDS office IPs]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds-internal-it/news/aviationhouse-sourceipaddresses
