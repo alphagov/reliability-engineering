@@ -12,6 +12,8 @@ This guide takes you through setting up authentication for logstash on Logit usi
 
 After signing into Logit.io create a new stack by selecting **Add stack** from the Stacks section of the Logit.io dashboard.
 
+If you do not see the **Add stack** button then it means you do not have permission to add a new stack. The tech lead for your team should have permissions to add a new stack. Alternatively, ask for help with permissions in the [#reliability-engineering](https://gds.slack.com/messages/reliability-engineering) Slack channel.
+
 ### Stack name
 
 When choosing a stack name, consider that other teams will need to use this name to differentiate your stack from one of their own.
@@ -142,7 +144,7 @@ VXgVDOk+Txn+281P0Z3LoYBs
 -----END CERTIFICATE-----
 ```
 
-This was retrieved by running: `openssl s_client -showcerts -connect f046ca39-8388-4c49-a536-19f95a555905-ls.logit.io:12345` 
+This was retrieved by running: `openssl s_client -showcerts -connect f046ca39-8388-4c49-a536-19f95a555905-ls.logit.io:12345`
 
 
 ## Configuring Filebeat
