@@ -37,7 +37,25 @@ Create a Prometheus service within your PaaS space and allow it to bind to apps 
   - `cf update-service <cdn-route-service> \
     -c '{"domain": "<custom-domain>", "headers": ["Accept", "Authorization", "<other app header values>"]}'`
 
-Within 5 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana][].
+Within 10 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana][].
+
+### IP whitelist your metrics path if using zero downtime plugins or a `blue-green` deployment process
+
+If you're using a zero downtime plugin such as [autopilot][] it is advisable to disable the basic auth on the metrics endpoint and instead protect the metrics endpoint using IP whitelisting in order to avoid gaps in metrics between deployments.
+
+By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
+
+1. Register the IP whitelist route service as a user-provided service in your PaaS space.
+
+    `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
+
+2. Map the route to the metrics path.
+
+    `cf map-route app-to-protect cloudapps.digital --hostname app-to-protect --path metrics`
+
+3. Register the IP whitelist route service against the metrics path.
+
+    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect --path metrics`
 
 ### App route configuration
 
@@ -47,9 +65,7 @@ For example, some apps may have multiple routes especially if they use custom do
 
 If there are no routes to your app the Prometheus service will default the route to:
 
-`<app-name>.cloudapps.digital`.
-
-Because changes to the first route will only be picked up within 5 minutes it could create gaps to metrics during route changes if you're using a zero downtime plugin such as [autopilot][].
+`<app-name>.cloudapps.digital`
 
 [authorization header and other app headers]: https://docs.cloud.service.gov.uk/deploying_services.html#forwarding-headers
 [autopilot]: https://github.com/contraband/autopilot
