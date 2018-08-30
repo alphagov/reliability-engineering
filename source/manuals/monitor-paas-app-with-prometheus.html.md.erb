@@ -45,7 +45,7 @@ Within 10 minutes Prometheus will start scraping your application for metrics, y
 
 If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] you should disable the basic auth on the metrics endpoint when using the [Ruby gem][] or [Python library][] and instead protect the metrics endpoint using IP whitelisting in order to minimise gaps in metrics between deployments.
 
-By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
+By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheus and [GDS Office IPs][].
 
 1. Map the route to the metrics path:
 
