@@ -1,5 +1,5 @@
 ---
-title: How to create Grafana dashboards
+title: Viewing your metrics using Grafana dashboards
 ---
 
 # <%= current_page.data.title %>
@@ -7,98 +7,52 @@ title: How to create Grafana dashboards
 
 ## Logging into Grafana
 
-Visit [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) and sign in with Google:
+Visit [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) and sign in with Google.
 
 ![google-auth](images/google-auth.png)
 
-Log in with your digital.cabinet-office.gov.uk email address.
 
-## Viewing metrics for your app
+## Viewing your dashboards
 
-Click 'Home' in the top left of the screen:
+Dashboards for teams have been organised into different Grafana folders.
 
-![dropdown](images/home.png)
+Click 'Home' in the top left of the screen to pick your team's dashboard folder and see your dashboards.
 
-Select 'GDS Default Dashboard' from the dropdown:
 
-![Dashboard List](images/dashboard-list.png)
+## Creating and editing dashboards
 
-Select your application from the 'Available Apps' dropdown:
+In order to create or edit a dashboard in your team folder you will need to have the relevant permissions. Admin/editor permissions for your team folder can be granted by contacting us on the `#re-prometheus-support` Slack channel.
+
+If you don't have a team folder, contact us on the `#re-prometheus-support` Slack channel to create the folder and get admin rights to manage it. If you would like your own copy of any of the default dashboards that you can personalise then please ask for this too.
+
+
+## Default and example dashboards
+
+In the 'General' dashboard folder, we provide default and template dashboards for you to use. These are a good starting point for customisation or if you have just set up monitoring to check that everything works as expected.
+
+### GDS Application Metrics Default Dashboard
+
+The [GDS Application Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/000000011/gds-default-dashboard?orgId=1) shows application metrics produced by our [Ruby](https://github.com/alphagov/gds_metrics_ruby), [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard) and [Python](https://github.com/alphagov/gds_metrics_python) clients. If you have instrumented your application with one of these libraries then you can view metrics for your application by selecting your application from the 'Available Apps' dropdown:
 
 ![Available Apps](images/available-apps.png)
 
-If you can't see your application in the list, make sure you've followed the instructions in [Setting up metrics](#setting-up-metrics) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/).
+If you can't see your application in the list, make sure you've followed the instructions in [Setting up metrics](../manuals/monitor-paas-app-with-prometheus.html) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/).
 
+[See a full explanation of what this default dashboard shows](../manuals/gds-application-metrics-default-dashboard.html)
 
+### GDS Container Metrics Default Dashboard
 
-You should now see the GDS Default Dashboard applied to your application.
+The [GDS Container Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/E2dUvczmz/container-metrics?orgId=1) shows container metrics produced by the [Paas Metric Exporter](https://github.com/alphagov/paas-metric-exporter). If you are running the PaaS metric exporter then you can view metrics for your application by selecting your application from the 'App' dropdown.
 
-## Understanding the dashboard
+If you can't see your application in the list, make sure you've followed the instructions in [Set up the PaaS metric exporter app with Prometheus](../manuals/set-up-paas-metric-exporter-with-prometheus.html) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/).
 
-This is the default dashboard for every application using the Reliability Enginering team metrics solution:
+### Official and community built dashboards
 
-![Dashboard](images/grafana_dashboard/dashboard.png)
+You can [import dashboards](http://docs.grafana.org/reference/export_import/#importing-a-dashboard) from the [official and community built dashboards](https://grafana.com/dashboards) on the Grafana website.
 
-
-
-### What's powering this dashboard?
-
-This dashboard has been built using the following metrics provided by Prometheus:
-
-```
-http_server_exceptions_total
-http_server_request_duration_seconds_bucket
-http_server_request_duration_seconds_count
-http_server_request_duration_seconds_sum
-http_server_requests_total
-```
-
-The widgets on the dashboard are the result of queries over these metrics. For example, the 'Number of requests per minute' widget is built from `http_server_requests_total` using Prometheus' [`sum`](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators) aggregator and [`rate`](https://prometheus.io/docs/prometheus/latest/querying/functions/#rate()) function. [TODO - link to PromQL section](#)
-
-
-### What does the dashboard tell me?
-
-There are eleven widgets showing information about your application:
-
-![Template dashboard widgets](images/grafana_dashboard/template_dashboard.png)
-
-1. A brief description of the dashboard.
-2. The number of healthy instances the application has running right now. The range of colors is: Green (more than 1 instance available), Orange (1 instance available), Red (no instances available)
-3. The number of total instances for your application.
-4. The percentage of HTTP Status code 2xx responses.
-5. The percentage of HTTP Status code 3xx responses.
-6. The percentage of HTTP Status code 4xx responses.
-7. The percentage of HTTP Status code 5xx responses.
-8. The number of request per minute your application is serving.
-9. The number of HTTP errors (4xx, 5xx) per minutes your application is throwing.
-10. A graph showing the average response times for your application.
-11. A table of the list of the seven slowest endpoints in the application.
-
-### Requesting Grafana edit permissions from Reliability Engineering
-
-Contact us on Slack in the #reliability-eng channel to be granted edit permissions.
-
-Refer to the instructions below to help you orientate the Grafana interface:
-
-![Dashboard](images/grafana_dashboard/dashboard_annotated.png)
-
-1. Click these icons to configure Grafana, e.g. manage profile updates, alerts, permissions, dashboard and folders. You'll see different options depending on your level of permissions.
-2. Click this dropdown to see the list of available dashboards, some of which you can apply to change the view of your application.
-3. Click this dropdown to see the list of applications currently instrumented with GDS metrics. In the screenshot, we have selected _registers.cloudapps.digital:80_.
-4. Click these icons to interact with the dashboard. You can create a copy of the dashboard or share it, as well as changing the time period displayed.
-5. View the widgets and graphs currently measuring the performance of your application. Click and drag on any of the graphs to zoom in on a particular time period. If you have editing permissions, you can click on any widget to configure or remove these.
 
 ## How to view dashboards on your team TV
 
 Use your TV’s Google Chromebit user to display your Grafana dashboard because the Google Chromebit user will only be able to access Grafana with read permissions.
 
 You should not use your personal Google account to display your Grafana dashboard on your team’s TV. This is because your personal Google account may have editing or admin permissions.
-
-## More instructions for navigating Grafana
-
-### Selecting different dashboards, and creating new dashboards
-
-The dashboard dropdown contains all dashboards currently in use. Use the filters to find dashboards by name or by tag. If you have edit permissions, you can also create new dashboards.
-
-![Dashboard selector](images/grafana_dashboard/dashboard_selector.png)
-[#reliability-eng Slack channel]: https://gds.slack.com/messages/reliability-eng
