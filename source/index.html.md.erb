@@ -16,7 +16,7 @@ To understand the context for our decisions and guidance you'll need to refer to
 
 Reliability Engineering develops, maintains and supports the [Amazon Web Services (AWS)][] and the [GOV.UK PaaS][] infrastructure GDS uses. GDS teams are responsible for the applications and components running on these platforms.
 
-For example, Reliability Engineering is responsible for rotating the SSL certificates that manage communications between AWS environments and [OpenVMS][]. GDS teams are responsible for rotating certificates that encrypt messages used by their service.
+For example, Reliability Engineering is responsible for managing the SSL certificates that handle communications between AWS environments and virtual machines. GDS teams are responsible for managing certificates that protect messages used by their service.
 
 ### Monitoring
 
@@ -65,9 +65,9 @@ These guides will help you:
 - [send logs securely to Logit](manuals/logit-io.html)
 - [respond to an incident with Logit](manuals/logit-incident-management.html)
 
-### Metrics
+### Metrics and Alerting
 
-Reliability Engineering is running an Alpha on using [Prometheus](https://prometheus.io/) as the operational metrics service for GDS.
+Reliability Engineering is running a beta service for GDS using [Prometheus](https://prometheus.io/) for operational metrics.
 
 Reliability Engineering provides client libraries which wrap Prometheus's own libraries so we can:
 
@@ -81,6 +81,7 @@ You can setup GDS metrics for your GOV.UK PaaS app using the Ruby and Java Dropw
 
 - [Ruby](https://github.com/alphagov/gds_metrics_ruby)
 - [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard)
+- [Python](https://github.com/alphagov/gds_metrics_python)
 
 Once you've setup your GOV.UK PaaS app with GDS metrics you can:
 
@@ -91,10 +92,11 @@ When using GDS metrics you can create:
 
 - [Grafana dashboards](manuals/grafana-dashboards.html)
 - [custom metrics](manuals/add-custom-metrics.html)
+- [alerts](manuals/alerting-with-prometheus-for-paas.html)
 
-Please email us at <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">the-gds-way@digital.cabinet-office.gov.uk</a> to find out more.
+Please contact us on the [#re-prometheus-support][] Slack channel to find out more.
 
-GDS Metrics is in alpha. These instructions are subject to change.
+GDS Metrics is currently in beta. These instructions are subject to change.
 
 ## Infrastructure as a Service
 
@@ -124,3 +126,4 @@ Reliability Engineering supports each GDS team's existing service levels until s
 [how to access AWS accounts]: manuals/access-aws-accounts.html
 [how to create AWS accounts]: manuals/create-aws-accounts.html
 [how AWS cross account access works]: manuals/aws-account-management.html
+[#re-prometheus-support]: https://gds.slack.com/messages/re-prometheus-support

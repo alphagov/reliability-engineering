@@ -50,6 +50,12 @@ Type the following to start the server:
 bundle exec middleman server
 ```
 
+There is currently an [issue](https://github.com/alphagov/tech-docs-template/issues/149) in the `tech-docs-template gem` when running `middleman` locally which may cause the website to hang. To see the preview locally use this command:
+
+```
+EXECJS_RUNTIME=Node bundle exec middleman server
+```
+
 If all goes well something like the following output will be displayed:
 
 ```

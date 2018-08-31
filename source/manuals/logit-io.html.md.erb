@@ -12,6 +12,8 @@ You need to add a new stack and configure it, you'll then need to setup how you'
 
 After signing into Logit create a new stack by selecting **Add stack** from the Stacks section of the Logit dashboard.
 
+If you do not see the **Add stack** button then it means you do not have permission to add a new stack. The tech lead for your team should have permissions to add a new stack. Alternatively, ask for help with permissions in the [#reliability-engineering](https://gds.slack.com/messages/reliability-engineering) Slack channel.
+
 ### Stack name
 
 When choosing a stack name, consider that other teams will need to use this name to differentiate your stack from one of their own.
@@ -88,7 +90,7 @@ The only inputs we are interested in are **Beats-SSL** and **Syslog-SSL**, you w
 
 If you know in advance which IP addresses or address ranges you will be sourcing logging traffic from, include these in your request so that the **Beats-SSL** and **Syslog-SSL** ports can be whitelisted.
 
-## Configure Filebeat
+## Configuring Filebeat
 
 Filebeat is a Logstash client that reads log files from the filesystem and ships them to Logstash as they are being written to. Please refer to [Filebeat documentation](https://www.elastic.co/products/beats/filebeat)for details on installation, general configuration and operation.
 
