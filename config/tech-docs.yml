@@ -4,7 +4,7 @@ host: reliability-engineering.cloudapps.digital
 # Header-related options
 show_govuk_logo: false
 service_name: Reliability Engineering
-service_link: https://reliability-engineering.cloudapps.digital
+service_link: /
 phase: Internal
 
 # Links to show on right-hand-side of header
