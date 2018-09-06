@@ -1,58 +1,61 @@
 ---
-title: Viewing your metrics using Grafana dashboards
+title: View and create Grafana dashboards
 ---
 
 # <%= current_page.data.title %>
 
+*there should be a brief intro here - what is this content about, who’s it for?*
 
-## Logging into Grafana
+## Access Grafana
 
-Visit [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) and sign in with Google.
+Sign in to Grafana at [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) using your GDS Google account.
 
 ![google-auth](images/google-auth.png)
 
+## Display dashboards
 
-## Viewing your dashboards
+Team dashboards are organised into separate Grafana folders.
 
-Dashboards for teams have been organised into different Grafana folders.
+Select **Home** in the top left of the Grafana screen to choose your team’s dashboard folder and view your dashboards.
 
-Click 'Home' in the top left of the screen to pick your team's dashboard folder and see your dashboards.
+### Display using your team TV
 
+You should use your TV’s Google Chromebit user to display your Grafana dashboard. The Google Chromebit user only has read access to Grafana.
 
-## Creating and editing dashboards
+You should not use your personal Google account to display your Grafana dashboard on your team’s TV. Your personal Google account may have editing or admin permissions.
 
-In order to create or edit a dashboard in your team folder you will need to have the relevant permissions. Admin/editor permissions for your team folder can be granted by contacting us on the `#re-prometheus-support` Slack channel.
+## Create and edit dashboards
 
-If you don't have a team folder, contact us on the `#re-prometheus-support` Slack channel to create the folder and get admin rights to manage it. If you would like your own copy of any of the default dashboards that you can personalise then please ask for this too.
+Contact Reliability Engineering using the [#re-prometheus-support Slack channel][https://gds.slack.com/messages/CAF5H4N4Q/#] to request:
 
+* admin permissions to create or edit a dashboard in your team folder
+* a new team folder and the admin rights to manage it
+* copies of default dashboards to customise
 
 ## Default and example dashboards
 
-In the 'General' dashboard folder, we provide default and template dashboards for you to use. These are a good starting point for customisation or if you have just set up monitoring to check that everything works as expected.
+You can use the default and template dashboards in the **General** dashboard folder. These are a good starting point for customisation or if you have set up monitoring to check everything works as expected.
 
 ### GDS Application Metrics Default Dashboard
 
-The [GDS Application Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/000000011/gds-default-dashboard?orgId=1) shows application metrics produced by our [Ruby](https://github.com/alphagov/gds_metrics_ruby), [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard) and [Python](https://github.com/alphagov/gds_metrics_python) clients. If you have instrumented your application with one of these libraries then you can view metrics for your application by selecting your application from the 'Available Apps' dropdown:
+The [GDS Application Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/000000011/gds-default-dashboard?orgId=1) displays application metrics produced by  [Ruby](https://github.com/alphagov/gds_metrics_ruby), [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard) and [Python](https://github.com/alphagov/gds_metrics_python) clients.
+
+If you’ve configured your application with one of these libraries you can view its metrics. You can do this by selecting your application from the **Available Apps** dropdown:
 
 ![Available Apps](images/available-apps.png)
 
-If you can't see your application in the list, make sure you've followed the instructions in [Setting up metrics](../manuals/monitor-paas-app-with-prometheus.html) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/).
+If your application is not displayed, check the instructions for [setting up metrics](../manuals/monitor-paas-app-with-prometheus.html) and that any changes are deployed to [GOV.UK Platform as a Service (PaaS)](https://docs.cloud.service.gov.uk/).
 
-[See a full explanation of what this default dashboard shows](../manuals/gds-application-metrics-default-dashboard.html)
+You can see a full explanation of [what the default dashboard shows here](../manuals/gds-application-metrics-default-dashboard.html)
 
 ### GDS Container Metrics Default Dashboard
 
-The [GDS Container Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/E2dUvczmz/container-metrics?orgId=1) shows container metrics produced by the [Paas Metric Exporter](https://github.com/alphagov/paas-metric-exporter). If you are running the PaaS metric exporter then you can view metrics for your application by selecting your application from the 'App' dropdown.
+The [GDS Container Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/E2dUvczmz/container-metrics?orgId=1) displays container metrics produced by the [paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter).
 
-If you can't see your application in the list, make sure you've followed the instructions in [Set up the PaaS metric exporter app with Prometheus](../manuals/set-up-paas-metric-exporter-with-prometheus.html) and that your changes have been deployed to the [GOV.UK PaaS](https://docs.cloud.service.gov.uk/).
+If you’re running the PaaS metric exporter you can view metrics for your application by selecting it from the **App** dropdown.
+
+If your application is not displayed, check the instructions for [setting up the PaaS metric exporter app with Prometheus](../manuals/set-up-paas-metric-exporter-with-prometheus.html) and that any changes are deployed to GOV.UK PaaS.
 
 ### Official and community built dashboards
 
 You can [import dashboards](http://docs.grafana.org/reference/export_import/#importing-a-dashboard) from the [official and community built dashboards](https://grafana.com/dashboards) on the Grafana website.
-
-
-## How to view dashboards on your team TV
-
-Use your TV’s Google Chromebit user to display your Grafana dashboard because the Google Chromebit user will only be able to access Grafana with read permissions.
-
-You should not use your personal Google account to display your Grafana dashboard on your team’s TV. This is because your personal Google account may have editing or admin permissions.
