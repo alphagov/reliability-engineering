@@ -47,8 +47,9 @@ groups:
         product: "yourteam"
     annotations:
         summary: "App {{ $labels.app }} has too many 5xx errors"
-        description: "Further context to help your fix this alert"
-
+        description: "Further context to help your fix this alert. You should include a link to your runbook for this alert if you have one"
+        logs: "A link to any relevant logs, for example https://kibana.logit.io/s/<stack-id>/app/kibana#/discover?_g=()"
+        dashboard: "A link to any relevant monitoring dashboards, for example https://grafana-paas.cloudapps.digital/d/<dashboard-id>"
 ```
 
 You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that did not require any action as the threshold was too low.
