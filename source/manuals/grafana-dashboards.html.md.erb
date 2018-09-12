@@ -1,12 +1,8 @@
 ---
-title: View and create Grafana dashboards
+title: Display, create and edit Grafana dashboards
 ---
 
 # <%= current_page.data.title %>
-
-Reliability Engineering provide [Grafana](https://grafana-paas.cloudapps.digital) which teams can use for their monitoring dashboards and for viewing Prometheus scraped metrics. You can use our example dashboards or create your own dashboards based on your teams needs.
-
-## Access Grafana
 
 Sign in to Grafana at [grafana-paas.cloudapps.digital](https://grafana-paas.cloudapps.digital) using your GDS Google account.
 
@@ -16,7 +12,7 @@ Sign in to Grafana at [grafana-paas.cloudapps.digital](https://grafana-paas.clou
 
 Team dashboards are organised into separate Grafana folders.
 
-Select **Home** in the top left of the Grafana screen to choose your team’s dashboard folder and view your dashboards.
+Select **Home** in the top left of the Grafana **Home Dashboard** to choose your team’s dashboard folder and view your dashboards.
 
 ### Display using your team TV
 
@@ -50,12 +46,12 @@ You can see a full explanation of [what the default dashboard shows here](../man
 
 ### GDS Container Metrics Default Dashboard
 
-The [GDS Container Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/E2dUvczmz/container-metrics?orgId=1) displays container metrics produced by the [paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter).
+The [GDS Container Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/E2dUvczmz/container-metrics?orgId=1) displays container metrics produced by the [paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter). Select your application from the **App** dropdown to view metrics for your application when you run the paas-metric-exporter.
 
-If you’re running the PaaS metric exporter you can view metrics for your application by selecting it from the **App** dropdown.
-
-If your application is not displayed, check the instructions for [setting up the PaaS metric exporter app with Prometheus](../manuals/set-up-paas-metric-exporter-with-prometheus.html) and that any changes are deployed to GOV.UK PaaS.
+If your application is not displayed, check the instructions for [setting up the PaaS metric exporter app with Prometheus](../manuals/set-up-paas-metric-exporter-with-prometheus.html) and that any changes are deployed to [GOV.UK Platform as a Service (PaaS)](https://docs.cloud.service.gov.uk/).
 
 ### Official and community built dashboards
 
-You can [import dashboards](http://docs.grafana.org/reference/export_import/#importing-a-dashboard) from the [official and community built dashboards](https://grafana.com/dashboards) on the Grafana website. Dashboards exist for many popular tools, for example [ElasticSearch](https://grafana.com/dashboards/266) or [PostgreSQL](https://grafana.com/dashboards/455). Using these dashboards means you do not need to spend time creating your own.
+You can import [official and community built dashboards](https://grafana.com/dashboards). For example, you could display backing service metrics such as [ElasticSearch](https://grafana.com/dashboards/266) or [PostgreSQL](https://grafana.com/dashboards/455).
+
+Learn how to [import dashboards](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
