@@ -41,7 +41,7 @@ groups:
 - name: Your team name
   rules:
   - alert: TeamName_RequestsExcess5xx
-    expr: rate(requests{org="your-paas-org" job="yourteam-metric-exporter", exported_space="prod", status_range="5xx"}[5m]) > 1
+    expr: rate(requests{org="your-paas-org", job="yourteam-metric-exporter", exported_space="prod", status_range="5xx"}[5m]) > 1
     for: 120s
     labels:
         product: "yourteam"
