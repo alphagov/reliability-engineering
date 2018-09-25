@@ -71,3 +71,49 @@ Access to resources are managed through IAM Policies, these can be custom or def
 
 [multiple account security strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
 [accessing aws accounts]: access-aws-accounts.html
+
+#### Managing "admin" permissions
+
+It is strongly recommended that anyone supporting an AWS account in an
+engineering capacity should have admin access.  Admin access should allow an
+engineer to completely recreate any given resource running in the account.
+
+In AWS one can restrict access to resources by only allowing only certain permissions:
+
+```
+data "aws_iam_policy_document" "admin" {
+  statement {
+    actions = [
+      "route53:*",
+    ]
+
+    resources = ["*"]
+    effect    = "Allow"
+  }
+}
+```
+
+This should be done where we do not want services to be run for proprietary
+service proliferation reasons, not for security reasons. The use case for this
+is so that we can manage what AWS services we consume, for instance not
+allowing people to spin up an AWS Neptune database.
+
+Services can be managed at the organisation level using service control
+policies, but this is not something we currently use. More information can be
+found [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html).
+
+It is an anti-pattern for administrators to not have full IAM permissions.  The
+reasoning behind this decision is that it prevents untracked access to things.
+However in practice it leads to the use of shared users and roles rather than
+the creation of a single user and/or role for a given purpose, which violates
+the principle of least privilege.
+
+#### Naming IAM roles
+
+For IAM roles attached to human IAM users, they should have descriptive names
+and ideally conform to the following (except for extenuating circumstances):
+
+- Admin: Can do everything in the account including IAM administration
+- Trusted user: Can do most things in the account excluding IAM administration
+- Read only: Can read things in the account but not perform any side-effects;
+             should NOT be able to do things like `ssm:DescribeParameters`
