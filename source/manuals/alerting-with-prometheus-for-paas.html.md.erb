@@ -24,7 +24,7 @@ Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL]
 
 Your expression must contain an `org` label, which refers to your PaaS organisation. This makes you sure it only uses metrics from your team. Although you can use the `job` label for this, it is not guaranteed to be unique to your team.
 
-You should only include timeseries for the PaaS space you wish to alert on, for example production.
+You should only include timeseries for the PaaS space you wish to alert on, for example only including production using the `space="production"` label.
 
 ### Create the alerting rule
 
