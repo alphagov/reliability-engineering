@@ -1,10 +1,4 @@
----
-title: Set up the PaaS metric exporter app with Prometheus
----
-
-# <%= current_page.data.title %>
-
-## Configure container metrics
+## Expose container level metrics using paas-metric-exporter
 
 [Cloud Foundry][] provides time-series data (metrics), for your PaaS apps.
 

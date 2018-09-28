@@ -1,15 +1,5 @@
----
-title: How to remove access to Logit
----
-
-# <%= current_page.data.title %>
+## Remove access to Logit
 
 When people leave GDS their G Suite account is cancelled, so they'll lose access to Logit but the actual Logit account will not be deleted.
 
 It's important that when people leave GDS, you also delete their logit account so it's clear who in GDS has access.
-
-## Troubleshooting
-
-Contact Reliabilty Engineering using the [#reliability-eng Slack channel][].
-
-[#reliability-eng Slack channel]: https://gds.slack.com/messages/CAD6NP598/#

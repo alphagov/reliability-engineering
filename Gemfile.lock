@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/alphagov/middleman-search.git
+  remote: https://github.com/alphagov/middleman-search
   revision: 50d072378c6f92a78ea02fed366ec6453aea8552
   specs:
     middleman-search (0.10.0)

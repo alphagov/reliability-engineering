@@ -1,10 +1,4 @@
----
-title: How to create or edit alerts with Prometheus
----
-
-# <%= current_page.data.title %>
-
-## Choosing alerts
+## Create and edit alerts using Prometheus
 
 When deciding what alerts you want to receive, consider:
 
@@ -12,7 +6,7 @@ When deciding what alerts you want to receive, consider:
 - looking at [existing alerting rules][2] used by other GDS teams
 - talking to us for advice using the [#re-prometheus-support][7] Slack channel
 
-## How to create or update alerting rules
+### How to create or update alerting rules
 
 You should first read [Prometheus' alerting rules documentation][4] to understand how alerting works.
 
@@ -58,15 +52,15 @@ You may have to iterate your alerting rules to make them more useful for your te
 
 Create a pull request for changes to your alerting rules file. Your commit should explain what the alert is and why you picked the threshold value. This is so future team members have the context they need to confidently change the alerting rule and other teams can learn from your alerting rules.
 
-Share your pull request in the [#re-prometheus-support][7] channel so we can review it. We will try to merge and deploy your pull request as quickly as possible and will let you know when your alerting rule is live.
+Share your pull request in the [#re-prometheus-support Slack channel][7] channel so we can review it. We will try to merge and deploy your pull request as quickly as possible and will let you know when your alerting rule is live.
 
-## How to receive alerts
+### How to receive alerts
 
 Once Prometheus triggers an alert, it sends the alert to [Alertmanager][10]. Alertmanager is then responsible for forwarding alerts to receivers such as [Pagerduty][11] or [Zendesk][12].
 
 Alerts are forwarded to the appropriate team and receiver using the [Alertmanager config file][9] which uses the alert labels to direct the alert to the right team and receiver.
 
-If you have not yet set up a receiver or would like to set up additional receivers please contact us on [Slack][7].
+If you have not yet set up a receiver or would like to set up additional receivers use the [#re-prometheus-support Slack channel][7].
 
 
 [0]: https://prometheus.io/

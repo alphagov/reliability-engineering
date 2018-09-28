@@ -1,8 +1,4 @@
----
-title: Logit incident management
----
-
-# <%= current_page.data.title %>
+## Logit incident management
 
 To find out about technical incidents affecting Logit you must:
 
@@ -16,11 +12,11 @@ Reliability Engineering uses these channels to tell GDS Logit users:
 
 Logit will keep in contact with Reliability Engineering during an incident, and ensure their [Logit status page][] is up to date.
 
-## How you should report an incident
+### Report an incident
 
 If you discover Logit or Kibana have failed, the process you must follow will differ depending on whether you are working during office hours or out-of-hours.
 
-### During office hours (9.30am to 5.30pm)
+#### During office hours (9.30am to 5.30pm)
 
 1. Check the [Logit status page][] to see if Logit know about the incident.
 2. Join the [#reliability-eng Slack channel][] and describe the problem.
@@ -29,7 +25,7 @@ If you discover Logit or Kibana have failed, the process you must follow will di
 
 The Reliability Engineering Tools team will work directly with Logit coordinating communication on behalf of GDS.
 
-### Outside office hours (from 5.30pm until 9.30am)
+#### Outside office hours (from 5.30pm until 9.30am)
 
 Logit provide an automated support process for out of hours incidents, for example in the event of a platform-wide outage an on-call Logit engineer is automaticlly paged. When you contact Logit outside office hours you need the [Logit support number and PIN][].
 
@@ -37,7 +33,7 @@ Logit provide an automated support process for out of hours incidents, for examp
 #### How to report a Logit incident out-of-hours:
 
 1. Use the [Logit status page][] to check if Logit know about the incident. If Logit have updated their status page, check this for updates on a half-hourly basis until the incident is resolved.
-2. If Logit are unaware of the issue, and it's urgent, you can telephone Logit to wake an on-call engineer. 
+2. If Logit are unaware of the issue, and it's urgent, you can telephone Logit to wake an on-call engineer.
 3. [Call the Logit support number][] and enter the pin to leave your message.
 4. Describe the incident leaving your name, and contact number, Logit will call you back within 30 minutes to acknowledge the incident.
 
@@ -52,16 +48,16 @@ Logit provide an automated support process for out of hours incidents, for examp
 
 The Reliability Engineering Tools team will work directly with Logit coordinating communication on behalf of GDS.
 
-## How to find out about incident reviews
+### Incident reviews
 
 If Logit have a major incident, for example a full Logit outage, Reliability Engineering will announce an internal incident review using the [Reliability Engineering announcements][] Google Group explaining how to register your interest in attending.
 
 After the incident review meeting, Reliability Engineering will:
 
-1. Email the incident report including a confirmed set of recommendations to [Reliability Engineering announcements][].
+1. Email the incident report including a confirmed set of recommendations to Reliability Engineering announcements.
 2. Follow up on actions arising from the incident review.
 3. Follow up with Logit on any actions on their side, including claiming refunds for the month in question according to our Enterprise SLA which is 99.9% uptime.
-4. Email Logit’s own incident report to [Reliability Engineering announcements][], Logit’s incident report will be sent out within 14 days of the incident.
+4. Email Logit’s own incident report to Reliability Engineering announcements, Logit’s incident report will be sent out within 14 days of the incident.
 
 
 [Reliability Engineering announcements]: https://groups.google.com/a/digital.cabinet-office.gov.uk/forum/#!forum/reliability-engineering-announce
