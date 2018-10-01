@@ -47,28 +47,34 @@ There are several command line tools you can use to work with AWS, such as:
 * [AWS Shell][] - an integrated shell for working with the AWS CLI
 * [Terraform][] - for building, changing, and versioning infrastructure
 
-These tools need credentials to access AWS. The simplest way to manage credentials is with an AWS credentials file. You could also use a tool like [aws-vault][] to manage your credentials for you.
+These tools need credentials to access AWS. We recommend using [aws-vault][] to manage your credentials.
 
-#### Create an AWS credentials file
+#### Installing aws-vault
 
-Create a local on your computer file at `~/.aws/credentials` and add:
+[aws-vault][] needs to be installed and available on your `PATH`. Follow [their
+instructions](https://github.com/99designs/aws-vault#installing) to do this.
+
+#### Add your credentials to aws-vault
+
+To add your credentials to aws-vault, run the command `aws-vault add
+gds-users`. This will prompt you for your Access Key ID and your Secret Access
+Key, and then create a new keychain to store these - you will be prompted to
+set a passphrase for this new keychain. Once done you should see the message:
 
 ```
-[gds-users]
-aws_access_key_id = MYACCESSKEYID
-aws_secret_access_key = MYSECRETACCESSKEY
+Added credentials to profile "gds-users" in vault
 ```
 
-You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the the GDS base account using the [AWS console][].
+You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the GDS base account using the [AWS console][].
 
 AWS has more instructions for [creating, modifying, and viewing Access Keys (Console)][] to do this.
 
-You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the GDS base account using the AWS console.
+#### Setup cross-account profile access
 
-For each role you need to assume, add a section like:
+For each role you need to assume, add a section like the following to `~/.aws/config`:
 
 ```
-[your-account-name]
+[profile target-account]
 source_profile = gds-users
 region = eu-west-1
 role_arn = <role arn>
@@ -90,41 +96,26 @@ and [Digital Marketplace](https://alphagov.github.io/digitalmarketplace-manual/a
   </ul>
 </details>
 
-#### Create tokens for command line use
-
-If you use tools like Terraform you will not be prompted for an MFA token.
-
-To use these tools you’ll need to create a token using the [AWS Security Token Service (STS)][].
-
-Use AWS CLI to run:
+Once this is all in place, you should be able to run `aws-vault list` and see output something like:
 
 ```
-aws sts assume-role \
-  --role-session-name "$(whoami)-$(date +%d-%m-%y_%H-%M)" \
-  --role-arn <role arn> \
-  --serial-number <mfa device arn> \
-  --duration-seconds "$((1*60*60))" \
-  --token-code <mfa token>
+Profile                  Credentials              Sessions
+=======                  ===========              ========
+gds-users                gds-users                -
+target-account           gds-users                -
 ```
 
-[AWS CLI documentation][] has more information about `assume-role`.
+#### Use aws-vault to invoke commandline tools
 
-Use the values set in the AWS credentials file `~/.aws/credentials` for `<role arn>` and `<mfa device arn>`. Use the current token shown by your MFA device for `<mfa token>`.
-
-The `assume-role` command returns JSON containing keys and tokens, use it
-to set the following environment variables:
+You can now use `aws-vault exec` to invoke the AWS CLI or other tools (eg [Terraform][]) as follows:
 
 ```
-export AWS_ACCESS_KEY_ID=... # Credentials.AccessKeyId
-export AWS_SECRET_ACCESS_KEY=... # Credentials.SecretAccessKey
-export AWS_SESSION_TOKEN=... # Credentials.SessionToken
+aws-vault exec target-account -- aws sts get-caller-identity
 ```
 
-Tools like Terraform will use these environment variables instead of the
-credentials file.
-
-The SessionToken will expire after one hour, or the time you
-supply in <nobr>`--duration-seconds`</nobr> up to the [maximum session duration][] for the role.
+aws-vault will prompt you for the passphrase that you set above to unlock the
+store (if it hasn't been accessed recently), and then prompt for your MFA
+token.
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
@@ -140,6 +131,6 @@ supply in <nobr>`--duration-seconds`</nobr> up to the [maximum session duration]
 [AWS CLI]: https://aws.amazon.com/cli/
 [AWS CLI documentation]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
 [Creating an AWS credentials file]: #creating-an-aws-credentials-file
-[aws-vault]: https://github.com/99designs/aws-vault
+[aws-vault]: https://github.com/99designs/aws-vault#readme
 [maximum session duration]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
 [team specific roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
