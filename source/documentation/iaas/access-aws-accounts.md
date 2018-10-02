@@ -117,6 +117,26 @@ aws-vault will prompt you for the passphrase that you set above to unlock the
 store (if it hasn't been accessed recently), and then prompt for your MFA
 token.
 
+#### Optional: add some shortcuts to your shell config
+
+If you find the above `aws-vault exec ...` invocation too verbose, you can add
+something like the following to your shell startup script:
+
+```
+for profile in $(awk '/^\[profile / { gsub("]", "", $2); print $2 }' ~/.aws/config); do
+  alias "aws-${profile}"="aws-vault exec ${profile} --"
+done
+```
+
+This sets up an alias for each profile in your `~/.aws/config` so that you can
+then invoke AWS commands as follows:
+
+```
+aws-target-account aws sts get-caller-identity
+aws-target-account terraform plan
+etc...
+```
+
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
 [request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
