@@ -1,21 +1,17 @@
----
-title: How to monitor your PaaS app with Prometheus
----
-
-# <%= current_page.data.title %>
+## Bind your exporter to Prometheus
 
 [Prometheus][] uses service discovery to decide what it monitors, so for apps running on [GOV.UK PaaS][] you'll need to:
 
 1. Grant Prometheus read-only access to your PaaS spaces.
 2. Bind your apps to the Prometheus service.
 
-## Grant Prometheus read-only access to your PaaS spaces
+### Grant Prometheus read-only access to your PaaS spaces
 
 By giving the `prometheus-for-paas` user the [`SpaceAuditor`][] role you allow it to monitor each instance of your app and respond to events, for example start, stop, scaling.
 
 `cf set-space-role prometheus-for-paas@digital.cabinet-office.gov.uk <org-name> <space-name> SpaceAuditor`
 
-## Bind your apps to the Prometheus service
+### Bind your apps to the Prometheus service
 
 You can find Prometheus in the PaaS marketplace.
 
@@ -39,7 +35,7 @@ Create a Prometheus service within your PaaS space and allow it to bind to apps 
 
 Within 10 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana][].
 
-### When using zero downtime plugins or a `blue-green` deployment process
+#### When using zero downtime plugins or a `blue-green` deployment process
 
 #### IP Whitelist your applications metrics endpoint
 

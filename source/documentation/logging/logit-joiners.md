@@ -1,12 +1,6 @@
----
-title: How to sign into Logit
----
-
-# <%= current_page.data.title %>
+## Get started with Logit
 
 If you do not have a Logit account you can create one by signing into Logit for the first time. Once you've created an account you must always sign into Logit the same way.
-
-## How to sign in
 
 To sign into Logit:
 
@@ -18,10 +12,4 @@ To sign into Logit:
 
 If you use **Log in with Google** on logit.io you will not sign into the GDS Dashboard.
 
-Once your user account is created, you'll need access to your team's logging stacks, your team's Tech Lead should be a Logit administrator who will add your account.
-
-## Troubleshooting
-
-Contact Reliabilty Engineering using the [#reliability-eng Slack channel][].
-
-[#reliability-eng Slack channel]: https://gds.slack.com/messages/CAD6NP598/#
+Once your user account is created, you'll need access to your team's logging stacks. Your team's Tech Lead should be a Logit administrator who will add your account.
