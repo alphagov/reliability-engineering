@@ -1,6 +1,6 @@
 ## Expose app level metrics using client libraries
 
-We provide client libraries which wrap Prometheus's own libraries to:
+Reliability Engineering provide client libraries which wrap Prometheus's own libraries to:
 
 - provide an easy metrics choice for GDS teams
 - supply consistent metrics and naming across different runtimes
