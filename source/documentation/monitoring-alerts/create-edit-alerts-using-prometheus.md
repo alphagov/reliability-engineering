@@ -12,6 +12,16 @@ You should first read [Prometheus' alerting rules documentation][4] to understan
 
 You will also need to understand how to write an expression in [PromQL][5] for your alerting rules.
 
+### Finding your metrics
+
+Prometheus contains metrics related to other teams that may not be useful to you. If you want to see which metrics are available for your team then the following queries will return a list of metric names that are available for your PaaS organisation or metric exporter.
+
+`sum by(__name__) ({org="<<ORG_NAME>>"})` for example `sum by(__name__) ({org="govuk-notify"})`
+
+`sum by(__name__) ({job="<<EXPORTER_APP_NAME>>"})` for example `sum by(__name__) ({job="notify-paas-postgres-exporter"})`
+
+Unfortunately it is not currently possible to order the results alphabetically.
+
 ### Writing your alerting rule PromQL expression
 
 Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL][5] expression.
