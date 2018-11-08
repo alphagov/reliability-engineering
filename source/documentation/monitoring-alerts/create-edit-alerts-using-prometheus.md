@@ -14,13 +14,15 @@ You will also need to understand how to write an expression in [PromQL][5] for y
 
 ### Finding your metrics
 
-Prometheus contains metrics related to other teams that may not be useful to you. If you want to see which metrics are available for your team then the following queries will return a list of metric names that are available for your PaaS organisation or metric exporter.
+Prometheus contains metrics related to other teams which may not be relevant to you.
+
+To see your team's available metrics, run the following queries to return a list of metric names available for your PaaS organisation or metric exporter.
 
 `sum by(__name__) ({org="<<ORG_NAME>>"})` for example `sum by(__name__) ({org="govuk-notify"})`
 
 `sum by(__name__) ({job="<<EXPORTER_APP_NAME>>"})` for example `sum by(__name__) ({job="notify-paas-postgres-exporter"})`
 
-Unfortunately it is not currently possible to order the results alphabetically.
+It's not currently possible to order these results alphabetically.
 
 ### Writing your alerting rule PromQL expression
 
