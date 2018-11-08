@@ -18,9 +18,9 @@ Prometheus contains metrics related to other teams which may not be relevant to 
 
 To see your team's available metrics, run the following queries to return a list of metric names available for your PaaS organisation or metric exporter.
 
-`sum by(__name__) ({org="<<ORG_NAME>>"})` for example `sum by(__name__) ({org="govuk-notify"})`
+`sum by(\_\_name\_\_) ({org="<<ORG_NAME>>"})` for example `sum by(\_\_name\_\_) ({org="govuk-notify"})`
 
-`sum by(__name__) ({job="<<EXPORTER_APP_NAME>>"})` for example `sum by(__name__) ({job="notify-paas-postgres-exporter"})`
+`sum by(\_\_name\_\_) ({job="<<EXPORTER_APP_NAME>>"})` for example `sum by(\_\_name\_\_) ({job="notify-paas-postgres-exporter"})`
 
 It's not currently possible to order these results alphabetically.
 
