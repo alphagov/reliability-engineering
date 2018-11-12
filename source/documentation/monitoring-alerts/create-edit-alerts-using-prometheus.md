@@ -28,6 +28,18 @@ It's not currently possible to order these results alphabetically.
 
 Use the [Prometheus dashboard][1] to experiment writing your alert as a [PromQL][5] expression.
 
+An example PromQL expression is:
+
+```
+rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5xx"}[5m])
+```
+
+To make it into an alert (that is, something that triggers if the data values are higher or lower than expected), the expression requires a threshold to be compared against:
+
+```
+rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5xx"}[5m]) > 1
+```
+
 Your expression must contain an `org` label, which refers to your PaaS organisation. This makes you sure it only uses metrics from your team. Although you can use the `job` label for this, it is not guaranteed to be unique to your team.
 
 You should only include timeseries for the PaaS space you wish to alert on, for example only including production using the `space="production"` label.
