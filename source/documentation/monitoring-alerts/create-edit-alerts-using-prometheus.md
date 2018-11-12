@@ -52,25 +52,9 @@ Alerting rules should be prefixed with your team name, for example `registers_Re
 
 You must add a `product` label to your alerting rule under `labels` so if the alert is triggered, Prometheus will alert the correct team.
 
-The alerting rule file should look something like this:
+For further information on how to create an alert, [see the README in the prometheus-aws-configuration-beta repo][13], which explains what each of the fields means and gives you a base to start from.
 
-```
-groups:
-- name: Your team name
-  rules:
-  - alert: TeamName_RequestsExcess5xx
-    expr: rate(requests{org="your-paas-org", job="yourteam-metric-exporter", space="prod", status_range="5xx"}[5m]) > 1
-    for: 120s
-    labels:
-        product: "yourteam"
-    annotations:
-        summary: "App {{ $labels.app }} has too many 5xx errors"
-        description: "Further context to help your fix this alert. You should include a link to your runbook for this alert if you have one"
-        logs: "A link to any relevant logs, for example https://kibana.logit.io/s/<stack-id>/app/kibana#/discover?_g=()"
-        dashboard: "A link to any relevant monitoring dashboards, for example https://grafana-paas.cloudapps.digital/d/<dashboard-id>"
-```
-
-You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that did not require any action as the threshold was too low.
+You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that do not require any action as the threshold is too low.
 
 ### Create a PR with your alerting rule
 
@@ -100,3 +84,4 @@ If you have not yet set up a receiver or would like to set up additional receive
 [10]: https://prometheus.io/docs/alerting/alertmanager/
 [11]: https://www.pagerduty.com/
 [12]: https://www.zendesk.com/
+[13]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/projects/app-ecs-services/config/alerts/README.md
