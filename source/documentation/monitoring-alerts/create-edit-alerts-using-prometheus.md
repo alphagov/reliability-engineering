@@ -66,9 +66,9 @@ Alerting rules should be prefixed with your team name, for example `registers_Re
 
 You must add a `product` label to your alerting rule under `labels` so if the alert is triggered, Prometheus will alert the correct team.
 
-For further information on how to create an alert, [see the README in the prometheus-aws-configuration-beta repo][13], which explains what each of the fields means and gives you a base to start from.
+You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that do not require any action as the threshold is too low.
 
-You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that do not require any action as the threshold is too low (false positives).
+For more information about creating alerts, see the [prometheus-aws-configuration-beta README][13] for an explanation of each field's meaning and an example alert you can customise.
 
 ### Create a PR with your alerting rule
 
