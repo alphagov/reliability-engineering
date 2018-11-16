@@ -35,7 +35,7 @@ rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5
 ```
 The above query means "amoumt of requests with status 5xx within the last 5 minutes for org "gds-tech-ops" and job "observe-metrics-exporter".  
 
-A query for an alert that fires when data values are higher or lower than expected would require a threshold to compare against:
+To make it into an alert (that is, something that triggers if the data values are higher or lower than expected), the expression requires a threshold to be compared against:
 
 ```
 rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5xx"}[5m]) > 1
