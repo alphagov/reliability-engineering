@@ -45,15 +45,20 @@ Your expression should contain an `org` label, which refers to your PaaS organis
 
 You should only include timeseries for the PaaS space you wish to alert on, for example only including production using the `space="production"` label.
 
-### Deciding what your alerting thresholds should be
+### Decide your alerting thresholds
 
-We discussed how we can create a query for alert by adding a threshold. In the first instance, you can determine this alerting threshold by looking at the historical values for this queries.  its averages and spikes, and your current monitoring system's thresholds for this alert.
+Queries need thresholds added to them to make them into alerts. You can work out an alert's threshold value from historical data. To do this, use your current monitoring system's thresholds, averages and spikes for each alert.
 
-If it's a brand new alert then experiment with thresholds until you find one that suits the type of alert, your priority for the alert, your metric's patterns and the Service Level Objective for your service.
+For new alerts, experiment with different thresholds until you find one that fits your:
+
+- chosen type of alert
+- alerting priorities
+- metric's patterns
+- Service Level Objective
 
 For new alerts, you may need to experiment with different thresholds until you find one that fits your, chosen type of alert, priorities and metric's patterns
  
-### Create The alerting rule
+### Create the alerting rule
 
 Alerting rules are defined in YAML format in a config file in the [prometheus-aws-configuration-beta][2] repository. Each product team should use their own file for their alerting rules.
 
