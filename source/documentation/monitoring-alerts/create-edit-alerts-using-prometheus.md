@@ -56,7 +56,7 @@ For new alerts, experiment with different thresholds until you find one that fit
 - metric's patterns
 - Service Level Objective
 
-For new alerts, you may need to experiment with different thresholds until you find one that fits your, chosen type of alert, priorities and metric's patterns
+For new alerts, you may need to experiment with different thresholds until you find one that fits your chosen type of alert, priorities and the patterns of your metric.
  
 ### Create the alerting rule
 
@@ -66,7 +66,7 @@ Alerting rules should be prefixed with your team name, for example `registers_Re
 
 You must add a `product` label to your alerting rule under `labels` so if the alert is triggered, Prometheus will alert the correct team.
 
-You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that do not require any action as the threshold is too low.
+You may have to iterate your alerting rules to make them more useful for your team. For example, you may get alerts that do not require any action as the threshold is too low (false positives). 
 
 For more information about creating alerts, see the [prometheus-aws-configuration-beta README][13] for an explanation of each field's meaning and an example alert you can customise.
 
