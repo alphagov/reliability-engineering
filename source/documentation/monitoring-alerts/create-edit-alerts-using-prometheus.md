@@ -33,24 +33,27 @@ An example PromQL expression is:
 ```
 rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5xx"}[5m])
 ```
+The above query means "amoumt of requests with status 5xx within the last 5 minutes for org "gds-tech-ops" and job "observe-metrics-exporter".  
 
-To make it into an alert (that is, something that triggers if the data values are higher or lower than expected), the expression requires a threshold to be compared against:
+A query for an alert that fires when data values are higher or lower than expected would require a threshold to compare against:
 
 ```
 rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5xx"}[5m]) > 1
 ```
 
-Your expression must contain an `org` label, which refers to your PaaS organisation. This makes you sure it only uses metrics from your team. Although you can use the `job` label for this, it is not guaranteed to be unique to your team.
+Your expression should contain an `org` label, which refers to your PaaS organisation. This ensures you only use the metrics from your team. Although the `job` label may serve the same purpose, it is not guaranteed to be unique to your team.
 
 You should only include timeseries for the PaaS space you wish to alert on, for example only including production using the `space="production"` label.
 
 ### Deciding what your alerting thresholds should be
 
-Above, we discussed that making your query into an alert required adding a threshold. The value of this alerting threshold should be informed by your historical data, its averages and spikes, and your current monitoring system's thresholds for this alert.
+We discussed how we can create a query for alert by adding a threshold. In the first instance, you can determine this alerting threshold by looking at the historical values for this queries.  its averages and spikes, and your current monitoring system's thresholds for this alert.
 
-If it's a brand new alert then experiment with thresholds until you find one that suits the type of alert, your priority for the alert and your metric's patterns.
+If it's a brand new alert then experiment with thresholds until you find one that suits the type of alert, your priority for the alert, your metric's patterns and the Service Level Objective for your service.
 
-### Create the alerting rule
+For new alerts, you may need to experiment with different thresholds until you find one that fits your, chosen type of alert, priorities and metric's patterns
+ 
+### Create The alerting rule
 
 Alerting rules are defined in YAML format in a config file in the [prometheus-aws-configuration-beta][2] repository. Each product team should use their own file for their alerting rules.
 
@@ -60,7 +63,7 @@ You must add a `product` label to your alerting rule under `labels` so if the al
 
 For further information on how to create an alert, [see the README in the prometheus-aws-configuration-beta repo][13], which explains what each of the fields means and gives you a base to start from.
 
-You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that do not require any action as the threshold is too low.
+You may have to iterate your alerting rules to make them more useful for your team. For example you may get alerts that do not require any action as the threshold is too low (false positives).
 
 ### Create a PR with your alerting rule
 
