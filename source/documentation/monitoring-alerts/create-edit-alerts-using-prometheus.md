@@ -33,7 +33,7 @@ An example PromQL expression is:
 ```
 rate(requests{org="gds-tech-ops", job="observe-metric-exporter", status_range="5xx"}[5m])
 ```
-The above query means "amoumt of requests with status 5xx within the last 5 minutes for org "gds-tech-ops" and job "observe-metrics-exporter".  
+The above query means "amount of requests with status 5xx within the last 5 minutes for org `gds-tech-ops` and job `observe-metrics-exporter`.  
 
 To make it into an alert (that is, something that triggers if the data values are higher or lower than expected), the expression requires a threshold to be compared against:
 
@@ -56,8 +56,6 @@ For new alerts, experiment with different thresholds until you find one that fit
 - metric's patterns
 - Service Level Objective
 
-For new alerts, you may need to experiment with different thresholds until you find one that fits your chosen type of alert, priorities and the patterns of your metric.
- 
 ### Create the alerting rule
 
 Alerting rules are defined in YAML format in a config file in the [prometheus-aws-configuration-beta][2] repository. Each product team should use their own file for their alerting rules.
