@@ -85,15 +85,15 @@ If you have not yet set up a receiver or would like to set up additional receive
 
 [0]: https://prometheus.io/
 [1]: https://prom-2.monitoring.gds-reliability.engineering
-[2]: https://github.com/alphagov/prometheus-aws-configuration-beta/tree/master/terraform/projects/app-ecs-services/config/alerts
+[2]: https://github.com/alphagov/prometheus-aws-configuration-beta/tree/master/terraform/modules/app-ecs-services/config/alerts
 [3]: https://github.com/alphagov/prometheus-aws-configuration-beta/
 [4]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
 [5]: https://prometheus.io/docs/prometheus/latest/querying/basics/
 [6]: https://gds-way.cloudapps.digital/standards/alerting.html#alerting
 [7]: https://gds.slack.com/messages/re-prometheus-support
 [8]: https://github.com/alphagov/paas-metric-exporter
-[9]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/projects/app-ecs-services/templates/alertmanager.tpl
+[9]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/modules/app-ecs-services/templates/alertmanager.tpl
 [10]: https://prometheus.io/docs/alerting/alertmanager/
 [11]: https://www.pagerduty.com/
 [12]: https://www.zendesk.com/
-[13]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/projects/app-ecs-services/config/alerts/README.md
+[13]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/modules/app-ecs-services/config/alerts/README.md
