@@ -1,4 +1,4 @@
-## Expose container level metrics using paas-metric-exporter
+## Expose container level metrics using paas-prometheus-exporter
 
 [Cloud Foundry][] provides time-series data (metrics), for your PaaS apps.
 
@@ -19,9 +19,9 @@ Your new account should be separate to your primary Cloud Foundry account and us
 
 To set up the metrics exporter app:
 
-1. Clone the [paas-metric-exporter][] GitHub repository.
-2. [Push the metrics exporter app](https://docs.cloud.service.gov.uk/deploying_apps.html) to Cloud Foundry (without starting the app) by running
- * `cf push -f manifest-prometheus.yml --no-start <app-name>`
+1. Clone the [paas-prometheus-exporter][] GitHub repository.
+2. [Push the metrics exporter app][] to Cloud Foundry (without starting the app) by running
+ * `cf push -f manifest.yml --no-start <app-name>`
 3. Set the following mandatory environment variables in the metrics exporter app using
   * `cf set-env <app-name> NAME VALUE`
 
@@ -72,7 +72,8 @@ The Service Manual as more information about [monitoring the status of your serv
 [Cloud Foundry]: https://docs.cloudfoundry.org/concepts/overview.html
 [logs]: https://reliability-engineering.cloudapps.digital/#logging
 [monitoring the status of your service]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
-[paas-metric-exporter]: https://github.com/alphagov/paas-metric-exporter
+[paas-prometheus-exporter]: https://github.com/alphagov/paas-prometheus-exporter
 [#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
 [`SpaceAuditor`]: https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-auditor
 [GDS office IPs]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds-internal-it/news/aviationhouse-sourceipaddresses
+[Push the metrics exporter app]: https://docs.cloud.service.gov.uk/deploying_apps.html
