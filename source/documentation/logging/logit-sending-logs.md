@@ -1,8 +1,6 @@
 ## Send logs to Logit
 
-Logit offers logstash endpoints. In their default mode there is no authentication on them, this means anyone who has the logstash address could inject fake logs into your stash.
-
-This guide takes you through setting up authentication for logstash on Logit using mutual TLS authentication.
+Logit offers logstash endpoints. In their default mode there is no authentication on them, this means anyone who has the logstash address could inject fake logs into your stack.
 
 ### Provision a new stack
 
@@ -12,7 +10,7 @@ If you do not see the **Add stack** button, it means you do not have permission 
 
 Contact Reliabilty Engineering using the  [#reliability-engineering](https://gds.slack.com/messages/reliability-engineering) Slack channel for help with permissions.
 
-#### Stack name
+#### Stack name
 
 When you choose a stack name, other teams will use this name to identify your stack from their own.
 
@@ -82,78 +80,11 @@ The only inputs we are interested in are **Beats-SSL** and **Syslog-SSL**, you w
 
 If you know in advance which IP addresses or address ranges you will be sourcing logging traffic from, include these in your request so that the **Beats-SSL** and **Syslog-SSL** ports can be whitelisted.
 
-## Request TLS mutual authentication
-
-Request TLS mutual authentication is switched on for your stack. You can do this through a support request to Logit.
-
-Logit provides two methods to achieve this:
-
-* provide Logit with a CA certificate of your own and instruct them to trust client certificates signed by that CA for access to the stack
-
-* the second, simpler method involves Logit generating a client private key and certificate on your behalf, signing it with their CA and sending it back
-
-This manual will cover just the second, simpler method.
-
-Please note, once TLS authentication is configured the ports you have assigned for rsyslog / beats will change after logit enable mTLS.
-
-### Logit provided keys
-
-Once your request to enable mutual TLS authentication has been carried out Logit will send you the following files.
-
-1. `f046ca39-8388-4c49-a536-19f95a555905.cert.pem` This is the client certificate, signed by the stack-specific intermediate CA.
-
-2. `f046ca39-8388-4c49-a536-19f95a555905.key.encrypted.pem` the corresponding RSA private key for the above certificate. This private key needs to be provided to any process that wants to authenticate to the Logit service to initiate a log stream, for example, Filebeat or Rsyslog. The private key should be encrypted and Logit will provide the password to decrypt via a separate channel.
-
-
-#### Logit CA Certificate ###
-
-When mutual authentication is enabled, Logit will behave as a Root Certificate Authority. Here is the `Logit.io Ltd Root CA` certificate your service will be trusting:
-
-```
------BEGIN CERTIFICATE-----
-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
-VXgVDOk+Txn+281P0Z3LoYBs
------END CERTIFICATE-----
-```
-
-This was retrieved by running: `openssl s_client -showcerts -connect f046ca39-8388-4c49-a536-19f95a555905-ls.logit.io:12345`
-
-
 ## Configure Filebeat
 
-Filebeat is a Logstash client that reads log files from the filesystem and ships them to Logstash as they are being written to. Please refer to [Filebeat documentation](https://www.elastic.co/products/beats/filebeat)for details on installation, general configuration and operation.
+Filebeat is a Logstash client that reads log files from the filesystem and ships them to Logstash as they are being written to. Please refer to the [Filebeat documentation](https://www.elastic.co/products/beats/filebeat) for details on installation, general configuration and operation.
 
-The following is a sample configuration fragment for mutual auth to Logit.  The port number in the `hosts` specification must be the TCP port assigned to the `Beats-SSL` input in your stack.
+The following is a sample configuration fragment for shipping to Logit.  The port number in the `hosts` specification must be the TCP port assigned to the `Beats-SSL` input in your stack.
 
 ```yaml
 output.logstash:
@@ -162,48 +93,6 @@ output.logstash:
     - f046ca39-8388-4c49-a536-19f95a555905-ls.logit.io:14303
   ssl:
     enabled: true
-    certificate_authorities:
-      - /etc/logit/certs/logstash-ca.crt
-    certificate: "/etc/logit/certs/logstash-client.crt"
-    key: "/etc/logit/private/logstash-client.key"
-```
-
-Puppet example with *optional* mutual auth - using the [pcfens-filebeat module](https://github.com/pcfens/puppet-filebeat):
-
-```puppet
-$logstash_output_config = {
-  'logstash'                    => {
-    'enabled'                   => 'true',
-    'hosts'                     => ["${logstash_host}:${logstash_port}"],
-    'ssl'                       => {
-      'enabled'                 => true,
-      'certificate_authorities' => [ $logstash_ca_cert_path ],
-    },
-  }
-}
-
-if $mutual_auth {
-  $logstash_mutual_auth_config = {
-    'logstash'        => {
-      'ssl'           => {
-        'key'         => $logstash_client_key_path,
-        'certificate' => $logstash_client_cert_path,
-      }
-    }
-  }
-}
-else {
-  $logstash_mutual_auth_config = {}
-}
-
-
-$filebeat_outputs = deep_merge($logstash_output_config, $logstash_mutual_auth_config)
-
-class { '::filebeat':
-  manage_repo   => false,
-  major_version => 5,
-  outputs       => $filebeat_outputs,
-}
 ```
 
 ## Configure Rsyslog
@@ -214,12 +103,9 @@ Then, load the `gtls` "stream driver" and configure it for operation with Logit:
 
 ```
 $DefaultNetstreamDriver gtls
-$DefaultNetstreamDriverCAFile /etc/logit/certs/logstash-ca.crt
 $ActionSendStreamDriverAuthMode x509/name
 $ActionSendStreamDriverPermittedPeer f046ca39-8388-4c49-a536-19f95a555905-ls.logit.io
 $ActionSendStreamDriverMode 1
-$DefaultNetstreamDriverCertFile /etc/logit/certs/logstash-client.crt
-$DefaultNetstreamDriverKeyFile /etc/logit/private/logstash-client.key
 ```
 
 Declare an action on matching messages that uses the `omfwd` module to forward them to Logit:
