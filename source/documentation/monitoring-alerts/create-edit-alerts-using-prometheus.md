@@ -82,7 +82,7 @@ Alerts are forwarded to the appropriate team and receiver using the [Alertmanage
 
 If you have not yet set up a receiver or would like to set up additional receivers use the [#re-prometheus-support Slack channel][7].
 
-If you need additional PagerDuty licences contact the Reliability Engineering Autom8 team using the [#re-autom8 Slack channel](14).
+If you need additional PagerDuty licences contact the Reliability Engineering Autom8 team using the [#re-autom8 Slack channel][14].
 
 [0]: https://prometheus.io/
 [1]: https://prom-2.monitoring.gds-reliability.engineering
