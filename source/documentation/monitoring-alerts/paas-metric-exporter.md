@@ -1,8 +1,8 @@
-## Expose container level metrics using paas-prometheus-exporter
+## Expose Cloud Foundry metrics using paas-prometheus-exporter
 
-[Cloud Foundry][] provides time-series data (metrics), for your PaaS apps.
+[Cloud Foundry][] provides metrics, for your PaaS apps.
 
-Currently supported metrics are:
+Currently supported metrics include:
 
 * CPU
 * RAM
@@ -10,10 +10,11 @@ Currently supported metrics are:
 * app crashes
 * app requests
 * app response times
+* backing service metrics
 
-### Set up the metrics exporter app
+### Set up the paas-prometheus-exporter
 
-Before you setting up the metrics exporter app, you'll need a live [Cloud Foundry account][] assigned to the spaces you want to receive metrics on.
+Before setting up the metrics exporter app, you'll need a live [Cloud Foundry account][] assigned to the spaces you want to receive metrics on.
 
 Your new account should be separate to your primary Cloud Foundry account and use the [`SpaceAuditor`][] role beause it can view app data without modifying it.
 
