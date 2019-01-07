@@ -1,4 +1,4 @@
-## Bind your exporter to Prometheus
+## Get your /metrics page scraped by Prometheus
 
 [Prometheus][] uses service discovery to decide what it monitors, so for apps running on [GOV.UK PaaS][] you'll need to:
 
@@ -35,42 +35,6 @@ Create a Prometheus service within your PaaS space and allow it to bind to apps 
 
 Within 10 minutes Prometheus will start scraping your application for metrics, you can validate this by checking [Grafana][].
 
-#### When using zero downtime plugins or a `blue-green` deployment process
-
-#### IP Whitelist your applications metrics endpoint
-
-If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] you should disable the basic auth on the metrics endpoint when using the [Ruby gem][] or [Python library][] and instead protect the metrics endpoint using IP whitelisting in order to minimise gaps in metrics between deployments.
-
-By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
-
-1. Map the route to the metrics path:
-
-  - Update your `manifest.yml`:
-
-```
-      routes:
-      ...
-      - route: app-to-protect.cloudapps.digital/metrics
-```
-
-  - redeploy your app to map the route and path
-
-2. Register the IP whitelist route service as a user-provided service in your PaaS space.
-
-    `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
-
-3. Register the IP whitelist route service against the metrics path.
-
-    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect --path metrics`
-
-#### Update your Grafana panel to combine metrics for blue-green deployments
-
-You should update your [Grafana][] panels to combine metrics from different deployment states, for example in order to show the number of healthy instances you can use regex:
-
-    `sum(up{job=~"app-to-protect(-venerable)?"})`
-
-- Note: if you are not using [autopilot][] you will have to substitute `-venerable` to whatever your zero downtime plugin is using during the app renaming.
-
 ### App route configuration
 
 Whether or not you're using a custom domain the Prometheus service broker will only scrape your app's first route.
@@ -82,14 +46,9 @@ If there are no routes to your app the Prometheus service will default the route
 `<app-name>.cloudapps.digital`
 
 [authorization header and other app headers]: https://docs.cloud.service.gov.uk/deploying_services.html#forwarding-headers
-[autopilot]: https://github.com/contraband/autopilot
 [GOV.UK PaaS]: https://www.cloud.service.gov.uk/
 [Grafana]: https://grafana-paas.cloudapps.digital
 [Prometheus]: https://prometheus.io/
 [#re-prometheus-support Slack channel]: https://gds.slack.com/messages/CAF5H4N4Q/
 [`SpaceAuditor`]: https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-auditor
 [update your app's manifest.yml]: https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block
-[blue-green deployment process]: https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html
-[Ruby gem]: https://github.com/alphagov/gds_metrics_ruby#optional-configuration
-[Python library]: https://github.com/alphagov/gds_metrics_python#optional-configuration
-[GDS office IPs]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds-internal-it/news/aviationhouse-sourceipaddresses
