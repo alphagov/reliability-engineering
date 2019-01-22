@@ -4,10 +4,10 @@ If you do not have a Logit account you can create one by signing into Logit for 
 
 To sign into Logit:
 
-1. Go to https://logit.io/ and click Sign In
-1. In the box 'Business email address' enter your GDS email address
-1. *...the password box should automatically disappear*
-1. Submit the form and complete the Google Authentication
+1. Go to https://logit.io/ and select **Sign in**.
+1. Enter your GDS email address in **Business email address**.
+1. *...the password box should automatically disappear*.
+1. Submit the form to complete Google Authentication.
 1. You're now signed into the Government Digital Service Dashboard.
 
 If you use **Log in with Google** on logit.io you will not sign into the GDS Dashboard.
