@@ -91,7 +91,7 @@ the HTML and asset files ready to be published.
 
 ## Deploy
 
-Continuously deployed from master by Travis.
+Continuously deployed from master by [Travis](https://travis-ci.org/alphagov/reliability-engineering).
 
 ## Licence
 
