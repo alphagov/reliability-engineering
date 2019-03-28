@@ -81,7 +81,7 @@ If there are no routes to your app the Prometheus service will default the route
 
 `<app-name>.cloudapps.digital`
 
-[authorization header and other app headers]: https://docs.cloud.service.gov.uk/deploying_services.html#forwarding-headers
+[authorization header and other app headers]: https://docs.cloud.service.gov.uk/deploying_services/use_a_custom_domain/#forwarding-headers
 [autopilot]: https://github.com/contraband/autopilot
 [GOV.UK PaaS]: https://www.cloud.service.gov.uk/
 [Grafana]: https://grafana-paas.cloudapps.digital
