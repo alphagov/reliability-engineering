@@ -34,7 +34,7 @@ Kubernetes as a container orchestration environment has become an industry stand
 
 It is expected the path to getting there will be as follows:
 
-<b>Kops on EC2 --> EKS and EC2 --> EKS with Fargate</b>
+<b>K8S on EC2 --> EKS and EC2 --> EKS with Fargate</b>
 
 rather than using ECS/Fargate as an intermediate step as has been proposed previously.
 
