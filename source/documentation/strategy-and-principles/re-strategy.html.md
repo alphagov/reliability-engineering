@@ -96,7 +96,7 @@ The GDS Supported Platform has a CI/CD toolset that implements this paradigm for
 ## 6. Use a shared responsibility model between RE and service delivery teams
 Clear separation of responsibility is important for program teams running services on RE’s platform. Some aspects of the service must be managed and supported by the program itself and cannot be RE’s sole responsibility. Similarly the program team can not be responsible for those systems managed by RE. This boundary is clearly defined in the shared responsibility model.
 
-See: [DRAFT Shared Responsibility Model PULL REQUEST](https://github.com/alphagov/gsp-team-manual/pull/22)
+See: [Shared Responsibility Model](https://github.com/alphagov/gsp-team-manual/blob/master/docs/gsp-shared-responsiblity-model.md)
 
 <i><small>This is not an attempt to create a barrier between programs and RE, commonly known as the “throw it over the wall” approach. We recognise that we are collectively responsible for the success of the service but there are areas of responsibility that need to be made clear, to avoid the finger-pointing of “it’s not my problem, ask them” but also to make visible all aspects of running a service.</small></i>
 
