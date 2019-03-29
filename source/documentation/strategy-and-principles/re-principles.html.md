@@ -17,7 +17,7 @@ We want to focus our resources on the things that provide the most value to GDS 
 Security requirements are an integral part of everything that we build, operate or run. By considering security requirements from the beginning we will have a system that is less complex, more secure and more reliable. TechOps helps teams to understand and apply the appropriate mitigations.
 
 ## 5 Be open and use open source
-As recommended by the Technology Code of Practice point 3 “Be open and use open source”
+As recommended by the [Technology Code of Practice point 3](https://www.gov.uk/government/publications/technology-code-of-practice/technology-code-of-practice#be-open-and-use-open-source) "[Be open and use open source](https://www.gov.uk/guidance/be-open-and-use-open-source)”
 
 ## 6 Remove unnecessary human effort through automation
 TechOps believes humans should not be burdened with tasks that computers can do. We focus our efforts on helping GDS teams deliver user value quicker by allowing them to focus on being creative. We automate away repetitive tasks where it makes sense to do so, but where it does not we challenge and simplify processes.
@@ -25,7 +25,7 @@ TechOps believes humans should not be burdened with tasks that computers can do.
 For example, TechOps promotes the use of continuous deployment for all GDS services. This frees up development teams from the need to perform repetitive deployment tasks so they can focus on improving their service.
 
 ## 7 Enable GDS to build modern, secure and scalable services
-TechOps promotes the use of the [12Factor Application Methodology](https://12factor.net) across GDS as the best way of building easily-deployed, loosely-coupled, composable and scalable services.
+TechOps promotes the use of the [12 Factor Application Methodology](https://12factor.net) across GDS as the best way of building easily-deployed, loosely-coupled, composable and scalable services.
 
 TechOps deploys applications in containers, enabling you to decouple your applications’ dependencies from the host operating system.
 
