@@ -86,7 +86,7 @@ If you need additional PagerDuty licences contact the Reliability Engineering Au
 
 [0]: https://prometheus.io/
 [1]: https://prom-2.monitoring.gds-reliability.engineering
-[2]: https://github.com/alphagov/prometheus-aws-configuration-beta/tree/master/terraform/modules/app-ecs-services/config/alerts
+[2]: https://github.com/alphagov/prometheus-aws-configuration-beta/tree/master/terraform/modules/prom-ec2/alerts-config/alerts
 [3]: https://github.com/alphagov/prometheus-aws-configuration-beta/
 [4]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
 [5]: https://prometheus.io/docs/prometheus/latest/querying/basics/
@@ -97,5 +97,5 @@ If you need additional PagerDuty licences contact the Reliability Engineering Au
 [10]: https://prometheus.io/docs/alerting/alertmanager/
 [11]: https://www.pagerduty.com/
 [12]: https://www.zendesk.com/
-[13]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/modules/app-ecs-services/config/alerts/README.md
+[13]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/modules/prom-ec2/alerts-config/alerts/README.md
 [14]: https://gds.slack.com/messages/CD1F78YJU/
