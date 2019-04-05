@@ -3,4 +3,6 @@ applications:
 - name: reliability-engineering
   memory: 64M
   path: ./build
-  buildpack: staticfile_buildpack
+  buildpacks:
+    - staticfile_buildpack
+  stack: cflinuxfs3
