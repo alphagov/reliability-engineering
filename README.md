@@ -91,7 +91,7 @@ the HTML and asset files ready to be published.
 
 ## Deploy
 
-Continuously deployed from master by [Travis](https://travis-ci.org/alphagov/reliability-engineering).
+Continuously deployed from master by the [multi-tenant Concourse](https://cd.gds-reliabilty.engineering) via the [internal-apps pipeline in the tech-ops repo](https://github.com/alphagov/tech-ops/blob/master/reliability-engineering/pipelines/internal-apps.yml).
 
 ## Licence
 
