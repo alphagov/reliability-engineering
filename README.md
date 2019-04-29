@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/alphagov/reliability-engineering.svg?branch=master)](https://travis-ci.org/alphagov/reliability-engineering)
 
+## What is this for?
+
+This reliability-engineering repo is used to document Reliability Engineering things for an external audience, i.e. for non-Reliability Engineers. The content can be browsed [HERE](https://reliability-engineering.cloudapps.digital/).
+
 ## Getting started
 
 To preview or build the website, we need to use the terminal.
