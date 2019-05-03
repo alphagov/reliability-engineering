@@ -82,6 +82,8 @@ Specifically, TechOps will enforce the established best practice of "two-eyes" (
 
 ### Responding to security events and incidents and acting on vulnerabilities
 
+As a general rule, TechOps will adopt the service team's existing incident management and support processes, until a consistent, cross-TechOps model has been established. 
+
 Reliability Engineering (RE) will monitor CVEs that relate to the technologies that underpin the infrastructure that we provide. RE will then work to mitigate any identified vulnerabilities that affect the platform as quickly as possible.
 
 Cyber Security will provide tooling and advice to teams, in order that they can identify and act upon security events and incidents.
