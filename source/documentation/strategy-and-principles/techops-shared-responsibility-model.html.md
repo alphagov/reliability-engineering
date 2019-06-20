@@ -2,7 +2,7 @@
 
 TechOps (including Reliability Engineering, Cyber Security and User Support) uses a [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model/) to provide a supported platform to GDS product teams. Broadly, TechOps builds, runs and maintains the infrastructure and supporting services, while the product teams maintain the applications that they wish to run on the platform.
 
-TechOps is only responsible for internal GDS product teams who host their service on the [GDS Supported Platform](https://github.com/alphagov/gsp-team-manual) and the [GOV.UK Platform as a Service (PaaS)](https://www.cloud.service.gov.uk/) and its tenants.
+TechOps is only responsible for internal GDS product teams who host their service on the [GDS Supported Platform](https://github.com/alphagov/gsp) and the [GOV.UK Platform as a Service (PaaS)](https://www.cloud.service.gov.uk/) and its tenants.
 
 ## Summary of responsibilities
 
@@ -41,7 +41,7 @@ When infrastructural components need to be upgraded/updated, RE will do so for e
 
 ### Setting up a build/deploy pipeline
 
-Reliability Engineering will help teams to set up a build and deployment pipeline (otherwise known as a continuous integration and deployment (CI/CD) pipeline) as part of helping teams migrate to either the PaaS or the GSP.
+Reliability Engineering will help teams to set up a build and deployment pipeline (otherwise known as a continuous integration and deployment (CI/CD) pipeline) as part of helping teams migrate to either the [GOV.UK PaaS](https://www.cloud.service.gov.uk/) or the [GDS Supported Platform](https://github.com/alphagov/gsp).
 
 This includes providing the tooling and documentation for product teams, as well as consulting/working with teams to get an initial pipeline setup.
 
@@ -152,9 +152,6 @@ Amazon maintains the AWS infrastructure and is responsible for updating it. Reli
 
 <!--
 ### Docker.io
-
-
-
 [What's the escalation path for when the inevitable arguments happen?]
 [something probably needs to go in here about Zendesk?]
 See Cyber Security’s page for more information about protective monitoring, our tools and services [link to more detailed guidance?]().
