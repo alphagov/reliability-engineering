@@ -36,8 +36,6 @@ It is expected the path to getting there will be as follows:
 
 <b>K8S on EC2 --> EKS and EC2 --> EKS with Fargate</b>
 
-rather than using ECS/Fargate as an intermediate step as has been proposed previously.
-
 The principle we’re invoking here says [use fully managed cloud services wherever possible](re-principles.html#3-use-fully-managed-cloud-services-by-default).
 
 This combined with the fact that we’re committing to AWS for the period of this strategy means EKS and Fargate is a clear choice if we are committed to Kubernetes as a technology.
