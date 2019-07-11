@@ -47,95 +47,27 @@ There are several command line tools you can use to work with AWS, such as:
 * [AWS Shell][] - an integrated shell for working with the AWS CLI
 * [Terraform][] - for building, changing, and versioning infrastructure
 
-These tools need credentials to access AWS. We recommend using [aws-vault][] to manage your credentials.
+These tools need credentials to access AWS. We recommend using [gds-cli][] to manage your credentials.
 
-#### Installing aws-vault
+#### Installing gds-cli
 
-[aws-vault][] needs to be installed and available on your `PATH`. Follow [their
-instructions](https://github.com/99designs/aws-vault#installing) to do this.
+[gds-cli][] needs to be installed and available on your `PATH`. The
+easiest way to do this is via Homebrew: `brew install alphagov/gds/gds-cli`.
 
-#### Add your credentials to aws-vault
+When you run `gds aws <some-role>` for the first time, it will prompt for your
+Access Key ID and Secret Access Key for AWS access and store them
+using [aws-vault][].
 
-To add your credentials to aws-vault, run the command `aws-vault add
-gds-users`. This will prompt you for your Access Key ID and your Secret Access
-Key, and then create a new keychain to store these - you will be prompted to
-set a passphrase for this new keychain. Once done you should see the message:
+You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the GDS base account using the [AWS Console][].
 
-```
-Added credentials to profile "gds-users" in vault
-```
+If you get MFA codes from your phone, run `gds config yubikey false`
 
-You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the GDS base account using the [AWS console][].
+#### Using gds-cli
 
-AWS has more instructions for [creating, modifying, and viewing Access Keys (Console)][] to do this.
+To use `gds-cli`, run `gds aws` to list all available accounts, then
+select one to access with `gds aws <some-role>`.
 
-#### Setup cross-account profile access
-
-For each role you need to assume, add a section like the following to `~/.aws/config`:
-
-```
-[profile target-account]
-source_profile = gds-users
-region = eu-west-1
-role_arn = <role arn>
-mfa_serial = <mfa device arn>
-```
-
-`<role arn>` - is from your team's list of accounts and roles, for example [GOV.UK](https://github.com/alphagov/govuk-aws-data/blob/master/docs/govuk-aws-accounts.md),
-[Verify](https://github.com/alphagov/verify-blackbox-passwords/blob/master/aws-accounts.info),
-and [Digital Marketplace](https://alphagov.github.io/digitalmarketplace-manual/aws-accounts.html#available-roles).
-
-`<mfa device arn>` - is your user's assigned [Multi-Factor Authentication (MFA)][] device.
-
-<details>
-  <summary><small>How to find your MFA device ARN</small></summary>
-  <li>sign into the GDS base account using the AWS console</li>
-  <li>navigate to **IAM** > **Users** > `$your-user`</li>
-  <li>select the **Security credentials** tab</li>
-  <li>look for the **Assigned MFA device**</li>
-  </ul>
-</details>
-
-Once this is all in place, you should be able to run `aws-vault list` and see output something like:
-
-```
-Profile                  Credentials              Sessions
-=======                  ===========              ========
-gds-users                gds-users                -
-target-account           gds-users                -
-```
-
-#### Use aws-vault to invoke commandline tools
-
-You can now use `aws-vault exec` to invoke the AWS CLI or other tools (eg [Terraform][]) as follows:
-
-```
-aws-vault exec target-account -- aws sts get-caller-identity
-```
-
-aws-vault will prompt you for the passphrase that you set above to unlock the
-store (if it hasn't been accessed recently), and then prompt for your MFA
-token.
-
-#### Optional: add some shortcuts to your shell config
-
-If you find the above `aws-vault exec ...` invocation too verbose, you can add
-something like the following to your shell startup script:
-
-```
-for profile in $(awk '/^\[profile / { gsub("]", "", $2); print $2 }' ~/.aws/config); do
-  alias "aws-${profile}"="aws-vault exec ${profile} --"
-done
-```
-
-This sets up an alias for each profile in your `~/.aws/config` so that you can
-then invoke AWS commands as follows:
-
-```
-aws-target-account aws sts get-caller-identity
-aws-target-account terraform plan
-etc...
-```
+Further usage instructions can be found in the [gds-cli README](https://github.com/alphagov/gds-cli#usage).
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
@@ -143,7 +75,7 @@ etc...
 [AWS Command Line Interface (AWS CLI)]: https://aws.amazon.com/cli/
 [AWS Shell]: https://github.com/awslabs/aws-shell
 [Terraform]: https://www.terraform.io/
-[AWS console]: https://gds-users.signin.aws.amazon.com/console
+[AWS Console]: https://gds-users.signin.aws.amazon.com/console
 [creating, modifying, and viewing Access Keys (Console)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey
 [Multi-Factor Authentication (MFA)]: https://aws.amazon.com/iam/details/mfa/
 [Terraform]: https://www.terraform.io/
@@ -152,5 +84,6 @@ etc...
 [AWS CLI documentation]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
 [Creating an AWS credentials file]: #creating-an-aws-credentials-file
 [aws-vault]: https://github.com/99designs/aws-vault#readme
+[gds-cli]: https://github.com/alphagov/gds-cli
 [maximum session duration]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
 [team specific roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
