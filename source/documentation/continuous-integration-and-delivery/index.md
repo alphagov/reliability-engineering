@@ -7,3 +7,10 @@ for task automation, running tests and status checks against pull-requests, and
 deploying code.
 
 The Reliability Engineering team help you get started with Concourse, and ensure that the infrastructure is available.
+
+## Links
+
+- [CD Concourse](https://cd.gds-reliability.engineering/)
+- [CD Prometheus](https://prom-1.monitoring.cd.gds-reliability.engineering/)
+- [CD Grafana](https://grafana.monitoring.cd.gds-reliability.engineering/)
+- [CD staging concourse](https://cd-staging.gds-reliability.engineering/)
