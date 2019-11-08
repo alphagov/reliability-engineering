@@ -10,7 +10,7 @@ The Reliability Engineering team's Concourse is multi-tenanted:
   - (unless the user is a member of both teams)
 
 By default, all Concourse workers share the same egress IP addresses, unless configured otherwise.
-If your team needs separate egress IP addresses, then please ask reliability engineering to make the configuration changes.
+If your team needs separate egress IP addresses, then please ask Reliability Engineering to make the configuration changes.
 
 The Reliability Engineering team's Concourse is managed as follows:
 
