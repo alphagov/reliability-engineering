@@ -1,4 +1,4 @@
-## Example pipelines
+## Example pipeline
 
 ### Deploy an application to GOV.UK PaaS
 
