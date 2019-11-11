@@ -3,7 +3,7 @@
 For convenience, the Reliability Engineering team provision the following
 resources for each Concourse team:
 
-- A private AWS S3 bucket (publicly readable from the internet)
+- A private AWS S3 bucket (publicly readable from the internet by anyone)
 - A public AWS S3 bucket
 - A private AWS Elastic Container Registry (ECR)
 
