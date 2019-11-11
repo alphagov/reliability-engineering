@@ -21,6 +21,4 @@ The Reliability Engineering team's Concourse is managed as follows:
 - Users authenticate using GitHub SSO
   - (if you need Google SSO instead of GitHub, ask the Reliability Engineering team)
 
-- Concourse is accessible from:
-  - the GDS network (Whitechapel and the VPN)
-  - the VPN of a vetted supplier building a Cabinet Office service 
+- Concourse is accessible from the GDS network (Whitechapel and the VPN)
