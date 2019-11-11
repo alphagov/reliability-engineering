@@ -31,7 +31,9 @@ syntax:
         ((github-ssh-key))
 </code></pre>
 
-There are also some convenience variables provided for you:
+For your convenience when writing Concourse pipelines, there are also some
+variables provided for you which are generated automatically and are immutable
+(hence the `readonly_` prefix).
 
 - `readonly_private_bucket_name` - the name of the private AWS S3 bucket
 - `readonly_private_bucket_arn` - the ARN of the private AWS S3 bucket
