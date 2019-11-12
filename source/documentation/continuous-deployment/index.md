@@ -1,4 +1,4 @@
-# Continuous Integration and Delivery
+# Continuous Deployment
 
 The Reliability Engineering team uses [Concourse](https://concourse-ci.org) for testing and deploying code to production.
 
