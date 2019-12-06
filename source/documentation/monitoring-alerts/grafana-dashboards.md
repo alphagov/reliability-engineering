@@ -49,3 +49,7 @@ If the dropdown down does not include your application, check the instructions f
 You can import [official and community built Grafana dashboards](https://grafana.com/dashboards). For example, you could display backing service metrics such as [ElasticSearch](https://grafana.com/dashboards/266) or [PostgreSQL](https://grafana.com/dashboards/455).
 
 Learn [how to import dashboards](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
+
+#### Troubleshooting
+
+Grafana is configured to point to one of our Prometheus instances by default. There are three, and unless all three go down no one will be paged out of hours. In a case where one or two prometheus instances are down but Grafana is up and you'd like to view your dashboards, you can change the data source of your panels to "Prometheus beta 2" or "Prometheus beta 3". The default is also known as just "Prometheus beta".
