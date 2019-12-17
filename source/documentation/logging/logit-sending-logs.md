@@ -49,7 +49,7 @@ TCP ports are assigned on a per-stack basis at stack creation time and will be d
 
 ## Send logs from PaaS to logit
 
-You can [send logs from PaaS to logit](https://docs.cloud.service.gov.uk/monitoring_apps.html#set-up-the-logit-io-log-management-service)
+You can [send logs from PaaS to logit](https://docs.cloud.service.gov.uk/monitoring_apps.html#set-up-the-logit-log-management-service)
 
 ## Ship logs using Amazon S3
 
