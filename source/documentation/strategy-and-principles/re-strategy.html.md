@@ -37,7 +37,7 @@ The benefits of this to GDS are:
 * Developers do not need to interact with CI/CD systems to trigger deployments, which means there are fewer credentials to manage and less need for deployer nodes to be accessible. It also removes the need for developers to carry out deployment tasks, freeing them up to focus on their services.
 * Easier user and access management.
 
-If feasible and pragmatic, continuous deployment should be implemented through Concourse, which is available as a managed service from reliability engineering.
+If feasible and pragmatic, continuous deployment should be implemented through Concourse, which is available as a managed service from [reliability engineering](/continuous-deployment.html#continuous-deployment).
 
 ## 3. Look ahead to the latest generation of “serverless” Functions as a Service (FaaS) technology
 GDS has supporting services running on FaaS platforms, mainly AWS Lambda. RE supports AWS Lambda for supporting services that do not directly handle user requests, such as deployment or notification pipelines or as the ‘glue’ between AWS services, logging.
