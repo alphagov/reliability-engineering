@@ -22,6 +22,7 @@ We want to extend the PaaS’s marketplace offerings to accommodate the common r
 We aim to have moved all GDS services from older legacy hosting providers or platforms by 2021
 
 This strategy makes clear that GDS continues to consolidate its various programs and services towards this one platform. This makes sense as an organisation grows for a number of reasons:
+
 * The engineers responsible for the management of those services do not need to learn many different technologies and variations across the GDS estate. For instance, an engineer familiar with running, GOV.UK’s service can also work on Verify’s service because they use the same platform and tooling. Similarly, a developer working on GOV.UK can work on Pay because the developer experience is consistent. This reduces the number of specialisations in the engineering team and means support of the whole estate can be shared by the whole of RE instead of siloed groups of support responsibility.
 * A problem solved, feature added or performance improvement made on one service can be applied and rolled out to all services that share that same platform.
 * Cost benefits associated with sharing the same tool.
