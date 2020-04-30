@@ -10,6 +10,6 @@ Reliability Engineering provide client libraries which wrap Prometheus's own lib
 
 You can setup GDS metrics for your GOV.UK PaaS app using the Ruby, Python and Java Dropwizard guides on GitHub to instrument:
 
-- [Ruby](https://github.com/alphagov/gds_metrics_ruby) in Ruby on Rails or Rack apps
+- [Ruby](https://github.com/prometheus/client_ruby/) in Ruby on Rails or Rack apps
 - [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard)  in Dropwizard based apps
 - [Python](https://github.com/alphagov/gds_metrics_python) in Python/Flask based apps

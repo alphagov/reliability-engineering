@@ -32,7 +32,7 @@ You can use these dashboards to get started customising your own dashboards, or 
 
 #### GDS Application Metrics Default Dashboard
 
-The [GDS Application Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/000000011/gds-default-dashboard?orgId=1) displays application metrics produced by [Ruby](https://github.com/alphagov/gds_metrics_ruby), [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard) and [Python](https://github.com/alphagov/gds_metrics_python) clients.
+The [GDS Application Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/000000011/gds-default-dashboard?orgId=1) displays application metrics produced by [Ruby](https://github.com/prometheus/client_ruby/), [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard) and [Python](https://github.com/alphagov/gds_metrics_python) clients.
 
 If you’ve configured your application with one of these libraries you can view its metrics. You can do this by selecting your application from the **Available Apps** dropdown.
 
