@@ -41,7 +41,7 @@ Within 10 minutes Prometheus will start scraping your application for metrics, y
 
 If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] you should disable the basic auth on the metrics endpoint when using the [Ruby gem][] or [Python library][] and instead protect the metrics endpoint using IP whitelisting in order to minimise gaps in metrics between deployments.
 
-By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
+By using the `paas-ip-authentication-route-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
 
 1. Map the route to the metrics path:
 
@@ -57,11 +57,11 @@ By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prom
 
 2. Register the IP whitelist route service as a user-provided service in your PaaS space.
 
-    `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
+    `cf create-user-provided-service paas-ip-authentication-route-service -r https://paas-ip-authentication-route-service.cloudapps.digital`
 
 3. Register the IP whitelist route service against the metrics path.
 
-    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect --path metrics`
+    `cf bind-route-service cloudapps.digital paas-ip-authentication-route-service --hostname app-to-protect --path metrics`
 
 #### Update your Grafana panel to combine metrics for blue-green deployments
 
@@ -90,6 +90,6 @@ If there are no routes to your app the Prometheus service will default the route
 [`SpaceAuditor`]: https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-auditor
 [update your app's manifest.yml]: https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block
 [blue-green deployment process]: https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html
-[Ruby gem]: https://github.com/alphagov/gds_metrics_ruby#optional-configuration
+[Ruby gem]: https://github.com/prometheus/client_ruby/
 [Python library]: https://github.com/alphagov/gds_metrics_python#optional-configuration
 [GDS office IPs]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds-internal-it/news/aviationhouse-sourceipaddresses

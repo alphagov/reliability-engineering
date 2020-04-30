@@ -45,20 +45,20 @@ To set up the metrics exporter app:
 
 IP whitelist is a security feature often used for limiting and controlling access to an app to trusted users. It works by only allowing traffic through from a list of trusted IP addresses or IP ranges.
 
-By using the `re-ip-whitelist-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
+By using the `paas-ip-authentication-route-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
 
 1. Register the IP whitelist route service as a user-provided service in your PaaS space.
 
-    `cf create-user-provided-service re-ip-whitelist-service -r https://re-ip-whitelist-service.cloudapps.digital`
+    `cf create-user-provided-service paas-ip-authentication-route-service -r https://paas-ip-authentication-route-service.cloudapps.digital`
 
 
 2. Register the route service for routes you want to protect.
 
-    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname <your paas app route>`
+    `cf bind-route-service cloudapps.digital paas-ip-authentication-route-service --hostname <your paas app route>`
 
     For example, `app-to-protect.cloudapps.digital` would be:
 
-    `cf bind-route-service cloudapps.digital re-ip-whitelist-service --hostname app-to-protect`
+    `cf bind-route-service cloudapps.digital paas-ip-authentication-route-service --hostname app-to-protect`
 
 ### Troubleshooting
 
