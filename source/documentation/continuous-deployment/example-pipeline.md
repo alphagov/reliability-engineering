@@ -61,7 +61,7 @@ jobs:
                 bundle install
                 bundle exec middleman build
   
-      - put: deploy-to-paas
+      - put: my-paas-app
         params:
           manifest: my-git-repo/manifest.yml
           path: my-git-repo
