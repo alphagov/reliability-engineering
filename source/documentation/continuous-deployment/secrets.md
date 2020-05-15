@@ -13,7 +13,7 @@ gds cd secrets add
 and
 
 ```
-gds cd secrets remove
+gds cd secrets rm
 ```
 
 Concourse injects secrets into pipelines at runtime using double parentheses
