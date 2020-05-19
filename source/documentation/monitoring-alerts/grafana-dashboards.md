@@ -30,14 +30,6 @@ You can use the default and template dashboards in the **General** folder of the
 
 You can use these dashboards to get started customising your own dashboards, or if you want to check your monitoring works as you expect.
 
-#### GDS Application Metrics Default Dashboard
-
-The [GDS Application Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/000000011/gds-default-dashboard?orgId=1) displays application metrics produced by [Ruby](https://github.com/prometheus/client_ruby/), [Java with Dropwizard](https://github.com/alphagov/gds_metrics_dropwizard) and [Python](https://github.com/alphagov/gds_metrics_python) clients.
-
-If you’ve configured your application with one of these libraries you can view its metrics. You can do this by selecting your application from the **Available Apps** dropdown.
-
-If the dropdown does not include your application, check the instructions for [setting up metrics](monitoring-alerts.html#bind-your-exporter-to-prometheus) and make sure any changes are deployed to [GOV.UK Platform as a Service (PaaS)](https://docs.cloud.service.gov.uk/).
-
 #### GDS Container Metrics Default Dashboard
 
 The [GDS Container Metrics Default Dashboard](https://grafana-paas.cloudapps.digital/d/E2dUvczmz/container-metrics?orgId=1) displays container metrics produced by the [paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter). Select your application from the **App** dropdown to view metrics for your application when you run the paas-metric-exporter.
