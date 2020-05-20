@@ -1,6 +1,6 @@
 ## Set up custom metrics
 
-Using the Prometheus client libraries, both [Java](https://github.com/alphagov/gds_metrics_dropwizard) and [Ruby](https://github.com/prometheus/client_ruby/) versions, we are allowed to create our own custom metrics to measure things specific to our applications in addition to the generic metrics offered by the libraries. The libraries include the Prometheus `simpleclient` offering four metric types.
+Using the Prometheus client libraries we are allowed to create our own custom metrics to measure things specific to our applications in addition to the generic metrics offered by the libraries. The libraries include the Prometheus `simpleclient` offering four metric types.
 
 ### Counter
 

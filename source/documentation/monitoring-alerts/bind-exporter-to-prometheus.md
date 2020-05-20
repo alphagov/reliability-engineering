@@ -39,7 +39,7 @@ Within 10 minutes Prometheus will start scraping your application for metrics, y
 
 #### IP Whitelist your applications metrics endpoint
 
-If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] you should disable the basic auth on the metrics endpoint when using the [Ruby gem][] or [Python library][] and instead protect the metrics endpoint using IP whitelisting in order to minimise gaps in metrics between deployments.
+If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] and you don't wish to publish metrics publicly, you should use an IP whitelist instead of basic auth on the metrics endpoint in order to minimise gaps in metrics between deployments.
 
 By using the `paas-ip-authentication-route-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
 
@@ -90,6 +90,4 @@ If there are no routes to your app the Prometheus service will default the route
 [`SpaceAuditor`]: https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-auditor
 [update your app's manifest.yml]: https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block
 [blue-green deployment process]: https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html
-[Ruby gem]: https://github.com/prometheus/client_ruby/
-[Python library]: https://github.com/alphagov/gds_metrics_python#optional-configuration
 [GDS office IPs]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds-internal-it/news/aviationhouse-sourceipaddresses
