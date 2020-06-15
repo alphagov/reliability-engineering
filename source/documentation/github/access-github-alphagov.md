@@ -1,6 +1,10 @@
 ## Access GitHub Alphagov
 
-People joining GDS do not automatically have access to [Alphagov][] on [GitHub][]. To grant access to Alphagov, user needs to [create a new][] or share an existing GitHub username with the team. All users are required to enable [two-form authentication][] on their GitHub accounts.
+People joining GDS do not automatically have access to the GDS GitHub organisation, [alphagov][]. To gain access:
+
+- [Create a GitHub account][GitHub] if you don't have one already. Existing personal accounts are fine to continue using.
+- Enable [two-factor authentication][] on your GitHub account.
+- Give your GitHub username to your team's tech lead, or your nearest technical Senior Management Team member.
 
 
 It’s the individual teams’ responsibility to grant that user access to relevant Alphagov [teams][]. 
