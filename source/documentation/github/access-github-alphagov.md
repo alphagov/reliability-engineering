@@ -9,7 +9,7 @@ People joining GDS do not automatically have access to the GDS GitHub organisati
 
 It’s the individual teams’ responsibility to grant that user access to relevant GDS [GitHub teams][]. 
 
-Once setup is completed, user can access Alphagov resources using the GitHub portal or [SSH connection] (https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+Once setup is completed, staff can access GDS resources on https://github.com or via the command-line.
 
 
 [GitHub]: https://www.github.com/
