@@ -9,7 +9,7 @@ People joining GDS do not automatically have access to the GDS GitHub organisati
 
 It’s the individual teams’ responsibility to grant that user access to relevant GDS [GitHub teams][]. 
 
-Once setup is completed, staff can access GDS resources on https://github.com or via the command-line.
+Once setup is completed, staff can access GDS resources on [GitHub][] or via the command-line.
 
 
 [GitHub]: https://www.github.com/
