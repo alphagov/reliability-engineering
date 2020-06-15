@@ -7,7 +7,7 @@ People joining GDS do not automatically have access to the GDS GitHub organisati
 - Give your GitHub username to your team's tech lead, or your nearest technical Senior Management Team member.
 
 
-It’s the individual teams’ responsibility to grant that user access to relevant Alphagov [teams][]. 
+It’s the individual teams’ responsibility to grant that user access to relevant GDS [GitHub teams][]. 
 
 Once setup is completed, user can access Alphagov resources using the GitHub portal or [SSH connection] (https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 
