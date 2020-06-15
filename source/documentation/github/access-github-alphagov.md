@@ -1,6 +1,6 @@
 ## Access GitHub Alphagov
 
-People joining GDS do not automatically have access to the GDS GitHub organisation, [alphagov][]. To gain access:
+People joining GDS do not automatically have access to the GDS GitHub organisation, [Alphagov][]. To gain access:
 
 - [Create a GitHub account][GitHub] if you don't have one already. Existing personal accounts are fine to continue using.
 - Enable [two-factor authentication][] on your GitHub account.
