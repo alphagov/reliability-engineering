@@ -15,6 +15,6 @@ Once setup is completed, staff can access GDS resources on https://github.com or
 [GitHub]: https://www.github.com/
 [Alphagov]: https://www.github.com/alphagov/
 [create a new]: https://github.com/join
-[two-form authentication]: https://help.github.com/en/github/authenticating-to-github/configuring-two-factor-authentication
+[two-factor authentication]: https://help.github.com/en/github/authenticating-to-github/configuring-two-factor-authentication
 [teams]: https://github.com/orgs/alphagov/teams
 [SSH connection]: https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
