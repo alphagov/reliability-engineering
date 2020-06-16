@@ -6,4 +6,4 @@ When someone no longer requires access to [Alphagov][] because they've left GDS,
 
 
 [Alphagov]: https://www.github.com/alphagov/
-[teams]: https://github.com/orgs/alphagov/teams
+[Github teams]: https://github.com/orgs/alphagov/teams
