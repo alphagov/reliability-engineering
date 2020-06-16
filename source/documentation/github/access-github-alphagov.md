@@ -12,7 +12,7 @@ It’s the individual teams’ responsibility to grant that user access to relev
 Once setup is completed, staff can access GDS resources on [GitHub][] or via the command-line.
 
 
-[GitHub]: https://www.github.com/
+[GitHub]: https://github.com/
 [Alphagov]: https://www.github.com/alphagov/
 [Create a GitHub account]: https://github.com/join
 [two-factor authentication]: https://help.github.com/en/github/authenticating-to-github/configuring-two-factor-authentication
