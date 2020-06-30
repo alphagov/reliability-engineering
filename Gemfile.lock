@@ -128,7 +128,7 @@ GEM
       middleman-core (>= 3.2)
       rouge (~> 2.0)
     mini_portile2 (2.4.0)
-    mini_racer (0.2.14)
+    mini_racer (0.2.15)
       libv8 (> 7.3)
     minitest (5.14.1)
     multi_json (1.14.1)
