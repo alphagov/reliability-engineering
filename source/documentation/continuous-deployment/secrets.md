@@ -50,10 +50,11 @@ variables provided for you which are generated automatically and are immutable
 - `readonly_private_ecr_repo_url` - the URL of the private AWS ECR
 - `readonly_private_ecr_repo_registry_id` - the ID of the private AWS ECR
 
+- `readonly_codecommit_pool_uri` - the URI of the pool resource git repository
+- `readonly_codecommit_private_key` - the private key for the pool resource git repository
 
 - `readonly_team_name` - the name of the Concourse team
 - `readonly_local_user_password` - the password for a local user of the Concourse team, which is used for updating pipelines
-
 
 - `readonly_secrets_path_prefix` - the secrets path prefix, which is used for managing secrets
 - `readonly_secrets_kms_key_id` - the AWS KMS Key ID, which is used for encrypting secrets at rest
