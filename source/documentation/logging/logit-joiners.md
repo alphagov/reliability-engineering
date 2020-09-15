@@ -4,7 +4,7 @@ If you do not have a Logit account you can create one by signing into Logit for 
 
 To sign into Logit:
 
-1. Go to [https://logit.io/dashboard](https://logit.io/dashboard).
+1. Go to [https://dashboard.logit.io/dashboard](https://dashboard.logit.io/dashboard).
 1. Enter your GDS email address in **Business email address**.
 1. *...the password box should automatically disappear*.
 1. Submit the form to complete Google Authentication.
