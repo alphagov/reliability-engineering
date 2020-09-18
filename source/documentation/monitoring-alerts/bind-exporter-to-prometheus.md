@@ -9,6 +9,12 @@
 
 By giving the `prometheus-for-paas` user the [`SpaceAuditor`][] role you allow it to monitor each instance of your app and respond to events, for example start, stop, scaling.
 
+If your org is hosted in the London region, run:
+
+`cf set-space-role prometheus-for-paas+london@digital.cabinet-office.gov.uk <org-name> <space-name> SpaceAuditor`
+
+If your org is hosted in the Ireland region, run:
+
 `cf set-space-role prometheus-for-paas@digital.cabinet-office.gov.uk <org-name> <space-name> SpaceAuditor`
 
 ### Bind your apps to the Prometheus service
@@ -21,7 +27,7 @@ service          plans        description
 gds-prometheus   prometheus   GDS internal Prometheus monitoring alpha https://reliability-engineering.cloudapps.digital/#metrics
 ```
 
-If you're unable to see `gds-prometheus` in the output of `cf marketplace` please contact us through the [#re-prometheus-support Slack channel].
+If you're unable to see `gds-prometheus` in the output of `cf marketplace` please contact us through the [#re-prometheus-support Slack channel] - it's likely your org hasn't been granted access to the `gds-prometheus` service.
 
 Create a Prometheus service within your PaaS space and allow it to bind to apps running there. Do this by following these steps:
 
