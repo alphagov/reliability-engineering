@@ -11,6 +11,8 @@ phase: INTERNAL
 header_links:
   Documentation: /
   GitHub: https://github.com/alphagov/reliability-engineering
+footer_links:
+  Reliability Engineering Team Manual Accessibility: /accessibility.html
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
