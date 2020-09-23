@@ -78,7 +78,7 @@ Logit stacks have a non-restrictive security configuration by default. Each of t
 
 The only inputs we are interested in are **Beats-SSL** and **Syslog-SSL**, you will need to log a support request with Logit to close the TCP or UDP ports for all other protocols.
 
-If you know in advance which IP addresses or address ranges you will be sourcing logging traffic from, include these in your request so that the **Beats-SSL** and **Syslog-SSL** ports can be whitelisted.
+If you know in advance which IP addresses or address ranges you will be sourcing logging traffic from, include these in your request so that the **Beats-SSL** and **Syslog-SSL** ports can be safelisted.
 
 ## Configure Filebeat
 

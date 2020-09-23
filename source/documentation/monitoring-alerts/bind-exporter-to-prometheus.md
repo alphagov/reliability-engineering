@@ -43,9 +43,9 @@ Within 10 minutes Prometheus will start scraping your application for metrics, y
 
 #### When using zero downtime plugins or a `blue-green` deployment process
 
-#### IP Whitelist your applications metrics endpoint
+#### IP Safelist your applications metrics endpoint
 
-If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] and you don't wish to publish metrics publicly, you should use an IP whitelist instead of basic auth on the metrics endpoint in order to minimise gaps in metrics between deployments.
+If you're using a [blue-green deployment process][] with a zero downtime plugin such as [autopilot][] and you don't wish to publish metrics publicly, you should use an IP safelist instead of basic auth on the metrics endpoint in order to minimise gaps in metrics between deployments.
 
 By using the `paas-ip-authentication-route-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
 
@@ -61,11 +61,11 @@ By using the `paas-ip-authentication-route-service` you will only allow traffic 
 
   - redeploy your app to map the route and path
 
-2. Register the IP whitelist route service as a user-provided service in your PaaS space.
+2. Register the IP safelist route service as a user-provided service in your PaaS space.
 
     `cf create-user-provided-service paas-ip-authentication-route-service -r https://paas-ip-authentication-route-service.cloudapps.digital`
 
-3. Register the IP whitelist route service against the metrics path.
+3. Register the IP safelist route service against the metrics path.
 
     `cf bind-route-service cloudapps.digital paas-ip-authentication-route-service --hostname app-to-protect --path metrics`
 
