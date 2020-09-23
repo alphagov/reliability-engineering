@@ -41,13 +41,13 @@ To set up the metrics exporter app:
 6. Bind your app to the Prometheus service
   - `cf bind-service <app-name> <service-instance-name>`
 
-### IP whitelist your app
+### IP safelist your app
 
-IP whitelist is a security feature often used for limiting and controlling access to an app to trusted users. It works by only allowing traffic through from a list of trusted IP addresses or IP ranges.
+IP safelist is a security feature often used for limiting and controlling access to an app to trusted users. It works by only allowing traffic through from a list of trusted IP addresses or IP ranges.
 
 By using the `paas-ip-authentication-route-service` you will only allow traffic from GDS Prometheis and [GDS Office IPs][].
 
-1. Register the IP whitelist route service as a user-provided service in your PaaS space.
+1. Register the IP safelist route service as a user-provided service in your PaaS space.
 
     `cf create-user-provided-service paas-ip-authentication-route-service -r https://paas-ip-authentication-route-service.cloudapps.digital`
 
