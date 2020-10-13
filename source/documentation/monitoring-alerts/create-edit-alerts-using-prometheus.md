@@ -135,7 +135,7 @@ amtool alert add alertname=<YOUR_ALERT_NAME> product=<your-product-name> \
 [6]: https://gds-way.cloudapps.digital/standards/alerting.html#alerting
 [7]: https://gds.slack.com/messages/re-prometheus-support
 [8]: https://github.com/alphagov/paas-metric-exporter
-[9]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/modules/app-ecs-services/templates/alertmanager.tpl
+[9]: https://github.com/alphagov/prometheus-aws-configuration-beta/blob/master/terraform/modules/alertmanager/templates/alertmanager.tpl
 [10]: https://prometheus.io/docs/alerting/alertmanager/
 [11]: https://www.pagerduty.com/
 [12]: https://www.zendesk.com/
