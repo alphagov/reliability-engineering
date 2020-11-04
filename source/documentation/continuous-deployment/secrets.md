@@ -35,6 +35,8 @@ For your convenience when writing Concourse pipelines, there are also some
 variables provided for you which are generated automatically and are immutable
 (hence the `readonly_` prefix).
 
+- `readonly_access_key_id`, `readonly_secret_access_key`, `readonly_session_token` - AWS credentials corresponding to your team.  Can be used with things like the `semver` resource to access your S3 bucket, or with `registry-image` for authenticating to ECR.
+
 - `readonly_private_bucket_name` - the name of the private AWS S3 bucket
 - `readonly_private_bucket_arn` - the ARN of the private AWS S3 bucket
 - `readonly_private_bucket_domain_name` - the domain name of the private AWS S3 bucket
