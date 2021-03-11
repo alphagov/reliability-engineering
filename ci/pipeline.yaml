@@ -1,0 +1,66 @@
+resources:
+  - name: reliability-engineering-git
+    type: git
+    source:
+      uri: https://github.com/alphagov/reliability-engineering.git
+      branch: master
+
+  - name: deploy-to-paas-docs-space
+    type: cf
+    source:
+      api: https://api.cloud.service.gov.uk
+      username: ((cf_user))
+      password: ((cf_password))
+      organization: gds-tech-ops
+      space: docs
+jobs:
+  - name: self-update
+    serial: true
+    plan:
+    - get: reliability-engineering-git
+      trigger: true
+    - set_pipeline: re-docs
+      file: reliability-engineering-git/ci/pipeline.yaml
+
+  - name: build-reliability-engineering
+    public: true
+    serial: true
+    plan:
+      - get: reliability-engineering-git
+        trigger: true
+      - task: bundle-reliability-engineering
+        timeout: 15m
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: ghcr.io/alphagov/aws-ruby
+              tag: 2.6.1
+          inputs:
+            - name: reliability-engineering-git
+              path: repo
+          outputs:
+            - name: bundled
+          run:
+            path: sh
+            dir: repo
+            args:
+            - -c
+            - |
+              # install node
+              VERSION=v12.16.3
+              mkdir -p /usr/local/lib/nodejs
+              wget https://nodejs.org/dist/v12.16.3/node-$VERSION-linux-x64.tar.xz
+              tar -xJvf node-$VERSION-linux-x64.tar.xz -C /usr/local/lib/nodejs
+              export PATH="/usr/local/lib/nodejs/node-$VERSION-linux-x64/bin:$PATH"
+              # build
+              bundle install --without development
+              bundle exec middleman build
+              cp manifest.yml ../bundled/manifest.yml
+              cp -r build/* ../bundled/
+      - put: deploy-to-paas-docs-space
+        params:
+          manifest: bundled/manifest.yml
+          show_app_log: true
+          path: bundled
