@@ -37,7 +37,7 @@ Once setup is complete users can access AWS using the AWS Console or the command
 
 Teams manage their own lists of accounts and roles, for example [GOV.UK](https://github.com/alphagov/govuk-aws-data/blob/master/docs/govuk-aws-accounts.md),
 [Verify](https://github.com/alphagov/verify-blackbox-passwords/blob/master/aws-accounts.info),
-and [Digital Marketplace](https://alphagov.github.io/digitalmarketplace-manual/aws-accounts.html#available-roles).
+and [Digital Marketplace](https://alphagov.github.io/digitalmarketplace-manual/infrastructure/aws-accounts.html#available-roles).
 
 ###  Use the command line
 
