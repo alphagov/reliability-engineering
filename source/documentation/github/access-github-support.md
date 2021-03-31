@@ -5,7 +5,7 @@ All Alphagov users and external contributors (as long they have access to any Al
 GitHub support team targets an eight-hour response, Monday to Friday (UK time zone).
 
 
-### Request a support
+### Request support
 
 All authorized users need to use a dedicated [support portal][] to request Enterprise Support. 
 
