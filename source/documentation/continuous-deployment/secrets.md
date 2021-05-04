@@ -7,13 +7,13 @@ Secrets can be managed by users with the `member` role using the [GDS
 CLI](https://github.com/alphagov/gds-cli):
 
 ```
-gds cd secrets add
+gds cd secrets add $PIPELINE/SECRETNAME $SECRETVALUE
 ```
 
 and
 
 ```
-gds cd secrets rm
+gds cd secrets rm $PIPELINE/SECRETNAME
 ```
 
 Concourse injects secrets into pipelines at runtime using double parentheses
