@@ -3,18 +3,14 @@
 The Reliability Engineering Concourse delegates secrets management to AWS
 Systems Manager Parameter Store and Key Management Service.
 
-Secrets can be managed by users with the `member` role using the [GDS
+Secrets can be managed by permitted users using the [GDS
 CLI](https://github.com/alphagov/gds-cli):
 
 ```
-gds cd secrets add $PIPELINE/SECRETNAME $SECRETVALUE
+gds cd secrets -t $TEAMNAME add [$PIPELINE/]$SECRETNAME $SECRETVALUE
 ```
 
-and
-
-```
-gds cd secrets rm $PIPELINE/SECRETNAME
-```
+Similar `rm`, `ls` and `get` subcommands exist to perform other operations.
 
 Concourse injects secrets into pipelines at runtime using double parentheses
 syntax:
