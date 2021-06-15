@@ -3,18 +3,14 @@
 The Reliability Engineering Concourse delegates secrets management to AWS
 Systems Manager Parameter Store and Key Management Service.
 
-Secrets can be managed by users with the `member` role using the [GDS
+Secrets can be managed by permitted users using the [GDS
 CLI](https://github.com/alphagov/gds-cli):
 
 ```
-gds cd secrets add $PIPELINE/SECRETNAME $SECRETVALUE
+gds cd secrets -t $TEAMNAME add [$PIPELINE/]$SECRETNAME $SECRETVALUE
 ```
 
-and
-
-```
-gds cd secrets rm $PIPELINE/SECRETNAME
-```
+Similar `rm`, `ls` and `get` subcommands exist to perform other operations.
 
 Concourse injects secrets into pipelines at runtime using double parentheses
 syntax:
@@ -30,6 +26,8 @@ syntax:
       private_key: |
         ((github-ssh-key))
 </code></pre>
+
+### Pre-populated secrets
 
 For your convenience when writing Concourse pipelines, there are also some
 variables provided for you which are generated automatically and are immutable
@@ -60,3 +58,21 @@ variables provided for you which are generated automatically and are immutable
 
 - `readonly_secrets_path_prefix` - the secrets path prefix, which is used for managing secrets
 - `readonly_secrets_kms_key_id` - the AWS KMS Key ID, which is used for encrypting secrets at rest
+
+### Efficient use of secrets
+
+AWS accounts are throttled in the rate they can make secrets requests, and approaching this
+rate limit may cause occasional pipeline failures for random users during surges. Therefore
+it's helpful if users can avoid certain patterns that are known to cause inflated numbers
+of secrets requests.
+
+- Requests for non-existent secrets actually result in 4 requests behind the scenes,
+  and concourse's secret caching time is significantly reduced if a secret is not found. This
+  means that untended pipelines requesting missing secrets can account for a significant
+  amount of our allowance.
+- Resources that use secrets in their configuration will continue using those secrets
+  to check that resource whether or not that pipeline is heavily used. It's helpful to pause
+  pipelines which are rarely needed.
+
+A "perfect storm" is for a pipeline to be left untended with a resource using a missing
+secret. This can result in a continuous high rate of unnecessary requests.
