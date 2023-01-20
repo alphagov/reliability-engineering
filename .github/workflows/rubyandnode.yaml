@@ -8,14 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '2.6'
-    - name: Set up Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12'
+        bundler-cache: true
+
     - name: Build and test
       run: |
         bundle install --without development

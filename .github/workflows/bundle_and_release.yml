@@ -11,23 +11,22 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v2
-      - name: add-cloudfoundry-repository
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Install-cf7-cli
         run: |
           wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
           echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-        
-      - name: install-system-dependencies
-        run: |        
-          sudo apt-get update
 
-          sudo apt-get install -y ruby=1:2.7+1
-          sudo apt-get install -y nodejs=10.19.0~dfsg-3ubuntu1
+          sudo apt-get update
           sudo apt-get install -y cf7-cli
-          
-          sudo gem install bundler:1.17.2
 
       - name: bundle-gds-way
-        run: |          
+        run: |
           bundle install --without development
           bundle exec middleman build
 
@@ -35,8 +34,8 @@ jobs:
         env:
           CF_USERNAME: ${{ secrets.CF_EMAIL }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-        run: | 
-          cf api https://api.cloud.service.gov.uk 
+        run: |
+          cf api https://api.cloud.service.gov.uk
           cf auth
           cf target -o gds-tech-ops -s docs
 
