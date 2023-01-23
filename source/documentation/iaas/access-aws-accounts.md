@@ -1,9 +1,5 @@
 ## Access AWS Accounts
 
-People joining GDS do not automatically have access to [Amazon Web Services (AWS)][]. To grant a user access to AWS you’ll need to add them to the gds-users base account.
-
-To add a user to the gds-users base account, complete the Request user access section of the [request an AWS account form][] form.
-
 After a user is added to the GDS base account it’s the individual teams’ responsibility to grant that user access to any [team specific roles][].
 
 Once setup is complete users can access AWS using the AWS Console or the command line.
