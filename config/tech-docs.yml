@@ -5,7 +5,7 @@ host: reliability-engineering.cloudapps.digital
 show_govuk_logo: false
 service_name: Reliability Engineering
 service_link: /
-phase: INTERNAL
+phase: DEPRECATED
 
 # Links to show on right-hand-side of header
 header_links:
