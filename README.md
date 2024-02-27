@@ -1,5 +1,10 @@
 # Technical Documentation
 
+## Status
+
+The Reliability Engineering team no longer exists. This repo has been archived
+and the guidance herein is considered deprecated.
+
 [![Build Status](https://travis-ci.org/alphagov/reliability-engineering.svg?branch=master)](https://travis-ci.org/alphagov/reliability-engineering)
 
 ## What is this for?
